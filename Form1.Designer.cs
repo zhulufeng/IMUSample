@@ -29,16 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Btn_OpenSerial = new System.Windows.Forms.Button();
             this.InfoBox = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MenuItem_SerialCfg = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_FileOperation = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_DataClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_ClearDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_ClearFile = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -58,6 +63,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.textBox_Info = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
@@ -88,7 +94,8 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem_SerialCfg});
+            this.MenuItem_SerialCfg,
+            this.MenuItem_FileOperation});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1373, 39);
@@ -102,38 +109,75 @@
             this.MenuItem_SerialCfg.Text = "串口设置(&S)";
             this.MenuItem_SerialCfg.Click += new System.EventHandler(this.MenuItem_SerialCfg_Click);
             // 
+            // MenuItem_FileOperation
+            // 
+            this.MenuItem_FileOperation.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_SaveAs,
+            this.MenuItem_DataClear});
+            this.MenuItem_FileOperation.Name = "MenuItem_FileOperation";
+            this.MenuItem_FileOperation.Size = new System.Drawing.Size(151, 35);
+            this.MenuItem_FileOperation.Text = "文件操作(&F)";
+            // 
+            // MenuItem_SaveAs
+            // 
+            this.MenuItem_SaveAs.Name = "MenuItem_SaveAs";
+            this.MenuItem_SaveAs.Size = new System.Drawing.Size(289, 38);
+            this.MenuItem_SaveAs.Text = "文件另存(&S)";
+            // 
+            // MenuItem_DataClear
+            // 
+            this.MenuItem_DataClear.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_ClearDirectory,
+            this.MenuItem_ClearFile});
+            this.MenuItem_DataClear.Name = "MenuItem_DataClear";
+            this.MenuItem_DataClear.Size = new System.Drawing.Size(289, 38);
+            this.MenuItem_DataClear.Text = "数据文件清除(&C)";
+            // 
+            // MenuItem_ClearDirectory
+            // 
+            this.MenuItem_ClearDirectory.Name = "MenuItem_ClearDirectory";
+            this.MenuItem_ClearDirectory.Size = new System.Drawing.Size(267, 38);
+            this.MenuItem_ClearDirectory.Text = "清除文件夹(&D)";
+            this.MenuItem_ClearDirectory.Click += new System.EventHandler(this.MenuItem_ClearDirectory_Click);
+            // 
+            // MenuItem_ClearFile
+            // 
+            this.MenuItem_ClearFile.Name = "MenuItem_ClearFile";
+            this.MenuItem_ClearFile.Size = new System.Drawing.Size(267, 38);
+            this.MenuItem_ClearFile.Text = "清除文件(&F)";
+            // 
             // serialPort
             // 
             this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived);
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(24, 282);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(1323, 324);
             this.chart1.TabIndex = 4;
             this.chart1.Text = "chart1";
             // 
             // chart2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart2.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(24, 612);
             this.chart2.Name = "chart2";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart2.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
             this.chart2.Size = new System.Drawing.Size(1323, 300);
             this.chart2.TabIndex = 5;
             this.chart2.Text = "chart2";
@@ -266,6 +310,14 @@
             this.label8.TabIndex = 7;
             this.label8.Text = "AccT";
             // 
+            // textBox_Info
+            // 
+            this.textBox_Info.Location = new System.Drawing.Point(246, 117);
+            this.textBox_Info.Multiline = true;
+            this.textBox_Info.Name = "textBox_Info";
+            this.textBox_Info.Size = new System.Drawing.Size(354, 159);
+            this.textBox_Info.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
@@ -273,6 +325,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1373, 929);
+            this.Controls.Add(this.textBox_Info);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label7);
@@ -331,6 +384,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_FileOperation;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_SaveAs;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_DataClear;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_ClearDirectory;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_ClearFile;
+        private System.Windows.Forms.TextBox textBox_Info;
     }
 }
 

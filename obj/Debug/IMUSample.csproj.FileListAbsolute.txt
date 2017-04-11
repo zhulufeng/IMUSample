@@ -8,3 +8,4 @@ E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.csproj.GenerateResourc
 E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.exe
 E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.pdb
 E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.FrmSerialCfg.resources
+E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.DirectoryClearDlg.resources

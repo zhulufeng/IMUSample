@@ -27,4 +27,10 @@ namespace IMUSample
     {
         public static Int32[] arrayIMUdata = new Int32[40];
     }
+    class PathString
+    {
+        public static string IMUDataBaseDirectory = System.AppDomain.CurrentDomain.BaseDirectory + "IMUDATA";
+        public static string IMUDataCurrentDirectory = null;
+        public static string ClearDirectory = null;
+    }
 }
