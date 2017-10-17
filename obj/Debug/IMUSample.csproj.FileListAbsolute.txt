@@ -1,7 +1,6 @@
 E:\My Code\C#Code\IMUSample\IMUSample\bin\Debug\IMUSample.exe.config
 E:\My Code\C#Code\IMUSample\IMUSample\bin\Debug\IMUSample.exe
 E:\My Code\C#Code\IMUSample\IMUSample\bin\Debug\IMUSample.pdb
-E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.csprojResolveAssemblyReference.cache
 E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.Form1.resources
 E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.Properties.Resources.resources
 E:\My Code\C#Code\IMUSample\IMUSample\obj\Debug\IMUSample.csproj.GenerateResource.Cache
