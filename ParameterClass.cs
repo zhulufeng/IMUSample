@@ -25,8 +25,23 @@ namespace IMUSample
 
     class IMUData
     {
-        public static Int32[] arrayIMUdata = new Int32[40];
+        public static double[] arrayIMUdata = new double[42];
+
+        public static byte[] arrayOriginData = new byte[42];
+        public static int[] intFogData = new int[3];
+        public static int[] intFogTmp = new int[3];
+        public static int[] intAccData = new int[3];
+        public static int[] intAccTmp = new int[3];
+        public static int Counter;
+        public static int TotalCounter;
+        public static int Timer_cyc;
+        public static double[] doubleFogData = new double[3];
+        public static double[] doubleFogTmp = new double[3];
+        public static double[] doubleAccData = new double[3];
+        public static double[] doubleAccTmp = new double[3];
+
     }
+
     class PathString
     {
         public static string IMUDataBaseDirectory = System.AppDomain.CurrentDomain.BaseDirectory + "IMUDATA";
