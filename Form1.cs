@@ -17,22 +17,35 @@ namespace IMUSample
         delegate void UpdateDataEventHandler();
         UpdateDataEventHandler updateText;
         StreamWriter intDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataInt.txt");
+        StreamWriter sw = new StreamWriter("data.txt");
         public Form1()
         {
             InitializeComponent();
             updateText = new UpdateDataEventHandler(showData);
+            Btn_Pos0_First.Enabled = true;
+            Btn_Pos0_Last.Enabled = false;
+            Btn_Pos1.Enabled = false;
+            Btn_Pos2.Enabled = false;
+            Btn_Pos3.Enabled = false;
+            Btn_Pos4.Enabled = false;
+            Btn_Pos5.Enabled = false;
+            Btn_Pos6.Enabled = false;
+            Btn_Pos7.Enabled = false;
+            Btn_Pos8.Enabled = false;
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
 
-           // MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+            // MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
         }
-        StreamWriter sw = new StreamWriter("data.txt");
+        
         private void Btn_OpenSerial_Click(object sender, EventArgs e)
         {
 
             if (Btn_OpenSerial.Text == "打开串口...")
             {
                 Btn_OpenSerial.Text = "关闭串口...";
+                Btn_Pos0_First.Enabled = true;
                 serialPort.Open();
+
             }
             else
             {
@@ -122,6 +135,7 @@ namespace IMUSample
                                 IMUData.arrayIMUdata[8] = serialData.buffer[28] + serialData.buffer[29] * 256 + serialData.buffer[30] * 256 * 256 + serialData.buffer[31] * 256 * 256 * 256;
                                 IMUData.arrayIMUdata[9] = serialData.buffer[32] + serialData.buffer[33] * 256 + serialData.buffer[34] * 256 * 256 + serialData.buffer[35] * 256 * 256 * 256;
                                 IMUData.arrayIMUdata[10] = serialData.buffer[36] + serialData.buffer[37] * 256 + serialData.buffer[38] * 256 * 256 + serialData.buffer[39] * 256 * 256 * 256;
+                                IMUData.arrayIMUdata[11] = PostionPara.PositionSequence;
                                 serialData.index++;
                                 saveData();
                                 serialData.buffer.RemoveRange(0, 40);
@@ -187,6 +201,161 @@ namespace IMUSample
             }
         }
 
-       
+        private void Btn_Pos0_First_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos0_First.Text == "位置0-静止状态")
+            {
+                PostionPara.PositionSequence = 0;
+                Btn_Pos0_First.Text = "位置0-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 1;
+                Btn_Pos0_First.Text = "位置0-静止状态";
+                Btn_Pos0_First.Enabled = false;
+                Btn_Pos1.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos1_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos1.Text == "位置1-静止状态")
+            {
+                PostionPara.PositionSequence = 2;
+                Btn_Pos1.Text = "位置1-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 3;
+                Btn_Pos1.Text = "位置1-静止状态";
+                Btn_Pos1.Enabled = false;
+                Btn_Pos2.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos2_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos2.Text == "位置2-静止状态")
+            {
+                PostionPara.PositionSequence = 4;
+                Btn_Pos2.Text = "位置2-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 5;
+                Btn_Pos2.Text = "位置2-静止状态";
+                Btn_Pos2.Enabled = false;
+                Btn_Pos3.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos3_Click(object sender, EventArgs e)
+        {
+
+            if (Btn_Pos3.Text == "位置3-静止状态")
+            {
+                PostionPara.PositionSequence = 6;
+                Btn_Pos3.Text = "位置3-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 7;
+                Btn_Pos3.Text = "位置3-静止状态";
+                Btn_Pos3.Enabled = false;
+                Btn_Pos4.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos4_Click(object sender, EventArgs e)
+        {
+
+            if (Btn_Pos4.Text == "位置4-静止状态")
+            {
+                PostionPara.PositionSequence = 8;
+                Btn_Pos4.Text = "位置4-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 9;
+                Btn_Pos4.Text = "位置4-静止状态";
+                Btn_Pos4.Enabled = false;
+                Btn_Pos5.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos5_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos5.Text == "位置5-静止状态")
+            {
+                PostionPara.PositionSequence = 10;
+                Btn_Pos5.Text = "位置5-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 11;
+                Btn_Pos5.Text = "位置5-静止状态";
+                Btn_Pos5.Enabled = false;
+                Btn_Pos6.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos6_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos6.Text == "位置6-静止状态")
+            {
+                PostionPara.PositionSequence = 12;
+                Btn_Pos6.Text = "位置6-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 13;
+                Btn_Pos6.Text = "位置6-静止状态";
+                Btn_Pos6.Enabled = false;
+                Btn_Pos7.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos7_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos7.Text == "位置7-静止状态")
+            {
+                PostionPara.PositionSequence = 14;
+                Btn_Pos7.Text = "位置7-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 15;
+                Btn_Pos7.Text = "位置7-静止状态";
+                Btn_Pos7.Enabled = false;
+                Btn_Pos8.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos8_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos8.Text == "位置8-静止状态")
+            {
+                PostionPara.PositionSequence = 16;
+                Btn_Pos8.Text = "位置8-转动状态";
+            }
+            else
+            {
+                PostionPara.PositionSequence = 17;
+                Btn_Pos8.Text = "位置8-静止状态";
+                Btn_Pos8.Enabled = false;
+                Btn_Pos0_Last.Enabled = true;
+            }
+        }
+
+        private void Btn_Pos0_Last_Click(object sender, EventArgs e)
+        {
+            if (Btn_Pos0_Last.Text == "位置0-静止状态")
+            {
+                PostionPara.PositionSequence = 18;
+                Btn_Pos0_Last.Enabled = false;
+                Btn_Pos0_First.Enabled = true;
+            }
+           
+        }
     }
 }

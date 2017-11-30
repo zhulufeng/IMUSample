@@ -33,4 +33,8 @@ namespace IMUSample
         public static string IMUDataCurrentDirectory = null;
         public static string ClearDirectory = null;
     }
+    class PostionPara
+    {
+        public static int PositionSequence = -1;
+    }
 }
