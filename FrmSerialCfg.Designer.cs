@@ -45,9 +45,10 @@
             // Btn_OK
             // 
             this.Btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Btn_OK.Location = new System.Drawing.Point(270, 72);
+            this.Btn_OK.Location = new System.Drawing.Point(221, 62);
+            this.Btn_OK.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Btn_OK.Name = "Btn_OK";
-            this.Btn_OK.Size = new System.Drawing.Size(107, 38);
+            this.Btn_OK.Size = new System.Drawing.Size(88, 33);
             this.Btn_OK.TabIndex = 0;
             this.Btn_OK.Text = "确定(&O)";
             this.Btn_OK.UseVisualStyleBackColor = true;
@@ -56,9 +57,10 @@
             // Btn_Cancel
             // 
             this.Btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Btn_Cancel.Location = new System.Drawing.Point(270, 170);
+            this.Btn_Cancel.Location = new System.Drawing.Point(221, 146);
+            this.Btn_Cancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Btn_Cancel.Name = "Btn_Cancel";
-            this.Btn_Cancel.Size = new System.Drawing.Size(107, 38);
+            this.Btn_Cancel.Size = new System.Drawing.Size(88, 33);
             this.Btn_Cancel.TabIndex = 1;
             this.Btn_Cancel.Text = "取消(&C)";
             this.Btn_Cancel.UseVisualStyleBackColor = true;
@@ -66,26 +68,29 @@
             // cmbox_SerialNum
             // 
             this.cmbox_SerialNum.FormattingEnabled = true;
-            this.cmbox_SerialNum.Location = new System.Drawing.Point(100, 38);
+            this.cmbox_SerialNum.Location = new System.Drawing.Point(82, 33);
+            this.cmbox_SerialNum.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbox_SerialNum.Name = "cmbox_SerialNum";
-            this.cmbox_SerialNum.Size = new System.Drawing.Size(111, 29);
+            this.cmbox_SerialNum.Size = new System.Drawing.Size(92, 26);
             this.cmbox_SerialNum.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 40);
+            this.label1.Location = new System.Drawing.Point(10, 34);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 21);
+            this.label1.Size = new System.Drawing.Size(62, 18);
             this.label1.TabIndex = 3;
             this.label1.Text = "串口号";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 89);
+            this.label2.Location = new System.Drawing.Point(9, 76);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 21);
+            this.label2.Size = new System.Drawing.Size(62, 18);
             this.label2.TabIndex = 5;
             this.label2.Text = "波特率";
             // 
@@ -104,17 +109,19 @@
             "460800",
             "614400",
             "921600"});
-            this.cmbox_BaudRate.Location = new System.Drawing.Point(100, 87);
+            this.cmbox_BaudRate.Location = new System.Drawing.Point(82, 75);
+            this.cmbox_BaudRate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbox_BaudRate.Name = "cmbox_BaudRate";
-            this.cmbox_BaudRate.Size = new System.Drawing.Size(111, 29);
+            this.cmbox_BaudRate.Size = new System.Drawing.Size(92, 26);
             this.cmbox_BaudRate.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 138);
+            this.label3.Location = new System.Drawing.Point(10, 118);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 21);
+            this.label3.Size = new System.Drawing.Size(62, 18);
             this.label3.TabIndex = 7;
             this.label3.Text = "数据位";
             // 
@@ -125,17 +132,19 @@
             "7",
             "8",
             "9"});
-            this.cmbox__DataBit.Location = new System.Drawing.Point(100, 136);
+            this.cmbox__DataBit.Location = new System.Drawing.Point(82, 117);
+            this.cmbox__DataBit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbox__DataBit.Name = "cmbox__DataBit";
-            this.cmbox__DataBit.Size = new System.Drawing.Size(111, 29);
+            this.cmbox__DataBit.Size = new System.Drawing.Size(92, 26);
             this.cmbox__DataBit.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 187);
+            this.label4.Location = new System.Drawing.Point(10, 160);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 21);
+            this.label4.Size = new System.Drawing.Size(62, 18);
             this.label4.TabIndex = 9;
             this.label4.Text = "停止位";
             // 
@@ -147,17 +156,19 @@
             "1",
             "1.5",
             "2"});
-            this.cmbox_StopBit.Location = new System.Drawing.Point(100, 185);
+            this.cmbox_StopBit.Location = new System.Drawing.Point(82, 159);
+            this.cmbox_StopBit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbox_StopBit.Name = "cmbox_StopBit";
-            this.cmbox_StopBit.Size = new System.Drawing.Size(111, 29);
+            this.cmbox_StopBit.Size = new System.Drawing.Size(92, 26);
             this.cmbox_StopBit.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 236);
+            this.label5.Location = new System.Drawing.Point(10, 202);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 21);
+            this.label5.Size = new System.Drawing.Size(62, 18);
             this.label5.TabIndex = 11;
             this.label5.Text = "校验位";
             // 
@@ -168,16 +179,17 @@
             "odd",
             "none",
             "even"});
-            this.cmbox_ParityBit.Location = new System.Drawing.Point(100, 234);
+            this.cmbox_ParityBit.Location = new System.Drawing.Point(82, 201);
+            this.cmbox_ParityBit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbox_ParityBit.Name = "cmbox_ParityBit";
-            this.cmbox_ParityBit.Size = new System.Drawing.Size(111, 29);
+            this.cmbox_ParityBit.Size = new System.Drawing.Size(92, 26);
             this.cmbox_ParityBit.TabIndex = 10;
             // 
             // FrmSerialCfg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 290);
+            this.ClientSize = new System.Drawing.Size(365, 249);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbox_ParityBit);
             this.Controls.Add(this.label4);
@@ -190,6 +202,7 @@
             this.Controls.Add(this.cmbox_SerialNum);
             this.Controls.Add(this.Btn_Cancel);
             this.Controls.Add(this.Btn_OK);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "FrmSerialCfg";
             this.Text = "串口配置";
             this.ResumeLayout(false);

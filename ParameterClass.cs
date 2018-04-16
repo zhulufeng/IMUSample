@@ -35,6 +35,7 @@ namespace IMUSample
         public static int Counter;
         public static int TotalCounter;
         public static int Timer_cyc;
+        public static double  Avedata;
         public static double[] doubleFogData = new double[3];
         public static double[] doubleFogTmp = new double[3];
         public static double[] doubleAccData = new double[3];

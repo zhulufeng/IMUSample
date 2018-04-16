@@ -18,14 +18,64 @@ namespace IMUSample
         UpdateDataEventHandler updateText;
         StreamWriter intDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataByte.txt");
         StreamWriter doubleDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
+        System.Timers.Timer timer;
+        bool Senddata_Enable;
+        int SumTime;
+        //定义委托
+        public delegate void SetControlValue();
+
         public Form1()
         {
             InitializeComponent();
             updateText = new UpdateDataEventHandler(showData);
             IMUData.TotalCounter = 0;
+            Senddata_Enable = false;
+            SumTime = Convert.ToInt32(tBox_FogZ.Text);
+            //InitTimer();
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
 
-           // MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+            // MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        }
+
+        private void InitTimer()
+        {
+            //设置定时间隔(毫秒为单位)
+            //int interval = SumTime;
+            timer = new System.Timers.Timer(SumTime);
+            //设置执行一次（false）还是一直执行(true)
+            timer.AutoReset = true;
+            //设置是否执行System.Timers.Timer.Elapsed事件
+            timer.Enabled = true;
+            //绑定Elapsed事件
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
+        }
+
+        /// <summary>
+        /// Timer类执行定时到点事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                //currentCount += 1;
+                this.Invoke(new SetControlValue(senddata));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("执行定时到点事件失败:" + ex.Message);
+            }
+        }
+        private void senddata()
+        {
+            byte [] data = new byte[1];
+            data[0] = 0x00;
+            if (serialPort.IsOpen && Senddata_Enable)
+            {
+                serialPort.Write(data, 0, 1);
+            }
+            
         }
         private void Btn_OpenSerial_Click(object sender, EventArgs e)
         {
@@ -48,11 +98,19 @@ namespace IMUSample
                 intDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataByte.txt");
                 doubleDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
                 serialPort.Open();
+                IMUData.TotalCounter = 0;
+                IMUData.Avedata = 0;
+                SumTime = Convert.ToInt32(tBox_FogZ.Text);
+                InitTimer();
                 MessageBox.Show("Hello!");
             }
             else if (Btn_OpenSerial.Text == "打开串口...")
             {
                 Btn_OpenSerial.Text = "关闭串口...";
+                IMUData.TotalCounter = 0;
+                IMUData.Avedata = 0;
+                SumTime = Convert.ToInt32(tBox_FogZ.Text);
+                InitTimer();
                 serialPort.Open();
             }
             else
@@ -61,6 +119,9 @@ namespace IMUSample
                 intDataSW.Close();
                 doubleDataSW.Close();
                 serialPort.Close();
+                timer.Stop();
+                timer.Enabled = false;
+                timer.Dispose();
             }
            
         }
@@ -124,53 +185,68 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 42)
+            UInt32 CheckSumC = 0;
+            UInt32 CheckSumD = 0;
+            while (serialData.buffer.Count >= 10)
             {
                 //Int32 index = 0;
                 //Byte ch = 
-                if (serialData.buffer[0] == 0xA5)
+                if (serialData.buffer[0] == 0x80)
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 0;i <= 37;i++)
+                    CheckSumC = 0;
+                    CheckSumD = 0;
+                    for (int i = 1;i <= 5;i++)
                     {
-                        CheckSumA = CheckSumA + serialData.buffer[i];
+                        CheckSumA = CheckSumA ^ serialData.buffer[i];
                     }
-                    CheckSumB = Convert.ToUInt32(serialData.buffer[41]) + Convert.ToUInt32(serialData.buffer[40]<<8) + Convert.ToUInt32(serialData.buffer[39]<<16) + Convert.ToUInt32(serialData.buffer[38]<<24);
-                   // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if (CheckSumA == CheckSumB)
+                    CheckSumC = Convert.ToUInt32(serialData.buffer[7]) ^ Convert.ToUInt32(serialData.buffer[8]);
+                    CheckSumB = Convert.ToUInt32(serialData.buffer[6]);
+                    CheckSumD = Convert.ToUInt32(serialData.buffer[9]);
+
+                    //MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
+                    if (CheckSumA == CheckSumB && CheckSumC == CheckSumD)
                     {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 42);
+                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 10);
                         IMUData.TotalCounter++;
-                        for (int i = 0; i < 3; i++)
+                        IMUData.intFogData[0] = (IMUData.arrayOriginData[1] + IMUData.arrayOriginData[2] * 128 + IMUData.arrayOriginData[3] * 128 * 128
+                            + IMUData.arrayOriginData[4] * 128 * 128 * 128 + IMUData.arrayOriginData[5] * 128 * 128 * 128 * 128);
+                        //                         for (int i = 0; i < 3; i++)
+                        //                         {
+                        //                             IMUData.intFogData[i] = (IMUData.arrayOriginData[3 * i + 1]  * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 2] * 256 * 256 + IMUData.arrayOriginData[3 * i + 3] * 256) / 256;
+                        //                             IMUData.intAccData[i] = (IMUData.arrayOriginData[3 * i + 11] * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 12] * 256 * 256 + IMUData.arrayOriginData[3 * i + 13] * 256) / 256;
+                        //                             IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 21] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 22] * 256 * 256) / 256 / 256;
+                        //                             IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 28] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 29] * 256 * 256) / 256 / 256;
+                        //                             IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 16384.0;
+                        //                             IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 131072.0;
+                        //                             IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 256.0;
+                        //                             IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 256.0;
+                        //                         }
+                        //                         IMUData.Counter = IMUData.arrayOriginData[35];
+                        //                         IMUData.Timer_cyc = IMUData.arrayOriginData[36] * 256 + IMUData.arrayOriginData[37];
+                        //                         IMUData.arrayIMUdata[0] = IMUData.Counter;
+                        //                         for (int i = 0; i < 3; i++)
+                        //                         {
+                        //                             IMUData.arrayIMUdata[1 + i] = IMUData.doubleFogData[i];
+                        //                             IMUData.arrayIMUdata[4 + i] = IMUData.doubleAccData[i];
+                        //                             IMUData.arrayIMUdata[7 + i] = IMUData.doubleFogTmp[i];
+                        //                             IMUData.arrayIMUdata[10 + i] = IMUData.doubleAccTmp[i];
+                        //                         }
+                        //                         IMUData.arrayIMUdata[13] = IMUData.Counter;
+                        //                         IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
+                        if (IMUData.TotalCounter > 1)
                         {
-                            IMUData.intFogData[i] = (IMUData.arrayOriginData[3 * i + 1]  * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 2] * 256 * 256 + IMUData.arrayOriginData[3 * i + 3] * 256) / 256;
-                            IMUData.intAccData[i] = (IMUData.arrayOriginData[3 * i + 11] * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 12] * 256 * 256 + IMUData.arrayOriginData[3 * i + 13] * 256) / 256;
-                            IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 21] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 22] * 256 * 256) / 256 / 256;
-                            IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 28] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 29] * 256 * 256) / 256 / 256;
-                            IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 16384.0;
-                            IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 131072.0;
-                            IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 256.0;
-                            IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 256.0;
+                            IMUData.Avedata = IMUData.Avedata / Convert.ToDouble(IMUData.TotalCounter - 1) * Convert.ToDouble(IMUData.TotalCounter - 2) +
+                                Convert.ToDouble(IMUData.intFogData[0]) / Convert.ToDouble(IMUData.TotalCounter - 1);
+                            saveData();
                         }
-                        IMUData.Counter = IMUData.arrayOriginData[35];
-                        IMUData.Timer_cyc = IMUData.arrayOriginData[36] * 256 + IMUData.arrayOriginData[37];
-                        IMUData.arrayIMUdata[0] = IMUData.Counter;
-                        for (int i = 0; i < 3; i++)
-                        {
-                            IMUData.arrayIMUdata[1 + i] = IMUData.doubleFogData[i];
-                            IMUData.arrayIMUdata[4 + i] = IMUData.doubleAccData[i];
-                            IMUData.arrayIMUdata[7 + i] = IMUData.doubleFogTmp[i];
-                            IMUData.arrayIMUdata[10 + i] = IMUData.doubleAccTmp[i];
-                        }
-                        IMUData.arrayIMUdata[13] = IMUData.Counter;
-                        IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
-                        saveData();
-                        if (IMUData.TotalCounter % 200 == 0)
+                        
+                        if (IMUData.TotalCounter % (1000 / SumTime) == 0)
                         {
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 42);
+                        serialData.buffer.RemoveRange(0, 10);
 
                     }
                     else
@@ -193,28 +269,17 @@ namespace IMUSample
             }
             intDataSW.Write("\r\n");
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 200.0);
-           for (int i = 1;i <= 12;i++)
-           {
-                if (IMUData.arrayIMUdata[i] >= 0)
-                {
-                    sb.AppendFormat("\t{0: 0.0000000e+000} ", IMUData.arrayIMUdata[i]);
-                }
-                else
-                {
-                    sb.AppendFormat("\t{0:0.0000000e+000} ", IMUData.arrayIMUdata[i]);
-                }
-            }
-            sb.AppendFormat("\t{0:000} ", IMUData.arrayIMUdata[13]);
-            sb.AppendFormat("\t{0:0000} ", IMUData.arrayIMUdata[14]);
+            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) );
+            sb.AppendFormat("\t{0:0.0000000e+000} ", IMUData.intFogData[0]);
+            
             doubleDataSW.WriteLine(sb.ToString());
             sb.Clear();
         }
         private void showData()
         {
-            tBox_FogX.Text = IMUData.doubleFogData[0].ToString();
-            tBox_FogY.Text = IMUData.doubleFogData[1].ToString();
-            tBox_FogZ.Text = IMUData.doubleFogData[2].ToString();
+            tBox_FogX.Text = IMUData.intFogData[0].ToString();
+            tBox_FogY.Text = IMUData.Avedata.ToString();
+           // tBox_FogZ.Text = IMUData.doubleFogData[2].ToString();
 
             tBox_AccX.Text = IMUData.doubleAccData[0].ToString();
             tBox_AccY.Text = IMUData.doubleAccData[1].ToString();
@@ -252,6 +317,21 @@ namespace IMUSample
             }
         }
 
-        
+        private void Btn_Senddata_Click(object sender, EventArgs e)
+        {
+            if (Senddata_Enable == false)
+            {
+                Senddata_Enable = true;
+                Btn_Senddata.Text = "关闭发数...";
+                this.Invoke(updateText);
+            } 
+            else
+            {
+                Senddata_Enable = false;
+                Btn_Senddata.Text = "开始发数...";
+
+            }
+            
+        }
     }
 }

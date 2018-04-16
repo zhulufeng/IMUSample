@@ -17,10 +17,10 @@ namespace IMUSample
         {
             InitializeComponent();
             setComBox();
-            cmbox_BaudRate.SelectedIndex = 10;
+            cmbox_BaudRate.SelectedIndex = 8;
             cmbox__DataBit.SelectedIndex = 1;
             cmbox_StopBit.SelectedIndex = 1;
-            cmbox_ParityBit.SelectedIndex = 1;
+            cmbox_ParityBit.SelectedIndex = 2;
 
         }
 
@@ -47,6 +47,6 @@ namespace IMUSample
             serialParameter.parityBit = cmbox_ParityBit.SelectedItem.ToString();
         }
 
-  
+        
     }
 }
