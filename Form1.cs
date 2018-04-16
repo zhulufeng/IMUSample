@@ -27,7 +27,6 @@ namespace IMUSample
 
            // MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
         }
-        StreamWriter sw = new StreamWriter("data.txt");
         private void Btn_OpenSerial_Click(object sender, EventArgs e)
         {
 
@@ -63,6 +62,7 @@ namespace IMUSample
                 doubleDataSW.Close();
                 serialPort.Close();
             }
+           
         }
 
  
@@ -252,6 +252,6 @@ namespace IMUSample
             }
         }
 
-       
+        
     }
 }
