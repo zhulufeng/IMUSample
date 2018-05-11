@@ -124,7 +124,7 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 35)
+            while (serialData.buffer.Count >= 41)
             {
                 //Int32 index = 0;
                 //Byte ch = 
@@ -132,23 +132,24 @@ namespace IMUSample
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 4;i <= 33;i++)
+                    for (int i = 4;i <= 39;i++)
                     {
                         CheckSumA = CheckSumA ^ serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[34];
+                    CheckSumB = serialData.buffer[40];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB)
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[41] == 0xBB) 
                     {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 34);
+                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 41);
                         IMUData.TotalCounter++;
                         for (int i = 0; i < 3; i++)
                         {
                             IMUData.intFogData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 7]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 6])  * 256 * 256
                                                             + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 5]) * 256  + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 4]));
-                            IMUData.intAccData[i] = (IMUData.arrayOriginData[2 * i + 17] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 16] * 256 * 256) / 256 / 256;
-                            IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 23] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 22] * 256 * 256) / 256 / 256;
-                            IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 29] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 28] * 256 * 256) / 256 / 256;
+                            IMUData.intAccData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 19]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 18]) * 256 * 256
+                                                            + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 17]) * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 16]));
+                            IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 29] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 28] * 256 * 256) / 256 / 256;
+                            IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 35] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 34] * 256 * 256) / 256 / 256;
                             IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
                             IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
                             IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
@@ -167,11 +168,11 @@ namespace IMUSample
                         IMUData.arrayIMUdata[13] = IMUData.Counter;
                         IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
                         saveData();
-                        if (IMUData.TotalCounter % 1000 == 0)
+                        if (IMUData.TotalCounter % 200 == 0)
                         {
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 35);
+                        serialData.buffer.RemoveRange(0, 41);
 
                     }
                     else
