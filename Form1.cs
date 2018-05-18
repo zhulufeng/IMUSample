@@ -195,7 +195,7 @@ namespace IMUSample
             }
             intDataSW.Write("\r\n");
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 1000.0);
+            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 200.0);
            for (int i = 1;i <= 12;i++)
            {
                 if (IMUData.arrayIMUdata[i] >= 0)
