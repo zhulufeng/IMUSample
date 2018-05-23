@@ -65,6 +65,7 @@
     <Compile Include="FrmSerialCfg.Designer.cs">
       <DependentUpon>FrmSerialCfg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matrix.cs" />
     <Compile Include="ParameterClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

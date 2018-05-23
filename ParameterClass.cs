@@ -48,4 +48,15 @@ namespace IMUSample
         public static string IMUDataCurrentDirectory = null;
         public static string ClearDirectory = null;
     }
+    class clsIMUCalidata
+    {
+        public Matrix GyroBias = new Matrix(3, 1);
+        public Matrix GyroSF = new Matrix(3, 1);
+        public Matrix GyroMA = new Matrix(3, 3);
+
+        public Matrix AccBias = new Matrix(3, 1);
+        public Matrix AccSF = new Matrix(3, 1);
+        public Matrix AccMA = new Matrix(3, 3);
+
+    }
 }
