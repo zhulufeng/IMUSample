@@ -166,68 +166,13 @@ namespace IMUSample
             byte[] buf = new byte[n];
             serialPort.Read(readBuffer, 0, n);
             serialData.buffer.AddRange(readBuffer);
-            int CheckSumA = 0;
-            int CheckSumB = 0;
-            while (serialData.buffer.Count >= 42)
-            {
-                //Int32 index = 0;
-                //Byte ch = 
-                if (serialData.buffer[0] == 0xA5 && serialData.buffer[10] == 0x00 && serialData.buffer[20] == 0x00 && serialData.buffer[27] == 0x00 && serialData.buffer[34] == 0x00)
-                {
-                    CheckSumA = 0;
-                    CheckSumB = 0;
-                    for (int i = 0;i <= 37;i++)
-                    {
-                        CheckSumA = CheckSumA + serialData.buffer[i];
-                    }
-                    CheckSumB = (serialData.buffer[41]) + (serialData.buffer[40] * 256) + (serialData.buffer[39] * 256 * 256) + (serialData.buffer[38] * 256 * 256 * 256);
-                   // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if (CheckSumA == CheckSumB)
-                    {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 42);
-                        IMUData.TotalCounter++;
-                        for (int i = 0; i < 3; i++)
-                        {
-                            IMUData.intFogData[i] = (IMUData.arrayOriginData[3 * i + 1]  * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 2] * 256 * 256 + IMUData.arrayOriginData[3 * i + 3] * 256) / 256;
-                            IMUData.intAccData[i] = (IMUData.arrayOriginData[3 * i + 11] * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 12] * 256 * 256 + IMUData.arrayOriginData[3 * i + 13] * 256) / 256;
-                            IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 21] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 22] * 256 * 256) / 256 / 256;
-                            IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 28] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 29] * 256 * 256) / 256 / 256;
-                            IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
-                            IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
-                            IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 256.0;
-                            IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 256.0;
-                        }
-                        IMUData.Counter = IMUData.arrayOriginData[35];
-                        IMUData.Timer_cyc = IMUData.arrayOriginData[36] * 256 + IMUData.arrayOriginData[37];
-                        IMUData.arrayIMUdata[0] = IMUData.Counter;
-                        for (int i = 0; i < 3; i++)
-                        {
-                            IMUData.arrayIMUdata[1 + i] = IMUData.doubleFogData[i];
-                            IMUData.arrayIMUdata[4 + i] = IMUData.doubleAccData[i];
-                            IMUData.arrayIMUdata[7 + i] = IMUData.doubleFogTmp[i];
-                            IMUData.arrayIMUdata[10 + i] = IMUData.doubleAccTmp[i];
-                        }
-                        IMUData.arrayIMUdata[13] = IMUData.Counter;
-                        IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
-                        saveData();
-                        if (IMUData.TotalCounter % 1000 == 0)
-                        {
-                            this.Invoke(updateText);
-                        }
-                        serialData.buffer.RemoveRange(0, 42);
+            string str = "";
 
-                    }
-                    else
-                    {
-                        serialData.buffer.RemoveRange(0, 1);
-                    }
-                }
-                else
-                {
-                    serialData.buffer.RemoveRange(0, 1);
-                }
-               
+            foreach (byte item in serialData.buffer)
+            {
+                str += Convert.ToChar(item);
             }
+
         }
         private void saveData()
         {
