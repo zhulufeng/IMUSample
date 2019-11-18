@@ -122,7 +122,7 @@
             // MenuItem_SerialCfg
             // 
             this.MenuItem_SerialCfg.Name = "MenuItem_SerialCfg";
-            this.MenuItem_SerialCfg.Size = new System.Drawing.Size(116, 28);
+            this.MenuItem_SerialCfg.Size = new System.Drawing.Size(120, 28);
             this.MenuItem_SerialCfg.Text = "串口设置(&S)";
             this.MenuItem_SerialCfg.Click += new System.EventHandler(this.MenuItem_SerialCfg_Click);
             // 
@@ -132,13 +132,13 @@
             this.MenuItem_SaveAs,
             this.MenuItem_DataClear});
             this.MenuItem_FileOperation.Name = "MenuItem_FileOperation";
-            this.MenuItem_FileOperation.Size = new System.Drawing.Size(116, 28);
+            this.MenuItem_FileOperation.Size = new System.Drawing.Size(120, 28);
             this.MenuItem_FileOperation.Text = "文件操作(&F)";
             // 
             // MenuItem_SaveAs
             // 
             this.MenuItem_SaveAs.Name = "MenuItem_SaveAs";
-            this.MenuItem_SaveAs.Size = new System.Drawing.Size(252, 30);
+            this.MenuItem_SaveAs.Size = new System.Drawing.Size(242, 34);
             this.MenuItem_SaveAs.Text = "文件另存(&S)";
             // 
             // MenuItem_DataClear
@@ -147,20 +147,20 @@
             this.MenuItem_ClearDirectory,
             this.MenuItem_ClearFile});
             this.MenuItem_DataClear.Name = "MenuItem_DataClear";
-            this.MenuItem_DataClear.Size = new System.Drawing.Size(252, 30);
+            this.MenuItem_DataClear.Size = new System.Drawing.Size(242, 34);
             this.MenuItem_DataClear.Text = "数据文件清除(&C)";
             // 
             // MenuItem_ClearDirectory
             // 
             this.MenuItem_ClearDirectory.Name = "MenuItem_ClearDirectory";
-            this.MenuItem_ClearDirectory.Size = new System.Drawing.Size(252, 30);
+            this.MenuItem_ClearDirectory.Size = new System.Drawing.Size(226, 34);
             this.MenuItem_ClearDirectory.Text = "清除文件夹(&D)";
             this.MenuItem_ClearDirectory.Click += new System.EventHandler(this.MenuItem_ClearDirectory_Click);
             // 
             // MenuItem_ClearFile
             // 
             this.MenuItem_ClearFile.Name = "MenuItem_ClearFile";
-            this.MenuItem_ClearFile.Size = new System.Drawing.Size(252, 30);
+            this.MenuItem_ClearFile.Size = new System.Drawing.Size(226, 34);
             this.MenuItem_ClearFile.Text = "清除文件(&F)";
             // 
             // serialPort
@@ -529,7 +529,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Timer";
+            this.Text = "陀螺采集";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

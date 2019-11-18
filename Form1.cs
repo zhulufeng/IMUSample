@@ -212,6 +212,8 @@ namespace IMUSample
                         IMUData.TotalCounter++;
                         IMUData.intFogData[0] = (IMUData.arrayOriginData[1] + IMUData.arrayOriginData[2] * 128 + IMUData.arrayOriginData[3] * 128 * 128
                             + IMUData.arrayOriginData[4] * 128 * 128 * 128 + IMUData.arrayOriginData[5] * 128 * 128 * 128 * 128);
+                        IMUData.intFogTmp[0] = IMUData.arrayOriginData[7] + IMUData.arrayOriginData[8] * 128;
+                        IMUData.doubleFogTmp[0] = Convert.ToDouble(IMUData.intFogTmp[0]) / 16.0;
                         //                         for (int i = 0; i < 3; i++)
                         //                         {
                         //                             IMUData.intFogData[i] = (IMUData.arrayOriginData[3 * i + 1]  * 256 * 256 * 256 + IMUData.arrayOriginData[3 * i + 2] * 256 * 256 + IMUData.arrayOriginData[3 * i + 3] * 256) / 256;
@@ -242,7 +244,7 @@ namespace IMUSample
                             saveData();
                         }
                         
-                        if (IMUData.TotalCounter % (1000 / SumTime) == 0)
+                        if (IMUData.TotalCounter % (200) == 0)
                         {
                             this.Invoke(updateText);
                         }
@@ -270,8 +272,9 @@ namespace IMUSample
             intDataSW.Write("\r\n");
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) );
-            sb.AppendFormat("\t{0:0.0000000e+000} ", IMUData.intFogData[0]);
-            
+            sb.AppendFormat("\t{0:#####0}", IMUData.intFogData[0]);
+            sb.AppendFormat("\t{0:00.000} ", IMUData.doubleFogTmp[0]);
+            sb.AppendFormat("\t{0:###0} ", IMUData.intFogTmp[0]);
             doubleDataSW.WriteLine(sb.ToString());
             sb.Clear();
         }
