@@ -124,7 +124,7 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 41)
+            while (serialData.buffer.Count >= 46)
             {
                 //Int32 index = 0;
                 //Byte ch = 
@@ -132,15 +132,15 @@ namespace IMUSample
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 4;i <= 39;i++)
+                    for (int i = 4;i <= 43;i++)
                     {
                         CheckSumA = CheckSumA ^ serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[40];
+                    CheckSumB = serialData.buffer[44];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[41] == 0xBB) 
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[45] == 0xBB) 
                     {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 41);
+                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 46);
                         IMUData.TotalCounter++;
                         for (int i = 0; i < 3; i++)
                         {
@@ -160,19 +160,19 @@ namespace IMUSample
                         IMUData.arrayIMUdata[0] = IMUData.Counter;
                         for (int i = 0; i < 3; i++)
                         {
-                            IMUData.arrayIMUdata[1  + i]  = IMUData.doubleFogData[i];
-                            IMUData.arrayIMUdata[4  + i]  = IMUData.doubleAccData[i];
-                            IMUData.arrayIMUdata[7  + i]  = IMUData.doubleFogTmp[i];
-                            IMUData.arrayIMUdata[10 + i] = IMUData.doubleAccTmp[i];
+                            IMUData.arrayIMUdata[1  + i]  = IMUData.intFogData[i];
+                            IMUData.arrayIMUdata[4  + i]  = IMUData.intAccData[i];
+                            IMUData.arrayIMUdata[7  + i]  = IMUData.intFogTmp[i];
+                            IMUData.arrayIMUdata[10 + i] = IMUData.intAccTmp[i];
                         }
                         IMUData.arrayIMUdata[13] = IMUData.Counter;
                         IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
                         saveData();
-                        if (IMUData.TotalCounter % 200 == 0)
+                        if (IMUData.TotalCounter % 100 == 0)
                         {
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 41);
+                        serialData.buffer.RemoveRange(0, 46);
 
                     }
                     else
@@ -195,16 +195,16 @@ namespace IMUSample
             }
             intDataSW.Write("\r\n");
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 200.0);
+            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 100.0);
            for (int i = 1;i <= 12;i++)
            {
                 if (IMUData.arrayIMUdata[i] >= 0)
                 {
-                    sb.AppendFormat("\t{0: 0.0000000e+000} ", IMUData.arrayIMUdata[i]);
+                    sb.AppendFormat("\t{0: #####000} ", IMUData.arrayIMUdata[i]);
                 }
                 else
                 {
-                    sb.AppendFormat("\t{0:0.0000000e+000} ", IMUData.arrayIMUdata[i]);
+                    sb.AppendFormat("\t{0:#####000} ", IMUData.arrayIMUdata[i]);
                 }
             }
             sb.AppendFormat("\t{0:000} ", IMUData.arrayIMUdata[13]);

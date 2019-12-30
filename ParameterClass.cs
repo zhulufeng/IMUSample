@@ -25,9 +25,9 @@ namespace IMUSample
 
     class IMUData
     {
-        public static double[] arrayIMUdata = new double[42];
+        public static int[] arrayIMUdata = new int[46];
 
-        public static byte[] arrayOriginData = new byte[42];
+        public static byte[] arrayOriginData = new byte[46];
         public static int[] intFogData = new int[3];
         public static int[] intFogTmp = new int[3];
         public static int[] intAccData = new int[3];
