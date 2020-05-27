@@ -25,8 +25,10 @@ namespace IMUSample
 
     class IMUData
     {
-        public static int[] arrayIMUdata = new int[46];
-
+        public static double[] arrayIMUdata = new double[46];
+        public static List <double>[]ListIMUdata = new List<double>[13]  ;
+        public static List<double>[] ListIMUdata_1s = new List<double>[13];
+        public static double[] data_1s = new double[12];
         public static byte[] arrayOriginData = new byte[46];
         public static int[] intFogData = new int[3];
         public static int[] intFogTmp = new int[3];
@@ -47,5 +49,14 @@ namespace IMUSample
         public static string IMUDataBaseDirectory = System.AppDomain.CurrentDomain.BaseDirectory + "IMUDATA";
         public static string IMUDataCurrentDirectory = null;
         public static string ClearDirectory = null;
+    }
+    class TimePara
+    {
+        public int total_time = 0;
+        public int dt;
+        public int sampleFreq = 1000;
+        public int drawCount = 0;
+        public int testTimes = 0;
+        public List<double> drawIndexTime = new List<double>();
     }
 }

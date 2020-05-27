@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +19,225 @@ namespace IMUSample
         UpdateDataEventHandler updateText;
         StreamWriter intDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataByte.txt");
         StreamWriter doubleDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
+        TimePara timePara = new TimePara();
+        bool[] zoomed_flag = new bool[6];
         public Form1()
         {
             InitializeComponent();
             updateText = new UpdateDataEventHandler(showData);
             IMUData.TotalCounter = 0;
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
+            for (int i = 0; i < 13; i++)
+            {
+ //               IMUData.ListIMUdata[i].
+            }
+            //MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        }
+        public void IntializeChart()
+        {
+            //图标的背景色
+            chart.BackColor = Color.FromArgb(255, 0, 24, 55);//Color.SkyBlue;
+            //图表背景色的渐变方式
+            chart.BackGradientStyle = GradientStyle.None;//GradientStyle.None;
+            //图表的边框线条颜色
+            chart.BorderlineColor = Color.Black;
+            //图表的边框线条样式
+            chart.BorderlineDashStyle = ChartDashStyle.Solid;
+            //图表边框线条宽度
+            chart.BorderlineWidth = 2;
+            //图表边框的皮肤
+            chart.BorderSkin.SkinStyle = BorderSkinStyle.None;
+            //图表边框宽度
+            chart.BorderSkin.BorderWidth = 0;
+        }
+        public void AddChartArea(int num)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                chart.ChartAreas.Add(SetChartArea(i));
+            }
+        }
+        /*************************************
+        函数名：AddSeries
+        创建日期：2019/10/25
+        函数功能：添加数据线
+        函数参数：
+        	num
+        返回值：void
+        *************************************/
+        public void AddSeries(int num)
+        {
+            for (int i = 0; i < num * 2; i++)
+            {
+                chart.Series.Add(SetSeries(i));
+                if (i % 2 == 0)
+                {
+                    chart.Series[i].YAxisType = AxisType.Primary;
+                }
+                else
+                {
+                    chart.Series[i].YAxisType = AxisType.Secondary;
+                }
+            }
+        }
 
-           // MessageBox.Show(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        /*************************************
+        函数名：SetSeries
+        创建日期：2019/10/25
+        函数功能：设置数据线格式
+        函数参数：
+        	index
+        返回值：System.Windows.Forms.DataVisualization.Charting.Series
+        *************************************/
+        public Series SetSeries(int index)
+        {
+            Series series = new Series();
+            //Series 的类型
+            series.ChartType = SeriesChartType.Line;
+            if (index % 2 == 0)
+            {
+                series.Color = Color.FromArgb(0xff, 0x32, 0xc5, 0xe9);//设置数据曲线的颜色
+            }
+            else
+            {
+                series.Color = Color.FromArgb(0xff, 0xff, 0x9f, 0x7f);//设置温度曲线的颜色
+            }
+            //Series线条阴影颜色
+            series.ShadowColor = Color.Green;
+            //阴影宽度
+            series.ShadowOffset = 0;
+            //是否显示数据说明
+            series.IsVisibleInLegend = false;
+            //线条上数据点上是否有数据显示
+            series.IsValueShownAsLabel = false;
+            //线条上的数据点标志类型
+            series.MarkerStyle = MarkerStyle.None;
+            //线条数据点的大小
+            series.MarkerSize = 2;
+            //Series 的边框颜色
+            series.BorderColor = Color.Tomato;
+            //Series线条的宽度
+            series.BorderWidth = 2;
+
+            return series;
+        }
+        /*************************************
+        函数名：SetChartArea
+        创建日期：2019/10/19
+        函数功能：设置绘图区
+        函数参数：
+        	index
+        返回值：System.Windows.Forms.DataVisualization.Charting.ChartArea
+        *************************************/
+        public ChartArea SetChartArea(int index)
+        {
+            ChartArea chartArea = new ChartArea();
+
+            
+            switch(index)
+            {
+                case 0:
+                    chartArea.Name = "FogX";
+                    chartArea.AxisY.Title = "X轴陀螺数据";
+                    break;
+                case 1:
+                    chartArea.Name = "FogY";
+                    chartArea.AxisY.Title = "Y轴陀螺数据";
+                    break;
+                case 2:
+                    chartArea.Name = "FogZ";
+                    chartArea.AxisY.Title = "Z轴陀螺数据";
+                    break;
+                case 3:
+                    chartArea.Name = "AccX";
+                    chartArea.AxisY.Title = "X轴加表螺数据";
+                    break;
+                case 4:
+                    chartArea.Name = "AccY";
+                    chartArea.AxisY.Title = "Y轴加表数据";
+                    break;
+                case 5:
+                    chartArea.Name = "AccZ";
+                    chartArea.AxisY.Title = "Z轴加表数据";
+                    break;
+            }
+            //背景色
+            chartArea.BackColor = Color.FromArgb(255, 4, 33, 65);
+            //背景渐变方式
+            chartArea.BackGradientStyle = GradientStyle.None;
+            //边框颜色
+            chartArea.BorderColor = Color.FromArgb(255, 4, 33, 65);
+            //边框柱线条宽度
+            chartArea.BorderWidth = 2;
+            //边框线条样式
+            chartArea.BorderDashStyle = ChartDashStyle.Solid;
+            //阴影颜色
+            chartArea.ShadowColor = Color.Transparent;
+
+
+            //设置X轴和Y轴线条的颜色和宽度
+            chartArea.AxisX.LineColor = Color.Black;//.FromArgb(64, 64, 64, 64);//
+            chartArea.AxisX.LineWidth = 1;
+            chartArea.AxisY.LineColor = Color.Black;//.FromArgb(64, 64, 64, 64);//
+            chartArea.AxisY.LineWidth = 1;
+            //设置x轴和Y轴的标题
+            chartArea.AxisX.Title = "时间";
+           
+            chartArea.AxisY2.Title = "温度";
+            chartArea.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12, FontStyle.Regular);
+            chartArea.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+            chartArea.AxisY2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 12, FontStyle.Regular);
+            chartArea.AxisX.TitleForeColor = Color.FromArgb(255, 245, 254, 252);
+            chartArea.AxisY.TitleForeColor = Color.FromArgb(0xff, 0x32, 0xc5, 0xe9);
+            chartArea.AxisY2.TitleForeColor = Color.FromArgb(0xff, 0xff, 0x9f, 0x7f);
+            //设置图表区网格横纵线条的颜色和宽度
+            chartArea.AxisX.MajorGrid.LineColor = Color.FromArgb(255, 114, 175, 207);
+            chartArea.AxisX.MajorGrid.LineWidth = 1;
+            chartArea.AxisY.MajorGrid.LineColor = Color.FromArgb(64, 64, 64, 64);
+            chartArea.AxisY.MajorGrid.LineWidth = 1;
+
+            //启用X游标，以支持局部区域选择放大
+            chartArea.CursorX.IsUserEnabled = true;
+            chartArea.CursorX.IsUserSelectionEnabled = true;
+            chartArea.CursorX.LineColor = Color.Pink;
+            chartArea.CursorX.IntervalType = DateTimeIntervalType.Auto;
+            chartArea.AxisX.ScaleView.Zoomable = false;
+            chartArea.AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.All;//启用X轴滚动条按钮
+            chartArea.AxisY.ScaleView.Zoomable = false;
+
+            chartArea.AxisY.LabelStyle.Format = "##########.0";
+            chartArea.AxisY2.LabelStyle.Format = "###.0000";
+            chartArea.AxisY.LabelStyle.ForeColor = Color.FromArgb(255, 146, 175, 207);
+            chartArea.AxisY2.LabelStyle.ForeColor = Color.FromArgb(255, 146, 175, 207);
+            chartArea.AxisX.LabelStyle.ForeColor = Color.FromArgb(255, 151, 167, 186);
+
+            return chartArea;
+        }
+
+        private void DrawFogData()
+        {
+            for (int index = 0; index < 6; index++)
+            {
+                timePara.drawIndexTime[index]++;
+                if (zoomed_flag[index])
+                {
+                    chart.ChartAreas[index].AxisY.Maximum = IMUData.ListIMUdata_1s[index].Max()+100;
+                    chart.ChartAreas[index].AxisY.Minimum = IMUData.ListIMUdata_1s[index].Min() - 100;
+                    chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListIMUdata_1s[index + 6].Max() + 1;
+                    chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListIMUdata_1s[index + 6].Min() - 1;
+
+                    chart.ChartAreas[index].AxisX.Interval = (IMUData.ListIMUdata_1s[index].Count / 20 + 1);
+                    chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListIMUdata_1s[index].Count * 1.1;
+                    chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
+                    chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
+                    chart.ChartAreas[index].CursorX.Position = -1;
+
+                }
+                chart.Series[2 * index].ChartArea = chart.ChartAreas[index].Name;
+                chart.Series[2 * index + 1].ChartArea = chart.ChartAreas[index].Name;
+                chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index]);
+                chart.Series[2 * index + 1].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index+6]);
+            }
         }
         private void Btn_OpenSerial_Click(object sender, EventArgs e)
         {
@@ -124,7 +336,7 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 46)
+            while (serialData.buffer.Count >= 42)
             {
                 //Int32 index = 0;
                 //Byte ch = 
@@ -132,15 +344,15 @@ namespace IMUSample
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 4;i <= 43;i++)
+                    for (int i = 4;i <= 39;i++)
                     {
                         CheckSumA = CheckSumA ^ serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[44];
+                    CheckSumB = serialData.buffer[40];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[45] == 0xBB) 
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[41] == 0xBB) 
                     {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 46);
+                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 42);
                         IMUData.TotalCounter++;
                         for (int i = 0; i < 3; i++)
                         {
@@ -160,19 +372,29 @@ namespace IMUSample
                         IMUData.arrayIMUdata[0] = IMUData.Counter;
                         for (int i = 0; i < 3; i++)
                         {
-                            IMUData.arrayIMUdata[1  + i]  = IMUData.intFogData[i];
-                            IMUData.arrayIMUdata[4  + i]  = IMUData.intAccData[i];
-                            IMUData.arrayIMUdata[7  + i]  = IMUData.intFogTmp[i];
-                            IMUData.arrayIMUdata[10 + i] = IMUData.intAccTmp[i];
+                            IMUData.arrayIMUdata[1  + i]  = IMUData.doubleFogData[i];
+                            IMUData.arrayIMUdata[4  + i]  = IMUData.doubleAccData[i];
+                            IMUData.arrayIMUdata[7  + i]  = IMUData.doubleFogTmp[i];
+                            IMUData.arrayIMUdata[10 + i]  = IMUData.doubleAccTmp[i];
+                        }
+                        for (int i = 1; i < 13; i++)
+                        {
+                            //IMUData.ListIMUdata[i].Add(IMUData.arrayIMUdata[i]);
                         }
                         IMUData.arrayIMUdata[13] = IMUData.Counter;
                         IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
                         saveData();
-                        if (IMUData.TotalCounter % 100 == 0)
+                        if (IMUData.TotalCounter % 10 == 0)
                         {
+//                             for (int i = 1; i < 13; i++)
+//                             {
+//                                 IMUData.data_1s[i] = IMUData.ListIMUdata[i].Average();
+//                                 IMUData.ListIMUdata_1s[i].Add(IMUData.ListIMUdata[i].Average());
+//                                 IMUData.ListIMUdata[i].Clear();
+//                             }
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 46);
+                        serialData.buffer.RemoveRange(0, 42);
 
                     }
                     else
