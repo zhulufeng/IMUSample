@@ -26,8 +26,21 @@ namespace IMUSample
     class IMUData
     {
         public static double[] arrayIMUdata = new double[46];
-        public static List <double>[]ListIMUdata = new List<double>[13]  ;
-        public static List<double>[] ListIMUdata_1s = new List<double>[13];
+        public static List <double>ListFogxData = new List<double>();
+        public static List<double> ListFogyData = new List<double>();
+        public static List<double> ListFogzData = new List<double>();
+
+        public static List<double> ListAccxData = new List<double>();
+        public static List<double> ListAccyData = new List<double>();
+        public static List<double> ListAcczData = new List<double>();
+
+        public static List<double> ListFogxData_1s = new List<double>();
+        public static List<double> ListFogyData_1s = new List<double>();
+        public static List<double> ListFogzData_1s = new List<double>();
+
+        public static List<double> ListAccxData_1s = new List<double>();
+        public static List<double> ListAccyData_1s = new List<double>();
+        public static List<double> ListAcczData_1s = new List<double>();
         public static double[] data_1s = new double[12];
         public static byte[] arrayOriginData = new byte[46];
         public static int[] intFogData = new int[3];
@@ -41,7 +54,8 @@ namespace IMUSample
         public static double[] doubleFogTmp = new double[3];
         public static double[] doubleAccData = new double[3];
         public static double[] doubleAccTmp = new double[3];
-
+        public static float[] floatAccData = new float[3];
+        public static float[] floatAccTmp = new float[3];
     }
 
     class PathString
