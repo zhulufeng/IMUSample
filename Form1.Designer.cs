@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.Btn_OpenSerial = new System.Windows.Forms.Button();
-            this.InfoBox = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MenuItem_SerialCfg = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItem_FileOperation = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,32 +83,27 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tBox_Accz_ave = new System.Windows.Forms.TextBox();
+            this.tBox_Accy_ave = new System.Windows.Forms.TextBox();
+            this.tBox_Accx_ave = new System.Windows.Forms.TextBox();
+            this.tBox_Fogz_ave = new System.Windows.Forms.TextBox();
+            this.tBox_Fogy_ave = new System.Windows.Forms.TextBox();
+            this.tBox_Fogx_ave = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_OpenSerial
             // 
-            this.Btn_OpenSerial.Location = new System.Drawing.Point(888, 50);
+            this.Btn_OpenSerial.Location = new System.Drawing.Point(984, 139);
             this.Btn_OpenSerial.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_OpenSerial.Name = "Btn_OpenSerial";
-            this.Btn_OpenSerial.Size = new System.Drawing.Size(74, 22);
+            this.Btn_OpenSerial.Size = new System.Drawing.Size(109, 40);
             this.Btn_OpenSerial.TabIndex = 1;
             this.Btn_OpenSerial.Text = "打开串口...";
             this.Btn_OpenSerial.UseVisualStyleBackColor = true;
             this.Btn_OpenSerial.Click += new System.EventHandler(this.Btn_OpenSerial_Click);
-            // 
-            // InfoBox
-            // 
-            this.InfoBox.BackColor = System.Drawing.SystemColors.Menu;
-            this.InfoBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.InfoBox.Location = new System.Drawing.Point(6, 28);
-            this.InfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.InfoBox.Multiline = true;
-            this.InfoBox.Name = "InfoBox";
-            this.InfoBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.InfoBox.Size = new System.Drawing.Size(114, 162);
-            this.InfoBox.TabIndex = 2;
             // 
             // menuStrip1
             // 
@@ -199,7 +192,7 @@
             // 
             // tBox_AccxT
             // 
-            this.tBox_AccxT.Location = new System.Drawing.Point(724, 144);
+            this.tBox_AccxT.Location = new System.Drawing.Point(842, 145);
             this.tBox_AccxT.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_AccxT.Name = "tBox_AccxT";
             this.tBox_AccxT.Size = new System.Drawing.Size(89, 21);
@@ -231,7 +224,7 @@
             // 
             // tBox_FogxT
             // 
-            this.tBox_FogxT.Location = new System.Drawing.Point(724, 58);
+            this.tBox_FogxT.Location = new System.Drawing.Point(842, 59);
             this.tBox_FogxT.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_FogxT.Name = "tBox_FogxT";
             this.tBox_FogxT.Size = new System.Drawing.Size(89, 21);
@@ -270,7 +263,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(680, 64);
+            this.label4.Location = new System.Drawing.Point(798, 65);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
@@ -310,7 +303,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(676, 148);
+            this.label8.Location = new System.Drawing.Point(794, 149);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 12);
@@ -319,16 +312,17 @@
             // 
             // textBox_Info
             // 
-            this.textBox_Info.Location = new System.Drawing.Point(132, 34);
+            this.textBox_Info.Location = new System.Drawing.Point(11, 41);
             this.textBox_Info.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Info.Multiline = true;
             this.textBox_Info.Name = "textBox_Info";
-            this.textBox_Info.Size = new System.Drawing.Size(179, 179);
+            this.textBox_Info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Info.Size = new System.Drawing.Size(282, 179);
             this.textBox_Info.TabIndex = 8;
             // 
             // tBox_FogzT
             // 
-            this.tBox_FogzT.Location = new System.Drawing.Point(724, 111);
+            this.tBox_FogzT.Location = new System.Drawing.Point(842, 112);
             this.tBox_FogzT.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_FogzT.Name = "tBox_FogzT";
             this.tBox_FogzT.Size = new System.Drawing.Size(89, 21);
@@ -336,7 +330,7 @@
             // 
             // tBox_FogyT
             // 
-            this.tBox_FogyT.Location = new System.Drawing.Point(724, 85);
+            this.tBox_FogyT.Location = new System.Drawing.Point(842, 86);
             this.tBox_FogyT.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_FogyT.Name = "tBox_FogyT";
             this.tBox_FogyT.Size = new System.Drawing.Size(89, 21);
@@ -345,7 +339,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(680, 115);
+            this.label9.Location = new System.Drawing.Point(798, 116);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 12);
@@ -355,7 +349,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(680, 89);
+            this.label10.Location = new System.Drawing.Point(798, 90);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 12);
@@ -364,7 +358,7 @@
             // 
             // tBox_AccyT
             // 
-            this.tBox_AccyT.Location = new System.Drawing.Point(724, 171);
+            this.tBox_AccyT.Location = new System.Drawing.Point(842, 172);
             this.tBox_AccyT.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_AccyT.Name = "tBox_AccyT";
             this.tBox_AccyT.Size = new System.Drawing.Size(89, 21);
@@ -372,7 +366,7 @@
             // 
             // tBox_AcczT
             // 
-            this.tBox_AcczT.Location = new System.Drawing.Point(724, 199);
+            this.tBox_AcczT.Location = new System.Drawing.Point(842, 200);
             this.tBox_AcczT.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_AcczT.Name = "tBox_AcczT";
             this.tBox_AcczT.Size = new System.Drawing.Size(89, 21);
@@ -381,7 +375,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(854, 121);
+            this.label11.Location = new System.Drawing.Point(949, 63);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(47, 12);
@@ -391,7 +385,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(676, 175);
+            this.label12.Location = new System.Drawing.Point(794, 176);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 12);
@@ -400,7 +394,7 @@
             // 
             // tBox_Counter
             // 
-            this.tBox_Counter.Location = new System.Drawing.Point(922, 114);
+            this.tBox_Counter.Location = new System.Drawing.Point(1004, 58);
             this.tBox_Counter.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Counter.Name = "tBox_Counter";
             this.tBox_Counter.Size = new System.Drawing.Size(89, 21);
@@ -408,7 +402,7 @@
             // 
             // tBox_Timer
             // 
-            this.tBox_Timer.Location = new System.Drawing.Point(922, 145);
+            this.tBox_Timer.Location = new System.Drawing.Point(1004, 85);
             this.tBox_Timer.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Timer.Name = "tBox_Timer";
             this.tBox_Timer.Size = new System.Drawing.Size(89, 21);
@@ -417,7 +411,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(857, 152);
+            this.label13.Location = new System.Drawing.Point(952, 94);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 12);
@@ -427,7 +421,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(676, 203);
+            this.label14.Location = new System.Drawing.Point(794, 204);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(35, 12);
@@ -436,11 +430,9 @@
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            this.chart.Location = new System.Drawing.Point(0, 258);
+            this.chart.Location = new System.Drawing.Point(0, 224);
             this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(1281, 573);
+            this.chart.Size = new System.Drawing.Size(1281, 607);
             this.chart.TabIndex = 12;
             this.chart.Text = "chart1";
             // 
@@ -470,7 +462,7 @@
             // 
             // tBox_Fogz_Std
             // 
-            this.tBox_Fogz_Std.Location = new System.Drawing.Point(567, 111);
+            this.tBox_Fogz_Std.Location = new System.Drawing.Point(685, 112);
             this.tBox_Fogz_Std.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Fogz_Std.Name = "tBox_Fogz_Std";
             this.tBox_Fogz_Std.Size = new System.Drawing.Size(89, 21);
@@ -478,7 +470,7 @@
             // 
             // tBox_Fogy_Std
             // 
-            this.tBox_Fogy_Std.Location = new System.Drawing.Point(567, 85);
+            this.tBox_Fogy_Std.Location = new System.Drawing.Point(685, 86);
             this.tBox_Fogy_Std.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Fogy_Std.Name = "tBox_Fogy_Std";
             this.tBox_Fogy_Std.Size = new System.Drawing.Size(89, 21);
@@ -486,7 +478,7 @@
             // 
             // tBox_Fogx_Std
             // 
-            this.tBox_Fogx_Std.Location = new System.Drawing.Point(567, 58);
+            this.tBox_Fogx_Std.Location = new System.Drawing.Point(685, 59);
             this.tBox_Fogx_Std.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Fogx_Std.Name = "tBox_Fogx_Std";
             this.tBox_Fogx_Std.Size = new System.Drawing.Size(89, 21);
@@ -494,7 +486,7 @@
             // 
             // tBox_Accz_Std
             // 
-            this.tBox_Accz_Std.Location = new System.Drawing.Point(566, 198);
+            this.tBox_Accz_Std.Location = new System.Drawing.Point(684, 199);
             this.tBox_Accz_Std.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Accz_Std.Name = "tBox_Accz_Std";
             this.tBox_Accz_Std.Size = new System.Drawing.Size(89, 21);
@@ -502,7 +494,7 @@
             // 
             // tBox_Accy_Std
             // 
-            this.tBox_Accy_Std.Location = new System.Drawing.Point(566, 172);
+            this.tBox_Accy_Std.Location = new System.Drawing.Point(684, 173);
             this.tBox_Accy_Std.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Accy_Std.Name = "tBox_Accy_Std";
             this.tBox_Accy_Std.Size = new System.Drawing.Size(89, 21);
@@ -510,7 +502,7 @@
             // 
             // tBox_Accx_Std
             // 
-            this.tBox_Accx_Std.Location = new System.Drawing.Point(566, 145);
+            this.tBox_Accx_Std.Location = new System.Drawing.Point(684, 146);
             this.tBox_Accx_Std.Margin = new System.Windows.Forms.Padding(2);
             this.tBox_Accx_Std.Name = "tBox_Accx_Std";
             this.tBox_Accx_Std.Size = new System.Drawing.Size(89, 21);
@@ -561,11 +553,68 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(575, 34);
+            this.label17.Location = new System.Drawing.Point(693, 35);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(41, 12);
             this.label17.TabIndex = 25;
             this.label17.Text = "稳定性";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(579, 36);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 12);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "均值";
+            // 
+            // tBox_Accz_ave
+            // 
+            this.tBox_Accz_ave.Location = new System.Drawing.Point(570, 200);
+            this.tBox_Accz_ave.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_Accz_ave.Name = "tBox_Accz_ave";
+            this.tBox_Accz_ave.Size = new System.Drawing.Size(89, 21);
+            this.tBox_Accz_ave.TabIndex = 29;
+            // 
+            // tBox_Accy_ave
+            // 
+            this.tBox_Accy_ave.Location = new System.Drawing.Point(570, 174);
+            this.tBox_Accy_ave.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_Accy_ave.Name = "tBox_Accy_ave";
+            this.tBox_Accy_ave.Size = new System.Drawing.Size(89, 21);
+            this.tBox_Accy_ave.TabIndex = 30;
+            // 
+            // tBox_Accx_ave
+            // 
+            this.tBox_Accx_ave.Location = new System.Drawing.Point(570, 147);
+            this.tBox_Accx_ave.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_Accx_ave.Name = "tBox_Accx_ave";
+            this.tBox_Accx_ave.Size = new System.Drawing.Size(89, 21);
+            this.tBox_Accx_ave.TabIndex = 31;
+            // 
+            // tBox_Fogz_ave
+            // 
+            this.tBox_Fogz_ave.Location = new System.Drawing.Point(571, 113);
+            this.tBox_Fogz_ave.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_Fogz_ave.Name = "tBox_Fogz_ave";
+            this.tBox_Fogz_ave.Size = new System.Drawing.Size(89, 21);
+            this.tBox_Fogz_ave.TabIndex = 26;
+            // 
+            // tBox_Fogy_ave
+            // 
+            this.tBox_Fogy_ave.Location = new System.Drawing.Point(571, 87);
+            this.tBox_Fogy_ave.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_Fogy_ave.Name = "tBox_Fogy_ave";
+            this.tBox_Fogy_ave.Size = new System.Drawing.Size(89, 21);
+            this.tBox_Fogy_ave.TabIndex = 27;
+            // 
+            // tBox_Fogx_ave
+            // 
+            this.tBox_Fogx_ave.Location = new System.Drawing.Point(571, 60);
+            this.tBox_Fogx_ave.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_Fogx_ave.Name = "tBox_Fogx_ave";
+            this.tBox_Fogx_ave.Size = new System.Drawing.Size(89, 21);
+            this.tBox_Fogx_ave.TabIndex = 28;
             // 
             // Form1
             // 
@@ -574,6 +623,13 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1281, 830);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.tBox_Accz_ave);
+            this.Controls.Add(this.tBox_Accy_ave);
+            this.Controls.Add(this.tBox_Accx_ave);
+            this.Controls.Add(this.tBox_Fogz_ave);
+            this.Controls.Add(this.tBox_Fogy_ave);
+            this.Controls.Add(this.tBox_Fogx_ave);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -619,13 +675,12 @@
             this.Controls.Add(this.tBox_FogX);
             this.Controls.Add(this.tBox_AccY);
             this.Controls.Add(this.tBox_AccX);
-            this.Controls.Add(this.InfoBox);
             this.Controls.Add(this.Btn_OpenSerial);
             this.Controls.Add(this.menuStrip1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Timer";
+            this.Text = "惯组采集系统";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
@@ -637,7 +692,6 @@
         #endregion
 
         private System.Windows.Forms.Button Btn_OpenSerial;
-        private System.Windows.Forms.TextBox InfoBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem MenuItem_SerialCfg;
         private System.IO.Ports.SerialPort serialPort;
@@ -691,6 +745,13 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox tBox_Accz_ave;
+        private System.Windows.Forms.TextBox tBox_Accy_ave;
+        private System.Windows.Forms.TextBox tBox_Accx_ave;
+        private System.Windows.Forms.TextBox tBox_Fogz_ave;
+        private System.Windows.Forms.TextBox tBox_Fogy_ave;
+        private System.Windows.Forms.TextBox tBox_Fogx_ave;
     }
 }
 

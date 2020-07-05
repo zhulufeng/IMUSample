@@ -16,6 +16,9 @@ namespace IMUSample
         public static string dataBit = "8";
         public static string stopBit = "1";
         public static string parityBit = "none";
+        public static bool isHighFreq = false;
+        public static bool isSaveHex = false;
+        public static string IMU_id = "001";
     }
     class serialData
     {
@@ -34,6 +37,14 @@ namespace IMUSample
         public static List<double> ListAccyData = new List<double>();
         public static List<double> ListAcczData = new List<double>();
 
+        public static List<double> ListTemFogxData = new List<double>();
+        public static List<double> ListTemFogyData = new List<double>();
+        public static List<double> ListTemFogzData = new List<double>();
+
+        public static List<double> ListTemAccxData = new List<double>();
+        public static List<double> ListTemAccyData = new List<double>();
+        public static List<double> ListTemAcczData = new List<double>();
+
         public static List<double> ListFogxData_1s = new List<double>();
         public static List<double> ListFogyData_1s = new List<double>();
         public static List<double> ListFogzData_1s = new List<double>();
@@ -41,7 +52,16 @@ namespace IMUSample
         public static List<double> ListAccxData_1s = new List<double>();
         public static List<double> ListAccyData_1s = new List<double>();
         public static List<double> ListAcczData_1s = new List<double>();
-        public static double[] data_1s = new double[12];
+
+        public static List<double> ListTemFogxData_1s = new List<double>();
+        public static List<double> ListTemFogyData_1s = new List<double>();
+        public static List<double> ListTemFogzData_1s = new List<double>();
+
+        public static List<double> ListTemAccxData_1s = new List<double>();
+        public static List<double> ListTemAccyData_1s = new List<double>();
+        public static List<double> ListTemAcczData_1s = new List<double>();
+
+        public static double[] data_1s = new double[19];
         public static byte[] arrayOriginData = new byte[46];
         public static int[] intFogData = new int[3];
         public static int[] intFogTmp = new int[3];

@@ -17,7 +17,7 @@ namespace IMUSample
         {
             InitializeComponent();
             setComBox();
-            cmbox_BaudRate.SelectedIndex = 8;
+            cmbox_BaudRate.SelectedIndex = 9;
             cmbox__DataBit.SelectedIndex = 1;
             cmbox_StopBit.SelectedIndex = 1;
             cmbox_ParityBit.SelectedIndex = 2;
@@ -45,6 +45,10 @@ namespace IMUSample
             serialParameter.dataBit = cmbox__DataBit.SelectedItem.ToString();
             serialParameter.stopBit = cmbox_StopBit.SelectedItem.ToString();
             serialParameter.parityBit = cmbox_ParityBit.SelectedItem.ToString();
+            serialParameter.isHighFreq = radioButton_HighFreq.Checked;
+            serialParameter.isSaveHex = radioButton_hexenable.Checked;
+            if (textBox_imu_id.Text != null)
+                serialParameter.IMU_id = textBox_imu_id.Text;
         }
 
   

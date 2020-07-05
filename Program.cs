@@ -18,7 +18,7 @@ namespace IMUSample
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             String dt = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-            Initial(dt);
+            //Initial(dt);
             Application.Run(new Form1());
         }
         static void Initial(String dt)
