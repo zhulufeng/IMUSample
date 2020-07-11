@@ -258,10 +258,10 @@ namespace IMUSample
                     switch (index)
                     {
                         case 0:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogxData_1s.Max() + 100) * 0.0017;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogxData_1s.Min() - 100) * 0.0017;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogxData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogxData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogxData_1s.ToArray().Max() + 100) * 0.0017;
+                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogxData_1s.ToArray().Min() - 100) * 0.0017;
+                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogxData_1s.ToArray().Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogxData_1s.ToArray().Min() - 1;
 
                             chart.ChartAreas[index].AxisX.Interval = (IMUData.ListFogxData_1s.Count / 20 + 1);
                             chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListFogxData_1s.Count * 1.1;
@@ -271,10 +271,10 @@ namespace IMUSample
                             break;
 
                         case 1:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogyData_1s.Max() + 100) * 0.0017;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogyData_1s.Min() - 100) * 0.0017;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogyData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogyData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogyData_1s.ToArray().Max() + 100) * 0.0017;
+                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogyData_1s.ToArray().Min() - 100) * 0.0017;
+                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogyData_1s.ToArray().Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogyData_1s.ToArray().Min() - 1;
 
                             chart.ChartAreas[index].AxisX.Interval = (IMUData.ListFogyData_1s.Count / 20 + 1);
                             chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListFogyData_1s.Count * 1.1;
@@ -284,10 +284,10 @@ namespace IMUSample
                             break;
 
                         case 2:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogzData_1s.Max() + 100) * 0.0017;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogzData_1s.Min() - 100) * 0.0017;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogzData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogzData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogzData_1s.ToArray().Max() + 100) * 0.0017;
+                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogzData_1s.ToArray().Min() - 100) * 0.0017;
+                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogzData_1s.ToArray().Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogzData_1s.ToArray().Min() - 1;
 
                             chart.ChartAreas[index].AxisX.Interval = (IMUData.ListFogzData_1s.Count / 20 + 1);
                             chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListFogzData_1s.Count * 1.1;
@@ -296,10 +296,10 @@ namespace IMUSample
                             chart.ChartAreas[index].CursorX.Position = -1;
                             break;
                         case 3:
-                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAccxData_1s.Max() + 0.0001;
-                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAccxData_1s.Min() - 0.0001;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAccxData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAccxData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAccxData_1s.ToArray().Max() + 0.0001;
+                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAccxData_1s.ToArray().Min() - 0.0001;
+                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAccxData_1s.ToArray().Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAccxData_1s.ToArray().Min() - 1;
 
                             chart.ChartAreas[index].AxisX.Interval = (IMUData.ListAccxData_1s.Count / 20 + 1);
                             chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListAccxData_1s.Count * 1.1;
@@ -309,10 +309,10 @@ namespace IMUSample
                             break;
 
                         case 4:
-                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAccyData_1s.Max() + 0.0001;
-                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAccyData_1s.Min() - 0.0001;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAccyData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAccyData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAccyData_1s.ToArray().Max() + 0.0001;
+                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAccyData_1s.ToArray().Min() - 0.0001;
+                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAccyData_1s.ToArray().Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAccyData_1s.ToArray().Min() - 1;
 
                             chart.ChartAreas[index].AxisX.Interval = (IMUData.ListAccyData_1s.Count / 20 + 1);
                             chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListAccyData_1s.Count * 1.1;
@@ -322,10 +322,10 @@ namespace IMUSample
                             break;
 
                         case 5:
-                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAcczData_1s.Max() + 0.0001;
-                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAcczData_1s.Min() - 0.0001;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAcczData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAcczData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAcczData_1s.ToArray().Max() + 0.0001;
+                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAcczData_1s.ToArray().Min() - 0.0001;
+                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAcczData_1s.ToArray().Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAcczData_1s.ToArray().Min() - 1;
 
                             chart.ChartAreas[index].AxisX.Interval = (IMUData.ListAcczData_1s.Count / 20 + 1);
                             chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListAcczData_1s.Count * 1.1;
@@ -631,39 +631,39 @@ namespace IMUSample
                         
                         if (IMUData.TotalCounter % 400 == 0)
                         {
-                            IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.Sum());
-                            IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.Sum());
-                            IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.Sum());
+                            IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.ToArray().Sum());
+                            IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.ToArray().Sum());
+                            IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.ToArray().Sum());
 
-                            IMUData.data_1s[1] = IMUData.ListFogxData.Sum();
-                            IMUData.data_1s[2] = IMUData.ListFogyData.Sum();
-                            IMUData.data_1s[3] = IMUData.ListFogzData.Sum();
+                            IMUData.data_1s[1] = IMUData.ListFogxData.ToArray().Sum();
+                            IMUData.data_1s[2] = IMUData.ListFogyData.ToArray().Sum();
+                            IMUData.data_1s[3] = IMUData.ListFogzData.ToArray().Sum();
 
                              
-                            IMUData.ListAccxData_1s.Add(IMUData.ListAccxData.Average());
-                            IMUData.ListAccyData_1s.Add(IMUData.ListAccyData.Average());
-                            IMUData.ListAcczData_1s.Add(IMUData.ListAcczData.Average());
+                            IMUData.ListAccxData_1s.Add(IMUData.ListAccxData.ToArray().Average());
+                            IMUData.ListAccyData_1s.Add(IMUData.ListAccyData.ToArray().Average());
+                            IMUData.ListAcczData_1s.Add(IMUData.ListAcczData.ToArray().Average());
 
-                            IMUData.data_1s[4] = IMUData.ListAccxData.Average();
-                            IMUData.data_1s[5] = IMUData.ListAccyData.Average();
-                            IMUData.data_1s[6] = IMUData.ListAcczData.Average();
+                            IMUData.data_1s[4] = IMUData.ListAccxData.ToArray().Average();
+                            IMUData.data_1s[5] = IMUData.ListAccyData.ToArray().Average();
+                            IMUData.data_1s[6] = IMUData.ListAcczData.ToArray().Average();
                             ////////////////////////温度
-                            IMUData.ListTemFogxData_1s.Add(IMUData.ListTemFogxData.Average());
-                            IMUData.ListTemFogyData_1s.Add(IMUData.ListTemFogyData.Average());
-                            IMUData.ListTemFogzData_1s.Add(IMUData.ListTemFogzData.Average());
+                            IMUData.ListTemFogxData_1s.Add(IMUData.ListTemFogxData.ToArray().Average());
+                            IMUData.ListTemFogyData_1s.Add(IMUData.ListTemFogyData.ToArray().Average());
+                            IMUData.ListTemFogzData_1s.Add(IMUData.ListTemFogzData.ToArray().Average());
 
-                            IMUData.data_1s[7] = IMUData.ListTemFogxData.Average();
-                            IMUData.data_1s[8] = IMUData.ListTemFogyData.Average();
-                            IMUData.data_1s[9] = IMUData.ListTemFogzData.Average();
+                            IMUData.data_1s[7] = IMUData.ListTemFogxData.ToArray().Average();
+                            IMUData.data_1s[8] = IMUData.ListTemFogyData.ToArray().Average();
+                            IMUData.data_1s[9] = IMUData.ListTemFogzData.ToArray().Average();
 
 
-                            IMUData.ListTemAccxData_1s.Add(IMUData.ListTemAccxData.Average());
-                            IMUData.ListTemAccyData_1s.Add(IMUData.ListTemAccyData.Average());
-                            IMUData.ListTemAcczData_1s.Add(IMUData.ListTemAcczData.Average());
+                            IMUData.ListTemAccxData_1s.Add(IMUData.ListTemAccxData.ToArray().Average());
+                            IMUData.ListTemAccyData_1s.Add(IMUData.ListTemAccyData.ToArray().Average());
+                            IMUData.ListTemAcczData_1s.Add(IMUData.ListTemAcczData.ToArray().Average());
 
-                            IMUData.data_1s[10] = IMUData.ListTemAccxData.Average();
-                            IMUData.data_1s[11] = IMUData.ListTemAccyData.Average();
-                            IMUData.data_1s[12] = IMUData.ListTemAcczData.Average();
+                            IMUData.data_1s[10] = IMUData.ListTemAccxData.ToArray().Average();
+                            IMUData.data_1s[11] = IMUData.ListTemAccyData.ToArray().Average();
+                            IMUData.data_1s[12] = IMUData.ListTemAcczData.ToArray().Average();
 
                             IMUData.data_1s[13] = IMUData.Counter;
                             IMUData.data_1s[14] = IMUData.Timer_cyc;
@@ -713,10 +713,12 @@ namespace IMUSample
         private double CalculateStdDev(List<double> value)
         {
             double std_data = 0.0;
+            double ave_data = 0.0;
+            double sum_data = 0.0;
             if (value.Count > 1)
             {
-                double ave_data = value.Average();
-                double sum_data = value.Sum(data => Math.Pow((data - ave_data), 2));
+                ave_data = value.ToArray().Average();
+                sum_data = value.ToArray().Sum(data => Math.Pow((data - ave_data), 2));
                 std_data = Math.Sqrt(sum_data / (value.Count - 1));
 
             }
@@ -790,9 +792,9 @@ namespace IMUSample
             tBox_Fogy_Std.Text = (CalculateStdDev(IMUData.ListFogyData_1s) * 0.0017).ToString("##0.000000");
             tBox_Fogz_Std.Text = (CalculateStdDev(IMUData.ListFogzData_1s) * 0.0017).ToString("##0.000000");
 
-            tBox_Fogx_ave.Text = (IMUData.ListFogxData_1s.Average() * 0.0017).ToString("##0.000000");
-            tBox_Fogy_ave.Text = (IMUData.ListFogyData_1s.Average() * 0.0017).ToString("##0.000000");
-            tBox_Fogz_ave.Text = (IMUData.ListFogzData_1s.Average() * 0.0017).ToString("##0.000000");
+            tBox_Fogx_ave.Text = (IMUData.ListFogxData_1s.ToArray().Average() * 0.0017).ToString("##0.000000");
+            tBox_Fogy_ave.Text = (IMUData.ListFogyData_1s.ToArray().Average() * 0.0017).ToString("##0.000000");
+            tBox_Fogz_ave.Text = (IMUData.ListFogzData_1s.ToArray().Average() * 0.0017).ToString("##0.000000");
 
             tBox_AccX.Text = IMUData.floatAccData[0].ToString();
             tBox_AccY.Text = IMUData.floatAccData[1].ToString();
@@ -806,9 +808,9 @@ namespace IMUSample
             tBox_Accy_Std.Text = (CalculateStdDev(IMUData.ListAccyData_1s) * 1.0).ToString("##0.00000000");
             tBox_Accz_Std.Text = (CalculateStdDev(IMUData.ListAcczData_1s) * 1.0).ToString("##0.00000000");
 
-            tBox_Accx_ave.Text = (IMUData.ListAccxData_1s.Average() * 1.0).ToString("##0.000000");
-            tBox_Accy_ave.Text = (IMUData.ListAccyData_1s.Average() * 1.0).ToString("##0.000000");
-            tBox_Accz_ave.Text = (IMUData.ListAcczData_1s.Average() * 1.0).ToString("##0.000000");
+            tBox_Accx_ave.Text = (IMUData.ListAccxData_1s.ToArray().Average() * 1.0).ToString("##0.000000");
+            tBox_Accy_ave.Text = (IMUData.ListAccyData_1s.ToArray().Average() * 1.0).ToString("##0.000000");
+            tBox_Accz_ave.Text = (IMUData.ListAcczData_1s.ToArray().Average() * 1.0).ToString("##0.000000");
 
             tBox_FogxT.Text = IMUData.doubleFogTmp[0].ToString();
             tBox_FogyT.Text = IMUData.doubleFogTmp[1].ToString();

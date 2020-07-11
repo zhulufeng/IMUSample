@@ -32,3 +32,4 @@ E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.Properties.Resources
 E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csproj.GenerateResource.cache
 E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.exe
 E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.pdb
+E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csproj.CoreCompileInputs.cache
