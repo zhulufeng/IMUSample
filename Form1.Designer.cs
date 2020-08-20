@@ -90,16 +90,29 @@
             this.tBox_Fogz_ave = new System.Windows.Forms.TextBox();
             this.tBox_Fogy_ave = new System.Windows.Forms.TextBox();
             this.tBox_Fogx_ave = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.Btn_SendInitialData = new System.Windows.Forms.Button();
+            this.tBox_InitLati = new System.Windows.Forms.TextBox();
+            this.tBox_InitHeight = new System.Windows.Forms.TextBox();
+            this.tBox_InitLongti = new System.Windows.Forms.TextBox();
+            this.tBox_Roll = new System.Windows.Forms.TextBox();
+            this.tBox_Yaw = new System.Windows.Forms.TextBox();
+            this.tBox_Pitch = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_OpenSerial
             // 
-            this.Btn_OpenSerial.Location = new System.Drawing.Point(984, 139);
+            this.Btn_OpenSerial.Location = new System.Drawing.Point(1136, 186);
             this.Btn_OpenSerial.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_OpenSerial.Name = "Btn_OpenSerial";
-            this.Btn_OpenSerial.Size = new System.Drawing.Size(109, 40);
+            this.Btn_OpenSerial.Size = new System.Drawing.Size(90, 26);
             this.Btn_OpenSerial.TabIndex = 1;
             this.Btn_OpenSerial.Text = "打开串口...";
             this.Btn_OpenSerial.UseVisualStyleBackColor = true;
@@ -616,6 +629,115 @@
             this.tBox_Fogx_ave.Size = new System.Drawing.Size(89, 21);
             this.tBox_Fogx_ave.TabIndex = 28;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(1111, 62);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(53, 12);
+            this.label19.TabIndex = 33;
+            this.label19.Text = "装订纬度";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(1111, 87);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 12);
+            this.label20.TabIndex = 34;
+            this.label20.Text = "装订经度";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(1111, 112);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(53, 12);
+            this.label21.TabIndex = 35;
+            this.label21.Text = "装订高度";
+            // 
+            // Btn_SendInitialData
+            // 
+            this.Btn_SendInitialData.Location = new System.Drawing.Point(1136, 145);
+            this.Btn_SendInitialData.Name = "Btn_SendInitialData";
+            this.Btn_SendInitialData.Size = new System.Drawing.Size(90, 23);
+            this.Btn_SendInitialData.TabIndex = 36;
+            this.Btn_SendInitialData.Text = "发送装订数据";
+            this.Btn_SendInitialData.UseVisualStyleBackColor = true;
+            this.Btn_SendInitialData.Click += new System.EventHandler(this.Btn_SendInitialData_Click);
+            // 
+            // tBox_InitLati
+            // 
+            this.tBox_InitLati.Location = new System.Drawing.Point(1169, 58);
+            this.tBox_InitLati.Name = "tBox_InitLati";
+            this.tBox_InitLati.Size = new System.Drawing.Size(81, 21);
+            this.tBox_InitLati.TabIndex = 37;
+            this.tBox_InitLati.Text = "29.39366867";
+            // 
+            // tBox_InitHeight
+            // 
+            this.tBox_InitHeight.Location = new System.Drawing.Point(1169, 111);
+            this.tBox_InitHeight.Name = "tBox_InitHeight";
+            this.tBox_InitHeight.Size = new System.Drawing.Size(81, 21);
+            this.tBox_InitHeight.TabIndex = 38;
+            this.tBox_InitHeight.Text = "291";
+            // 
+            // tBox_InitLongti
+            // 
+            this.tBox_InitLongti.Location = new System.Drawing.Point(1169, 85);
+            this.tBox_InitLongti.Name = "tBox_InitLongti";
+            this.tBox_InitLongti.Size = new System.Drawing.Size(81, 21);
+            this.tBox_InitLongti.TabIndex = 39;
+            this.tBox_InitLongti.Text = "106.2759943";
+            // 
+            // tBox_Roll
+            // 
+            this.tBox_Roll.Location = new System.Drawing.Point(1004, 153);
+            this.tBox_Roll.Name = "tBox_Roll";
+            this.tBox_Roll.Size = new System.Drawing.Size(81, 21);
+            this.tBox_Roll.TabIndex = 45;
+            // 
+            // tBox_Yaw
+            // 
+            this.tBox_Yaw.Location = new System.Drawing.Point(1004, 179);
+            this.tBox_Yaw.Name = "tBox_Yaw";
+            this.tBox_Yaw.Size = new System.Drawing.Size(81, 21);
+            this.tBox_Yaw.TabIndex = 44;
+            // 
+            // tBox_Pitch
+            // 
+            this.tBox_Pitch.Location = new System.Drawing.Point(1004, 126);
+            this.tBox_Pitch.Name = "tBox_Pitch";
+            this.tBox_Pitch.Size = new System.Drawing.Size(81, 21);
+            this.tBox_Pitch.TabIndex = 43;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(958, 180);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(41, 12);
+            this.label22.TabIndex = 42;
+            this.label22.Text = "航向角";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(958, 155);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 12);
+            this.label23.TabIndex = 41;
+            this.label23.Text = "横滚角";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(958, 130);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(41, 12);
+            this.label24.TabIndex = 40;
+            this.label24.Text = "俯仰角";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -623,6 +745,19 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1281, 830);
+            this.Controls.Add(this.tBox_Roll);
+            this.Controls.Add(this.tBox_Yaw);
+            this.Controls.Add(this.tBox_Pitch);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.tBox_InitLongti);
+            this.Controls.Add(this.tBox_InitHeight);
+            this.Controls.Add(this.tBox_InitLati);
+            this.Controls.Add(this.Btn_SendInitialData);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.tBox_Accz_ave);
             this.Controls.Add(this.tBox_Accy_ave);
@@ -752,6 +887,19 @@
         private System.Windows.Forms.TextBox tBox_Fogz_ave;
         private System.Windows.Forms.TextBox tBox_Fogy_ave;
         private System.Windows.Forms.TextBox tBox_Fogx_ave;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button Btn_SendInitialData;
+        private System.Windows.Forms.TextBox tBox_InitLati;
+        private System.Windows.Forms.TextBox tBox_InitHeight;
+        private System.Windows.Forms.TextBox tBox_InitLongti;
+        private System.Windows.Forms.TextBox tBox_Roll;
+        private System.Windows.Forms.TextBox tBox_Yaw;
+        private System.Windows.Forms.TextBox tBox_Pitch;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
     }
 }
 

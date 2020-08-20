@@ -28,54 +28,61 @@ namespace IMUSample
 
     class IMUData
     {
-        public static double[] arrayIMUdata = new double[46];
-        public static List <double>ListFogxData = new List<double>();
-        public static List<double> ListFogyData = new List<double>();
-        public static List<double> ListFogzData = new List<double>();
+        public  double[] arrayIMUdata = new double[46];
+        public  List <double>ListFogxData = new List<double>();
+        public  List<double> ListFogyData = new List<double>();
+        public  List<double> ListFogzData = new List<double>();
 
-        public static List<double> ListAccxData = new List<double>();
-        public static List<double> ListAccyData = new List<double>();
-        public static List<double> ListAcczData = new List<double>();
+        public  List<double> ListAccxData = new List<double>();
+        public  List<double> ListAccyData = new List<double>();
+        public  List<double> ListAcczData = new List<double>();
 
-        public static List<double> ListTemFogxData = new List<double>();
-        public static List<double> ListTemFogyData = new List<double>();
-        public static List<double> ListTemFogzData = new List<double>();
+        public  List<double> ListTemFogxData = new List<double>();
+        public  List<double> ListTemFogyData = new List<double>();
+        public  List<double> ListTemFogzData = new List<double>();
 
-        public static List<double> ListTemAccxData = new List<double>();
-        public static List<double> ListTemAccyData = new List<double>();
-        public static List<double> ListTemAcczData = new List<double>();
+        public  List<double> ListTemAccxData = new List<double>();
+        public  List<double> ListTemAccyData = new List<double>();
+        public  List<double> ListTemAcczData = new List<double>();
 
-        public static List<double> ListFogxData_1s = new List<double>();
-        public static List<double> ListFogyData_1s = new List<double>();
-        public static List<double> ListFogzData_1s = new List<double>();
+        public List<double> ListAttxData = new List<double>();
+        public List<double> ListAttyData = new List<double>();
+        public List<double> ListAttzData = new List<double>();
 
-        public static List<double> ListAccxData_1s = new List<double>();
-        public static List<double> ListAccyData_1s = new List<double>();
-        public static List<double> ListAcczData_1s = new List<double>();
+        public  List<double> ListFogxData_1s = new List<double>();
+        public  List<double> ListFogyData_1s = new List<double>();
+        public  List<double> ListFogzData_1s = new List<double>();
 
-        public static List<double> ListTemFogxData_1s = new List<double>();
-        public static List<double> ListTemFogyData_1s = new List<double>();
-        public static List<double> ListTemFogzData_1s = new List<double>();
+        public  List<double> ListAccxData_1s = new List<double>();
+        public  List<double> ListAccyData_1s = new List<double>();
+        public  List<double> ListAcczData_1s = new List<double>();
 
-        public static List<double> ListTemAccxData_1s = new List<double>();
-        public static List<double> ListTemAccyData_1s = new List<double>();
-        public static List<double> ListTemAcczData_1s = new List<double>();
+        public  List<double> ListTemFogxData_1s = new List<double>();
+        public  List<double> ListTemFogyData_1s = new List<double>();
+        public  List<double> ListTemFogzData_1s = new List<double>();
 
-        public static double[] data_1s = new double[19];
-        public static byte[] arrayOriginData = new byte[46];
-        public static int[] intFogData = new int[3];
-        public static int[] intFogTmp = new int[3];
-        public static int[] intAccData = new int[3];
-        public static int[] intAccTmp = new int[3];
-        public static int Counter;
-        public static int TotalCounter;
-        public static int Timer_cyc;
-        public static double[] doubleFogData = new double[3];
-        public static double[] doubleFogTmp = new double[3];
-        public static double[] doubleAccData = new double[3];
-        public static double[] doubleAccTmp = new double[3];
-        public static float[] floatAccData = new float[3];
-        public static float[] floatAccTmp = new float[3];
+        public  List<double> ListTemAccxData_1s = new List<double>();
+        public  List<double> ListTemAccyData_1s = new List<double>();
+        public  List<double> ListTemAcczData_1s = new List<double>();
+
+        public  double[] data_1s = new double[19];
+        public  byte[] arrayOriginData = new byte[46];
+        public  int[] intFogData = new int[3];
+        public  int[] intAttData = new int[3];
+        public  int[] intFogTmp = new int[3];
+        public  int[] intAccData = new int[3];
+        public  int[] intAccTmp = new int[3];
+        public  int Counter;
+        public  int TotalCounter;
+        public  int Timer_cyc;
+        public int nav_state;
+        public  double[] doubleFogData = new double[3];
+        public  double[] doubleAttData = new double[3];
+        public  double[] doubleFogTmp = new double[3];
+        public  double[] doubleAccData = new double[3];
+        public  double[] doubleAccTmp = new double[3];
+        public  float[] floatAccData = new float[3];
+        public  float[] floatAccTmp = new float[3];
     }
 
     class PathString

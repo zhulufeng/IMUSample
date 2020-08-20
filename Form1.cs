@@ -23,7 +23,7 @@ namespace IMUSample
         StreamWriter doubleDataSW;//= new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
         TimePara timePara = new TimePara();
         bool[] zoomed_flag = new bool[6];
-
+        IMUData INSdata = new IMUData();
         //定义联合体
         [StructLayout(LayoutKind.Explicit, Size = 4)]
 
@@ -50,7 +50,7 @@ namespace IMUSample
             IntializeChart();
             AddSeries(12);
             AddChartArea(6);
-            IMUData.TotalCounter = 0;
+            INSdata.TotalCounter = 0;
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
             for (int i = 0; i < 13; i++)
             {
@@ -258,77 +258,77 @@ namespace IMUSample
                     switch (index)
                     {
                         case 0:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogxData_1s.Max() + 100) / 3713100 * 3600;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogxData_1s.Min() - 100) / 3713100 * 3600;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogxData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogxData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = (INSdata.ListFogxData_1s.Max() + 100);
+                            chart.ChartAreas[index].AxisY.Minimum = (INSdata.ListFogxData_1s.Min() - 100);
+                            chart.ChartAreas[index].AxisY2.Maximum = INSdata.ListTemFogxData_1s.Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = INSdata.ListTemFogxData_1s.Min() - 1;
 
-                            chart.ChartAreas[index].AxisX.Interval = (IMUData.ListFogxData_1s.Count / 20 + 1);
-                            chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListFogxData_1s.Count * 1.1;
+                            chart.ChartAreas[index].AxisX.Interval = (INSdata.ListFogxData_1s.Count / 20 + 1);
+                            chart.ChartAreas[index].AxisX.ScaleView.Size = INSdata.ListFogxData_1s.Count * 1.1;
                             chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
                             chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
                             chart.ChartAreas[index].CursorX.Position = -1;
                             break;
 
                         case 1:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogyData_1s.Max() + 100) / 3713100 * 3600;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogyData_1s.Min() - 100) / 3713100 * 3600;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogyData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogyData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = (INSdata.ListFogyData_1s.Max() + 100);
+                            chart.ChartAreas[index].AxisY.Minimum = (INSdata.ListFogyData_1s.Min() - 100);
+                            chart.ChartAreas[index].AxisY2.Maximum = INSdata.ListTemFogyData_1s.Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = INSdata.ListTemFogyData_1s.Min() - 1;
 
-                            chart.ChartAreas[index].AxisX.Interval = (IMUData.ListFogyData_1s.Count / 20 + 1);
-                            chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListFogyData_1s.Count * 1.1;
+                            chart.ChartAreas[index].AxisX.Interval = (INSdata.ListFogyData_1s.Count / 20 + 1);
+                            chart.ChartAreas[index].AxisX.ScaleView.Size = INSdata.ListFogyData_1s.Count * 1.1;
                             chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
                             chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
                             chart.ChartAreas[index].CursorX.Position = -1;
                             break;
 
                         case 2:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogzData_1s.Max() + 100) / 3713100 * 3600;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogzData_1s.Min() - 100) / 3713100 * 3600;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogzData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogzData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = (INSdata.ListFogzData_1s.Max() + 100);
+                            chart.ChartAreas[index].AxisY.Minimum = (INSdata.ListFogzData_1s.Min() - 100);
+                            chart.ChartAreas[index].AxisY2.Maximum = INSdata.ListTemFogzData_1s.Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = INSdata.ListTemFogzData_1s.Min() - 1;
 
-                            chart.ChartAreas[index].AxisX.Interval = (IMUData.ListFogzData_1s.Count / 20 + 1);
-                            chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListFogzData_1s.Count * 1.1;
+                            chart.ChartAreas[index].AxisX.Interval = (INSdata.ListFogzData_1s.Count / 20 + 1);
+                            chart.ChartAreas[index].AxisX.ScaleView.Size = INSdata.ListFogzData_1s.Count * 1.1;
                             chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
                             chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
                             chart.ChartAreas[index].CursorX.Position = -1;
                             break;
                         case 3:
-                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAccxData_1s.Max() / 133926300 * 9.82 + 0.0001;
-                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAccxData_1s.Min() / 133926300 * 9.82 - 0.0001;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAccxData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAccxData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = INSdata.ListAccxData_1s.Max() + 0.0001;
+                            chart.ChartAreas[index].AxisY.Minimum = INSdata.ListAccxData_1s.Min() - 0.0001;
+                            chart.ChartAreas[index].AxisY2.Maximum = INSdata.ListTemAccxData_1s.Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = INSdata.ListTemAccxData_1s.Min() - 1;
 
-                            chart.ChartAreas[index].AxisX.Interval = (IMUData.ListAccxData_1s.Count / 20 + 1);
-                            chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListAccxData_1s.Count * 1.1;
+                            chart.ChartAreas[index].AxisX.Interval = (INSdata.ListAccxData_1s.Count / 20 + 1);
+                            chart.ChartAreas[index].AxisX.ScaleView.Size = INSdata.ListAccxData_1s.Count * 1.1;
                             chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
                             chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
                             chart.ChartAreas[index].CursorX.Position = -1;
                             break;
 
                         case 4:
-                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAccyData_1s.Max() / 133926300 * 9.82 + 0.0001;
-                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAccyData_1s.Min() / 133926300 * 9.82 - 0.0001;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAccyData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAccyData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = INSdata.ListAccyData_1s.Max() + 0.0001;
+                            chart.ChartAreas[index].AxisY.Minimum = INSdata.ListAccyData_1s.Min() - 0.0001;
+                            chart.ChartAreas[index].AxisY2.Maximum = INSdata.ListTemAccyData_1s.Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = INSdata.ListTemAccyData_1s.Min() - 1;
 
-                            chart.ChartAreas[index].AxisX.Interval = (IMUData.ListAccyData_1s.Count / 20 + 1);
-                            chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListAccyData_1s.Count * 1.1;
+                            chart.ChartAreas[index].AxisX.Interval = (INSdata.ListAccyData_1s.Count / 20 + 1);
+                            chart.ChartAreas[index].AxisX.ScaleView.Size = INSdata.ListAccyData_1s.Count * 1.1;
                             chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
                             chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
                             chart.ChartAreas[index].CursorX.Position = -1;
                             break;
 
                         case 5:
-                            chart.ChartAreas[index].AxisY.Maximum = IMUData.ListAcczData_1s.Max() / 133926300 * 9.82 + 0.0001;
-                            chart.ChartAreas[index].AxisY.Minimum = IMUData.ListAcczData_1s.Min() / 133926300 * 9.82 - 0.0001;
-                            chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemAcczData_1s.Max() + 1;
-                            chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemAcczData_1s.Min() - 1;
+                            chart.ChartAreas[index].AxisY.Maximum = INSdata.ListAcczData_1s.Max() + 0.0001;
+                            chart.ChartAreas[index].AxisY.Minimum = INSdata.ListAcczData_1s.Min() - 0.0001;
+                            chart.ChartAreas[index].AxisY2.Maximum = INSdata.ListTemAcczData_1s.Max() + 1;
+                            chart.ChartAreas[index].AxisY2.Minimum = INSdata.ListTemAcczData_1s.Min() - 1;
 
-                            chart.ChartAreas[index].AxisX.Interval = (IMUData.ListAcczData_1s.Count / 20 + 1);
-                            chart.ChartAreas[index].AxisX.ScaleView.Size = IMUData.ListAcczData_1s.Count * 1.1;
+                            chart.ChartAreas[index].AxisX.Interval = (INSdata.ListAcczData_1s.Count / 20 + 1);
+                            chart.ChartAreas[index].AxisX.ScaleView.Size = INSdata.ListAcczData_1s.Count * 1.1;
                             chart.ChartAreas[index].AxisX.ScaleView.Position = 0.0;
                             chart.ChartAreas[index].CursorX.SelectionStart = chart.ChartAreas[index].CursorX.SelectionEnd = 0.0;
                             chart.ChartAreas[index].CursorX.Position = -1;
@@ -343,13 +343,13 @@ namespace IMUSample
                 chart.Series[2 * index + 1].ChartArea = chart.ChartAreas[index].Name;
                 if (index < 3)
                 {
-                    chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1] / 3713100 * 3600);
-                    chart.Series[2 * index + 1].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1 + 6]);
+                    chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], INSdata.data_1s[index + 1]);
+                    chart.Series[2 * index + 1].Points.AddXY(timePara.drawIndexTime[index], INSdata.data_1s[index + 1 + 6]);
                 }
                 else 
                 {
-                    chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1] / 133926300 * 9.82);
-                    chart.Series[2 * index + 1].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1 + 6]);
+                    chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], INSdata.data_1s[index + 1]);
+                    chart.Series[2 * index + 1].Points.AddXY(timePara.drawIndexTime[index], INSdata.data_1s[index + 1 + 6]);
                 }
             }
         }
@@ -359,7 +359,7 @@ namespace IMUSample
             if (Btn_OpenSerial.Text == "再次打开串口...")
             {
                 Btn_OpenSerial.Text = "关闭串口...";
-                
+                INSdata.TotalCounter = 0;
                 String dt = DateTime.Now.ToString("yyyyMMdd-HHmmss");
                 PathString.IMUDataCurrentDirectory = PathString.IMUDataBaseDirectory + @"\" + serialParameter.IMU_id + "_imudata" + dt;
                 if (!Directory.Exists(PathString.IMUDataBaseDirectory))
@@ -393,24 +393,25 @@ namespace IMUSample
 //                 {
 //                     timePara.drawIndexTime.Add(0);
 //                     chart.Series.Clear();
-//                     IMUData.ListFogxData_1s.Clear();
-//                     IMUData.ListFogyData_1s.Clear();
-//                     IMUData.ListFogzData_1s.Clear();
-//                     IMUData.ListAccxData_1s.Clear();
-//                     IMUData.ListAccyData_1s.Clear();
-//                     IMUData.ListAcczData_1s.Clear();
-//                     IMUData.ListTemFogxData_1s.Clear();
-//                     IMUData.ListTemFogyData_1s.Clear();
-//                     IMUData.ListTemFogzData_1s.Clear();
-//                     IMUData.ListTemAccxData_1s.Clear();
-//                     IMUData.ListTemAccyData_1s.Clear();
-//                     IMUData.ListTemAcczData_1s.Clear();
+//                     INSdata.ListFogxData_1s.Clear();
+//                     INSdata.ListFogyData_1s.Clear();
+//                     INSdata.ListFogzData_1s.Clear();
+//                     INSdata.ListAccxData_1s.Clear();
+//                     INSdata.ListAccyData_1s.Clear();
+//                     INSdata.ListAcczData_1s.Clear();
+//                     INSdata.ListTemFogxData_1s.Clear();
+//                     INSdata.ListTemFogyData_1s.Clear();
+//                     INSdata.ListTemFogzData_1s.Clear();
+//                     INSdata.ListTemAccxData_1s.Clear();
+//                     INSdata.ListTemAccyData_1s.Clear();
+//                     INSdata.ListTemAcczData_1s.Clear();
 //                 }
                 
                 //MessageBox.Show("Hello!");
             }
             else if (Btn_OpenSerial.Text == "打开串口...")
             {
+                INSdata.TotalCounter = 0;
                 Btn_OpenSerial.Text = "关闭串口...";
                 String dt = DateTime.Now.ToString("yyyyMMdd-HHmmss");
                 PathString.IMUDataCurrentDirectory = PathString.IMUDataBaseDirectory + @"\" + serialParameter.IMU_id + "_imudata" + dt;
@@ -453,19 +454,19 @@ namespace IMUSample
 //                     
 //                 }
                 chart.Series.Clear();
-                IMUData.TotalCounter = 0;
-                IMUData.ListFogxData_1s.Clear();
-                IMUData.ListFogyData_1s.Clear();
-                IMUData.ListFogzData_1s.Clear();
-                IMUData.ListAccxData_1s.Clear();
-                IMUData.ListAccyData_1s.Clear();
-                IMUData.ListAcczData_1s.Clear();
-                IMUData.ListTemFogxData_1s.Clear();
-                IMUData.ListTemFogyData_1s.Clear();
-                IMUData.ListTemFogzData_1s.Clear();
-                IMUData.ListTemAccxData_1s.Clear();
-                IMUData.ListTemAccyData_1s.Clear();
-                IMUData.ListTemAcczData_1s.Clear();
+                INSdata.TotalCounter = 0;
+                INSdata.ListFogxData_1s.Clear();
+                INSdata.ListFogyData_1s.Clear();
+                INSdata.ListFogzData_1s.Clear();
+                INSdata.ListAccxData_1s.Clear();
+                INSdata.ListAccyData_1s.Clear();
+                INSdata.ListAcczData_1s.Clear();
+                INSdata.ListTemFogxData_1s.Clear();
+                INSdata.ListTemFogyData_1s.Clear();
+                INSdata.ListTemFogzData_1s.Clear();
+                INSdata.ListTemAccxData_1s.Clear();
+                INSdata.ListTemAccyData_1s.Clear();
+                INSdata.ListTemAcczData_1s.Clear();
                 if (serialParameter.isSaveHex)
                 {
                     intDataSW.Close();
@@ -545,6 +546,10 @@ namespace IMUSample
 
         private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            if (!serialPort.IsOpen)
+            {
+                return;
+            }
             int n = serialPort.BytesToRead;
             byte[] readBuffer = new byte[n];
             byte[] buf = new byte[n];
@@ -552,143 +557,156 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 46)
+            while (serialData.buffer.Count >= 38)
             {
                 //Int32 index = 0;
                 //Byte ch = 
-                if (serialData.buffer[0] == 0xAA && serialData.buffer[1] == 0xAA)
+                if (serialData.buffer[0] == 0x5A && serialData.buffer[1] == 0xA5)
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 4;i <= 43;i++)
+                    for (int i = 3;i < 35;i++)
                     {
-                        CheckSumA = CheckSumA ^ serialData.buffer[i];
+                        CheckSumA = CheckSumA + serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[44];
+                    CheckSumB = serialData.buffer[36];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[45] == 0xBB) 
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[37] == 0x55) 
                     {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 42);
-                        IMUData.TotalCounter++;
+                        serialData.buffer.CopyTo(0,INSdata.arrayOriginData, 0, 38);
+                        INSdata.TotalCounter++;
+                        INSdata.nav_state = INSdata.arrayOriginData[2];
                         Union[] trdata = new Union[3];
                         for (int i = 0; i < 3; i++)
                         {
-                            IMUData.intFogData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 7]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 6])  * 256 * 256
-                                                            + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 5]) * 256  + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 4]));
-                            IMUData.intAccData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 19]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 18]) * 256 * 256
-                                                             + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 17]) * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 16]));
-                            IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 29] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 28] * 256 * 256) / 256 / 256;
-                            IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 35] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 34] * 256 * 256) / 256 / 256;
-                            IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
-                            IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
-                            IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
-                            IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 16.0;
-//                             trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 16];
-//                             trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 17];
-//                             trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 18];
-//                             trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 19];
+                            INSdata.intAttData[i] = (Convert.ToInt32(Convert.ToInt32(INSdata.arrayOriginData[2 * i + 4]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[2 * i + 3]) * 256 * 256)) / 256 / 256;
+                            INSdata.intFogData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 12]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 11])  * 256 * 256
+                                                            + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 10]) * 256  + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 9]));
+                            INSdata.intAccData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 24]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 23]) * 256 * 256
+                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 22]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 21]));
+                            INSdata.intFogTmp[i]  = (INSdata.arrayOriginData[34] * 256 * 256 * 256 + INSdata.arrayOriginData[33] * 256 * 256) / 256 / 256;
+                            INSdata.intAccTmp[i]  = (INSdata.arrayOriginData[34] * 256 * 256 * 256 + INSdata.arrayOriginData[33] * 256 * 256) / 256 / 256;
+                            INSdata.doubleFogData[i] = Convert.ToDouble(INSdata.intFogData[i]) / 10000.0;
+                            INSdata.doubleAttData[i] = Convert.ToDouble(INSdata.intAttData[i]) / 100.0;
+                            INSdata.doubleAccData[i] = Convert.ToDouble(INSdata.intAccData[i]) / 10000.0;
+                            INSdata.doubleFogTmp[i] = Convert.ToDouble(INSdata.intFogTmp[i]) / 100.0;
+                            INSdata.doubleAccTmp[i] = Convert.ToDouble(INSdata.intAccTmp[i]) / 100.0;
+//                             trdata[i].b0 = INSdata.arrayOriginData[i * 4 + 16];
+//                             trdata[i].b1 = INSdata.arrayOriginData[i * 4 + 17];
+//                             trdata[i].b2 = INSdata.arrayOriginData[i * 4 + 18];
+//                             trdata[i].b3 = INSdata.arrayOriginData[i * 4 + 19];
 // 
-// //                             trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 19];
-// //                             trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 18];
-// //                             trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 17];
-// //                             trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 16];
-//                            IMUData.floatAccData[i] = trdata[i].f;
+// //                             trdata[i].b0 = INSdata.arrayOriginData[i * 4 + 19];
+// //                             trdata[i].b1 = INSdata.arrayOriginData[i * 4 + 18];
+// //                             trdata[i].b2 = INSdata.arrayOriginData[i * 4 + 17];
+// //                             trdata[i].b3 = INSdata.arrayOriginData[i * 4 + 16];
+//                            INSdata.floatAccData[i] = trdata[i].f;
 
                         }
                         
 
-                        IMUData.Counter = IMUData.arrayOriginData[2];
-                        //IMUData.Timer_cyc = IMUData.arrayOriginData[36] * 256 + IMUData.arrayOriginData[37];
-                        IMUData.arrayIMUdata[0] = IMUData.Counter;
+                        INSdata.Counter = INSdata.arrayOriginData[2];
+                        //INSdata.Timer_cyc = INSdata.arrayOriginData[36] * 256 + INSdata.arrayOriginData[37];
+                        INSdata.arrayIMUdata[0] = INSdata.Counter;
                         for (int i = 0; i < 3; i++)
                         {
-                            IMUData.arrayIMUdata[1  + i]  = IMUData.doubleFogData[i];
-                            IMUData.arrayIMUdata[4  + i]  = IMUData.doubleAccData[i];
-                            IMUData.arrayIMUdata[7  + i]  = IMUData.doubleFogTmp[i];
-                            IMUData.arrayIMUdata[10 + i]  = IMUData.doubleAccTmp[0];
+                            INSdata.arrayIMUdata[1  + i]  = INSdata.doubleFogData[i];
+                            INSdata.arrayIMUdata[4  + i]  = INSdata.doubleAccData[i];
+                            INSdata.arrayIMUdata[7  + i]  = INSdata.doubleFogTmp[i];
+                            INSdata.arrayIMUdata[10 + i]  = INSdata.doubleAccTmp[0];
+                            INSdata.arrayIMUdata[13 + i]  = INSdata.doubleAttData[i];
                         }
 
-                        IMUData.ListFogxData.Add(IMUData.arrayIMUdata[1]);
-                        IMUData.ListFogyData.Add(IMUData.arrayIMUdata[2]);
-                        IMUData.ListFogzData.Add(IMUData.arrayIMUdata[3]);
-                        IMUData.ListAccxData.Add(IMUData.arrayIMUdata[4]);
-                        IMUData.ListAccyData.Add(IMUData.arrayIMUdata[5]);
-                        IMUData.ListAcczData.Add(IMUData.arrayIMUdata[6]);
+                        INSdata.ListFogxData.Add(INSdata.arrayIMUdata[1]);
+                        INSdata.ListFogyData.Add(INSdata.arrayIMUdata[2]);
+                        INSdata.ListFogzData.Add(INSdata.arrayIMUdata[3]);
+                        INSdata.ListAccxData.Add(INSdata.arrayIMUdata[4]);
+                        INSdata.ListAccyData.Add(INSdata.arrayIMUdata[5]);
+                        INSdata.ListAcczData.Add(INSdata.arrayIMUdata[6]);
 
-                        IMUData.ListTemFogxData.Add(IMUData.arrayIMUdata[7]);
-                        IMUData.ListTemFogyData.Add(IMUData.arrayIMUdata[8]);
-                        IMUData.ListTemFogzData.Add(IMUData.arrayIMUdata[9]);
-                        IMUData.ListTemAccxData.Add(IMUData.arrayIMUdata[10]);
-                        IMUData.ListTemAccyData.Add(IMUData.arrayIMUdata[11]);
-                        IMUData.ListTemAcczData.Add(IMUData.arrayIMUdata[12]);
-
-                        IMUData.arrayIMUdata[13] = IMUData.Counter;
-                        IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
+                        INSdata.ListTemFogxData.Add(INSdata.arrayIMUdata[7]);
+                        INSdata.ListTemFogyData.Add(INSdata.arrayIMUdata[8]);
+                        INSdata.ListTemFogzData.Add(INSdata.arrayIMUdata[9]);
+                        INSdata.ListTemAccxData.Add(INSdata.arrayIMUdata[10]);
+                        INSdata.ListTemAccyData.Add(INSdata.arrayIMUdata[11]);
+                        INSdata.ListTemAcczData.Add(INSdata.arrayIMUdata[12]);
+                        INSdata.ListAttxData.Add(INSdata.arrayIMUdata[14]);
+                        INSdata.ListAttyData.Add(INSdata.arrayIMUdata[13]);
+                        INSdata.ListAttzData.Add(INSdata.arrayIMUdata[15]);
+                        INSdata.arrayIMUdata[16] = INSdata.Counter;
+                        INSdata.arrayIMUdata[17] = INSdata.Timer_cyc;
                         if (serialParameter.isHighFreq)
                         {
-                            saveData(IMUData.arrayIMUdata);
+                            saveData(INSdata.arrayIMUdata);
                         }
                         
-                        if (IMUData.TotalCounter % 100 == 0)
+                        if (INSdata.TotalCounter % 400 == 0)
                         {
-                            IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.Sum());
-                            IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.Sum());
-                            IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.Sum());
+                            INSdata.ListFogxData_1s.Add(INSdata.ListFogxData.ToArray().Average());
+                            INSdata.ListFogyData_1s.Add(INSdata.ListFogyData.ToArray().Average());
+                            INSdata.ListFogzData_1s.Add(INSdata.ListFogzData.ToArray().Average());
 
-                            IMUData.data_1s[1] = IMUData.ListFogxData.Sum();
-                            IMUData.data_1s[2] = IMUData.ListFogyData.Sum();
-                            IMUData.data_1s[3] = IMUData.ListFogzData.Sum();
+                            INSdata.data_1s[1] = INSdata.ListFogxData.ToArray().Average();
+                            INSdata.data_1s[2] = INSdata.ListFogyData.ToArray().Average();
+                            INSdata.data_1s[3] = INSdata.ListFogzData.ToArray().Average();
 
                              
-                            IMUData.ListAccxData_1s.Add(IMUData.ListAccxData.Sum());
-                            IMUData.ListAccyData_1s.Add(IMUData.ListAccyData.Sum());
-                            IMUData.ListAcczData_1s.Add(IMUData.ListAcczData.Sum());
+                            INSdata.ListAccxData_1s.Add(INSdata.ListAccxData.ToArray().Average());
+                            INSdata.ListAccyData_1s.Add(INSdata.ListAccyData.ToArray().Average());
+                            INSdata.ListAcczData_1s.Add(INSdata.ListAcczData.ToArray().Average());
 
-                            IMUData.data_1s[4] = IMUData.ListAccxData.Sum();
-                            IMUData.data_1s[5] = IMUData.ListAccyData.Sum();
-                            IMUData.data_1s[6] = IMUData.ListAcczData.Sum();
+                            INSdata.data_1s[4] = INSdata.ListAccxData.ToArray().Average();
+                            INSdata.data_1s[5] = INSdata.ListAccyData.ToArray().Average();
+                            INSdata.data_1s[6] = INSdata.ListAcczData.ToArray().Average();
                             ////////////////////////温度
-                            IMUData.ListTemFogxData_1s.Add(IMUData.ListTemFogxData.Average());
-                            IMUData.ListTemFogyData_1s.Add(IMUData.ListTemFogyData.Average());
-                            IMUData.ListTemFogzData_1s.Add(IMUData.ListTemFogzData.Average());
+                            INSdata.ListTemFogxData_1s.Add(INSdata.ListTemFogxData.ToArray().Average());
+                            INSdata.ListTemFogyData_1s.Add(INSdata.ListTemFogyData.ToArray().Average());
+                            INSdata.ListTemFogzData_1s.Add(INSdata.ListTemFogzData.ToArray().Average());
 
-                            IMUData.data_1s[7] = IMUData.ListTemFogxData.Average();
-                            IMUData.data_1s[8] = IMUData.ListTemFogyData.Average();
-                            IMUData.data_1s[9] = IMUData.ListTemFogzData.Average();
+                            INSdata.data_1s[7] = INSdata.ListTemFogxData.ToArray().Average();
+                            INSdata.data_1s[8] = INSdata.ListTemFogyData.ToArray().Average();
+                            INSdata.data_1s[9] = INSdata.ListTemFogzData.ToArray().Average();
 
 
-                            IMUData.ListTemAccxData_1s.Add(IMUData.ListTemAccxData.Average());
-                            IMUData.ListTemAccyData_1s.Add(IMUData.ListTemAccyData.Average());
-                            IMUData.ListTemAcczData_1s.Add(IMUData.ListTemAcczData.Average());
+                            INSdata.ListTemAccxData_1s.Add(INSdata.ListTemAccxData.ToArray().Average());
+                            INSdata.ListTemAccyData_1s.Add(INSdata.ListTemAccyData.ToArray().Average());
+                            INSdata.ListTemAcczData_1s.Add(INSdata.ListTemAcczData.ToArray().Average());
 
-                            IMUData.data_1s[10] = IMUData.ListTemAccxData.Average();
-                            IMUData.data_1s[11] = IMUData.ListTemAccyData.Average();
-                            IMUData.data_1s[12] = IMUData.ListTemAcczData.Average();
+                            INSdata.data_1s[10] = INSdata.ListTemAccxData.ToArray().Average();
+                            INSdata.data_1s[11] = INSdata.ListTemAccyData.ToArray().Average();
+                            INSdata.data_1s[12] = INSdata.ListTemAcczData.ToArray().Average();
 
-                            IMUData.data_1s[13] = IMUData.Counter;
-                            IMUData.data_1s[14] = IMUData.Timer_cyc;
+                            INSdata.data_1s[13] = INSdata.ListAttxData.ToArray().Average();
+                            INSdata.data_1s[14] = INSdata.ListAttyData.ToArray().Average();
+                            INSdata.data_1s[15] = INSdata.ListAttzData.ToArray().Average();
 
-                            IMUData.ListFogxData.Clear();
-                            IMUData.ListFogyData.Clear();
-                            IMUData.ListFogzData.Clear();
-                            IMUData.ListAccxData.Clear();
-                            IMUData.ListAccyData.Clear();
-                            IMUData.ListAcczData.Clear();
+                            INSdata.data_1s[16] = INSdata.Counter;
+                            INSdata.data_1s[17] = INSdata.Timer_cyc;
 
-                            IMUData.ListTemFogxData.Clear();
-                            IMUData.ListTemFogyData.Clear();
-                            IMUData.ListTemFogzData.Clear();
-                            IMUData.ListTemAccxData.Clear();
-                            IMUData.ListTemAccyData.Clear();
-                            IMUData.ListTemAcczData.Clear();
+                            INSdata.ListFogxData.Clear();
+                            INSdata.ListFogyData.Clear();
+                            INSdata.ListFogzData.Clear();
+                            INSdata.ListAccxData.Clear();
+                            INSdata.ListAccyData.Clear();
+                            INSdata.ListAcczData.Clear();
+                            INSdata.ListAttxData.Clear();
+                            INSdata.ListAttyData.Clear();
+                            INSdata.ListAttzData.Clear();
+
+                            INSdata.ListTemFogxData.Clear();
+                            INSdata.ListTemFogyData.Clear();
+                            INSdata.ListTemFogzData.Clear();
+                            INSdata.ListTemAccxData.Clear();
+                            INSdata.ListTemAccyData.Clear();
+                            INSdata.ListTemAcczData.Clear();
                             if (!serialParameter.isHighFreq)
                             {
-                                saveData(IMUData.data_1s);
+                                saveData(INSdata.data_1s);
                             }
                             
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 46);
+                        serialData.buffer.RemoveRange(0, 38);
 
                     }
                     else
@@ -713,10 +731,12 @@ namespace IMUSample
         private double CalculateStdDev(List<double> value)
         {
             double std_data = 0.0;
+            double ave_data = 0.0;
+            double sum_data = 0.0;
             if (value.Count > 1)
             {
-                double ave_data = value.Average();
-                double sum_data = value.Sum(data => Math.Pow((data - ave_data), 2));
+                ave_data = value.ToArray().Average();
+                sum_data = value.ToArray().Sum(data => Math.Pow((data - ave_data), 2));
                 std_data = Math.Sqrt(sum_data / (value.Count - 1));
 
             }
@@ -726,16 +746,18 @@ namespace IMUSample
         {
             if (serialParameter.isSaveHex)
             {
-                for (int i = 0; i < IMUData.arrayOriginData.Length; i++)
+                for (int i = 0; i < INSdata.arrayOriginData.Length; i++)
                 {
-                    intDataSW.Write(IMUData.arrayOriginData[i].ToString("X2") + "\t");
+                    intDataSW.Write(INSdata.arrayOriginData[i].ToString("X2") + "\t");
                 }
                 intDataSW.Write("\r\n");
             }           
            
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 100.0);
-           for (int i = 1;i <= 12;i++)
+            sb.AppendFormat("{0:0000.000}\t",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
+            sb.Append(DateTime.Now.ToString("HH:mm:ss:fff:ffffff"));
+            //sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
+            for (int i = 1;i <= 15;i++)
            {
                 if (i >= 0 && i <= 3)
                 {
@@ -772,54 +794,59 @@ namespace IMUSample
                 }
                 
             }
-            sb.AppendFormat("\t{0:000} ", Datalist[13]);
-            sb.AppendFormat("\t{0:0000} ", Datalist[14]);
+            sb.AppendFormat("\t{0:000} ", Datalist[16]);
+            sb.AppendFormat("\t{0:0000} ", Datalist[17]);
             doubleDataSW.WriteLine(sb.ToString());
             sb.Clear();
         }
         private void showData()
         {
-            tBox_FogX.Text = IMUData.data_1s[1].ToString();
-            tBox_FogY.Text = IMUData.data_1s[2].ToString();
-            tBox_FogZ.Text = IMUData.data_1s[3].ToString();
-            tBox_Fogx_Com.Text = (IMUData.data_1s[1] / 3713100 * 3600).ToString();
-            tBox_Fogy_Com.Text = (IMUData.data_1s[2] / 3713100 * 3600).ToString();
-            tBox_Fogz_Com.Text = (IMUData.data_1s[3] / 3713100 * 3600).ToString();
+            tBox_FogX.Text = INSdata.data_1s[1].ToString();
+            tBox_FogY.Text = INSdata.data_1s[2].ToString();
+            tBox_FogZ.Text = INSdata.data_1s[3].ToString();
+            tBox_Fogx_Com.Text = (INSdata.data_1s[1]).ToString();
+            tBox_Fogy_Com.Text = (INSdata.data_1s[2]).ToString();
+            tBox_Fogz_Com.Text = (INSdata.data_1s[3]).ToString();
 
-            tBox_Fogx_Std.Text = (CalculateStdDev(IMUData.ListFogxData_1s) / 3713100 * 3600).ToString("##0.000000");
-            tBox_Fogy_Std.Text = (CalculateStdDev(IMUData.ListFogyData_1s) / 3713100 * 3600).ToString("##0.000000");
-            tBox_Fogz_Std.Text = (CalculateStdDev(IMUData.ListFogzData_1s) / 3713100 * 3600).ToString("##0.000000");
+            tBox_Fogx_Std.Text = (CalculateStdDev(INSdata.ListFogxData_1s)).ToString("##0.000000");
+            tBox_Fogy_Std.Text = (CalculateStdDev(INSdata.ListFogyData_1s)).ToString("##0.000000");
+            tBox_Fogz_Std.Text = (CalculateStdDev(INSdata.ListFogzData_1s)).ToString("##0.000000");
 
-            tBox_Fogx_ave.Text = (IMUData.ListFogxData_1s.Average() / 3713100 * 3600).ToString("##0.000000");
-            tBox_Fogy_ave.Text = (IMUData.ListFogyData_1s.Average() / 3713100 * 3600).ToString("##0.000000");
-            tBox_Fogz_ave.Text = (IMUData.ListFogzData_1s.Average() / 3713100 * 3600).ToString("##0.000000");
+            tBox_Fogx_ave.Text = (INSdata.ListFogxData_1s.ToArray().Average()).ToString("##0.000000");
+            tBox_Fogy_ave.Text = (INSdata.ListFogyData_1s.ToArray().Average()).ToString("##0.000000");
+            tBox_Fogz_ave.Text = (INSdata.ListFogzData_1s.ToArray().Average()).ToString("##0.000000");
 
-            tBox_AccX.Text = IMUData.data_1s[4].ToString();
-            tBox_AccY.Text = IMUData.data_1s[5].ToString();
-            tBox_AccZ.Text = IMUData.data_1s[6].ToString();
+            tBox_AccX.Text = INSdata.data_1s[4].ToString();
+            tBox_AccY.Text = INSdata.data_1s[5].ToString();
+            tBox_AccZ.Text = INSdata.data_1s[6].ToString();
 
-            tBox_Accx_Com.Text = (IMUData.data_1s[4] / 133926300 * 9.82).ToString("##0.00000000");
-            tBox_Accy_Com.Text = (IMUData.data_1s[5] / 133926300 * 9.82).ToString("##0.00000000");
-            tBox_Accz_Com.Text = (IMUData.data_1s[6] / 133926300 * 9.82).ToString("##0.00000000");
+            tBox_Accx_Com.Text = (INSdata.data_1s[4]).ToString("##0.00000000");
+            tBox_Accy_Com.Text = (INSdata.data_1s[5]).ToString("##0.00000000");
+            tBox_Accz_Com.Text = (INSdata.data_1s[6]).ToString("##0.00000000");
 
-            tBox_Accx_Std.Text = (CalculateStdDev(IMUData.ListAccxData_1s) / 133926300 * 9.82).ToString("##0.00000000");
-            tBox_Accy_Std.Text = (CalculateStdDev(IMUData.ListAccyData_1s) / 133926300 * 9.82).ToString("##0.00000000");
-            tBox_Accz_Std.Text = (CalculateStdDev(IMUData.ListAcczData_1s) / 133926300 * 9.82).ToString("##0.00000000");
+            tBox_Accx_Std.Text = (CalculateStdDev(INSdata.ListAccxData_1s)).ToString("##0.00000000");
+            tBox_Accy_Std.Text = (CalculateStdDev(INSdata.ListAccyData_1s)).ToString("##0.00000000");
+            tBox_Accz_Std.Text = (CalculateStdDev(INSdata.ListAcczData_1s)).ToString("##0.00000000");
 
-            tBox_Accx_ave.Text = (IMUData.ListAccxData_1s.Average() / 133926300 * 9.82).ToString("##0.000000");
-            tBox_Accy_ave.Text = (IMUData.ListAccyData_1s.Average() / 133926300 * 9.82).ToString("##0.000000");
-            tBox_Accz_ave.Text = (IMUData.ListAcczData_1s.Average() / 133926300 * 9.82).ToString("##0.000000");
+            tBox_Accx_ave.Text = (INSdata.ListAccxData_1s.ToArray().Average()).ToString("##0.000000");
+            tBox_Accy_ave.Text = (INSdata.ListAccyData_1s.ToArray().Average()).ToString("##0.000000");
+            tBox_Accz_ave.Text = (INSdata.ListAcczData_1s.ToArray().Average()).ToString("##0.000000");
 
-            tBox_FogxT.Text = IMUData.doubleFogTmp[0].ToString();
-            tBox_FogyT.Text = IMUData.doubleFogTmp[1].ToString();
-            tBox_FogzT.Text = IMUData.doubleFogTmp[2].ToString();
+            tBox_FogxT.Text = INSdata.doubleFogTmp[0].ToString();
+            tBox_FogyT.Text = INSdata.doubleFogTmp[1].ToString();
+            tBox_FogzT.Text = INSdata.doubleFogTmp[2].ToString();
 
-            tBox_AccxT.Text = IMUData.doubleAccTmp[0].ToString();
-            tBox_AccyT.Text = IMUData.doubleAccTmp[1].ToString();
-            tBox_AcczT.Text = IMUData.doubleAccTmp[2].ToString();
+            tBox_AccxT.Text = INSdata.doubleAccTmp[0].ToString();
+            tBox_AccyT.Text = INSdata.doubleAccTmp[1].ToString();
+            tBox_AcczT.Text = INSdata.doubleAccTmp[2].ToString();
 
-            tBox_Counter.Text = (IMUData.TotalCounter / 100.0).ToString();
-            tBox_Timer.Text = IMUData.Timer_cyc.ToString();
+            tBox_Pitch.Text = (INSdata.data_1s[13]).ToString("###0.0000");
+            tBox_Roll.Text =  (INSdata.data_1s[14]).ToString("###0.0000");
+            tBox_Yaw.Text =   (INSdata.data_1s[15]).ToString("###0.0000");
+
+
+            tBox_Counter.Text = (INSdata.TotalCounter / 400.0).ToString();
+            tBox_Timer.Text = INSdata.nav_state.ToString();
 
             DrawIMUData();
         }
@@ -844,6 +871,65 @@ namespace IMUSample
             }
         }
 
-       
+        private void Btn_SendInitialData_Click(object sender, EventArgs e)
+        {
+            double init_lati, init_longti, init_height;
+            int checksum = 0;
+            byte[] Sendbuff = new byte[17];
+            Union[] trdata = new Union[3];
+            init_lati = Convert.ToDouble(tBox_InitLati.Text);
+            init_longti = Convert.ToDouble(tBox_InitLongti.Text);
+            init_height = Convert.ToDouble(tBox_InitHeight.Text);
+            trdata[0].i = Convert.ToInt32(init_lati   * 1e6);
+            trdata[1].i = Convert.ToInt32(init_longti * 1e6);
+            trdata[2].i = Convert.ToInt32(init_height * 100);
+
+            Sendbuff[0] = 0x5A;
+            Sendbuff[1] = 0xA5;
+            Sendbuff[2] = 0x03;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Sendbuff[3 + 4 * i] = trdata[i].b0;
+                Sendbuff[4 + 4 * i] = trdata[i].b1;
+                Sendbuff[5 + 4 * i] = trdata[i].b2;
+                Sendbuff[6 + 4 * i] = trdata[i].b3;
+            }
+            for (int i = 2; i < 15; i++)
+            {
+                checksum += Sendbuff[i];
+            }
+            Sendbuff[15] = Convert.ToByte(checksum & 0xFF);
+            Sendbuff[16] = 0x55;
+            INSdata.TotalCounter = 0;
+            if (!serialPort.IsOpen)
+            {
+                Btn_OpenSerial.Text = "关闭串口...";
+                serialPort.Open();
+            }
+
+            serialPort.Write(Sendbuff, 0, 17);
+            textBox_Info.Text += "发送的纬度是：" + init_lati.ToString() + "\r\n";
+            textBox_Info.Text += "发送的经度是：" + init_longti.ToString() + "\r\n";
+            textBox_Info.Text += "发送的高度是：" + init_height.ToString() + "\r\n";
+            textBox_Info.Text += "对应数据码是：" + "\r\n";
+            for (int i = 0; i < Sendbuff.Length; i++)
+            {
+                textBox_Info.Text += "0x" + Sendbuff[i].ToString("X2") + " ";
+            }
+            for (int i = 0; i < Sendbuff.Length; i++)
+            {
+                textBox_Info.Text += Sendbuff[i].ToString("X2") + " ";
+            }
+            textBox_Info.Text += "\r\n";
+            //让文本框获取焦点 
+            this.textBox_Info.Focus();
+            //设置光标的位置到文本尾 
+            this.textBox_Info.Select(this.textBox_Info.Text.Length, 0);
+            //滚动到控件光标处 
+            this.textBox_Info.ScrollToCaret();
+        }
+
+        
     }
 }
