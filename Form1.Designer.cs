@@ -90,16 +90,23 @@
             this.tBox_Fogz_ave = new System.Windows.Forms.TextBox();
             this.tBox_Fogy_ave = new System.Windows.Forms.TextBox();
             this.tBox_Fogx_ave = new System.Windows.Forms.TextBox();
+            this.tBox_Fog_SFX = new System.Windows.Forms.TextBox();
+            this.tBox_Fog_SFZ = new System.Windows.Forms.TextBox();
+            this.tBox_Fog_SFY = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.Btn_Set_SF = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_OpenSerial
             // 
-            this.Btn_OpenSerial.Location = new System.Drawing.Point(984, 139);
+            this.Btn_OpenSerial.Location = new System.Drawing.Point(984, 150);
             this.Btn_OpenSerial.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_OpenSerial.Name = "Btn_OpenSerial";
-            this.Btn_OpenSerial.Size = new System.Drawing.Size(109, 40);
+            this.Btn_OpenSerial.Size = new System.Drawing.Size(109, 29);
             this.Btn_OpenSerial.TabIndex = 1;
             this.Btn_OpenSerial.Text = "打开串口...";
             this.Btn_OpenSerial.UseVisualStyleBackColor = true;
@@ -616,6 +623,70 @@
             this.tBox_Fogx_ave.Size = new System.Drawing.Size(89, 21);
             this.tBox_Fogx_ave.TabIndex = 28;
             // 
+            // tBox_Fog_SFX
+            // 
+            this.tBox_Fog_SFX.Location = new System.Drawing.Point(1152, 58);
+            this.tBox_Fog_SFX.Name = "tBox_Fog_SFX";
+            this.tBox_Fog_SFX.Size = new System.Drawing.Size(100, 21);
+            this.tBox_Fog_SFX.TabIndex = 33;
+            this.tBox_Fog_SFX.Text = "2263936.861";
+            // 
+            // tBox_Fog_SFZ
+            // 
+            this.tBox_Fog_SFZ.Location = new System.Drawing.Point(1152, 112);
+            this.tBox_Fog_SFZ.Name = "tBox_Fog_SFZ";
+            this.tBox_Fog_SFZ.Size = new System.Drawing.Size(100, 21);
+            this.tBox_Fog_SFZ.TabIndex = 34;
+            this.tBox_Fog_SFZ.Text = "2283573.475";
+            // 
+            // tBox_Fog_SFY
+            // 
+            this.tBox_Fog_SFY.Location = new System.Drawing.Point(1152, 85);
+            this.tBox_Fog_SFY.Name = "tBox_Fog_SFY";
+            this.tBox_Fog_SFY.Size = new System.Drawing.Size(100, 21);
+            this.tBox_Fog_SFY.TabIndex = 35;
+            this.tBox_Fog_SFY.Text = "-2261332.189";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(1118, 64);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(23, 12);
+            this.label19.TabIndex = 36;
+            this.label19.Text = "SFX";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(1118, 116);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(23, 12);
+            this.label20.TabIndex = 37;
+            this.label20.Text = "SFZ";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(1118, 90);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(23, 12);
+            this.label21.TabIndex = 38;
+            this.label21.Text = "SFY";
+            // 
+            // Btn_Set_SF
+            // 
+            this.Btn_Set_SF.Location = new System.Drawing.Point(1120, 150);
+            this.Btn_Set_SF.Name = "Btn_Set_SF";
+            this.Btn_Set_SF.Size = new System.Drawing.Size(132, 29);
+            this.Btn_Set_SF.TabIndex = 39;
+            this.Btn_Set_SF.Text = "设置陀螺标度参数";
+            this.Btn_Set_SF.UseVisualStyleBackColor = true;
+            this.Btn_Set_SF.Click += new System.EventHandler(this.Btn_Set_SF_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -623,6 +694,13 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1281, 830);
+            this.Controls.Add(this.Btn_Set_SF);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.tBox_Fog_SFY);
+            this.Controls.Add(this.tBox_Fog_SFZ);
+            this.Controls.Add(this.tBox_Fog_SFX);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.tBox_Accz_ave);
             this.Controls.Add(this.tBox_Accy_ave);
@@ -752,6 +830,13 @@
         private System.Windows.Forms.TextBox tBox_Fogz_ave;
         private System.Windows.Forms.TextBox tBox_Fogy_ave;
         private System.Windows.Forms.TextBox tBox_Fogx_ave;
+        private System.Windows.Forms.TextBox tBox_Fog_SFX;
+        private System.Windows.Forms.TextBox tBox_Fog_SFZ;
+        private System.Windows.Forms.TextBox tBox_Fog_SFY;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button Btn_Set_SF;
     }
 }
 

@@ -76,6 +76,8 @@ namespace IMUSample
         public static double[] doubleAccTmp = new double[3];
         public static float[] floatAccData = new float[3];
         public static float[] floatAccTmp = new float[3];
+
+        public static double Fogx_SF, Fogy_SF, Fogz_SF;
     }
 
     class PathString
