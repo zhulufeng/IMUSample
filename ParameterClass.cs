@@ -67,6 +67,7 @@ namespace IMUSample
 
         public  double[] data_1s = new double[19];
         public  byte[] arrayOriginData = new byte[46];
+        public byte[] arrayStatusData = new byte[6];
         public  int[] intFogData = new int[3];
         public  int[] intAttData = new int[3];
         public  int[] intFogTmp = new int[3];

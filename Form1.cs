@@ -19,6 +19,7 @@ namespace IMUSample
     {
         delegate void UpdateDataEventHandler();
         UpdateDataEventHandler updateText;
+        UpdateDataEventHandler updateInfoText;
         StreamWriter intDataSW ;
         StreamWriter doubleDataSW;//= new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
         TimePara timePara = new TimePara();
@@ -47,6 +48,7 @@ namespace IMUSample
         {
             InitializeComponent();
             updateText = new UpdateDataEventHandler(showData);
+            updateInfoText = new UpdateDataEventHandler(UpdateInfoText);
             IntializeChart();
             AddSeries(12);
             AddChartArea(6);
@@ -387,6 +389,7 @@ namespace IMUSample
                     serialPort.Close();
                 }
                 serialPort.Open();
+                Btn_SendInitialData.Enabled = true;
 //                 timePara.drawIndexTime.Clear();
 //                 //chart.DataBind();
 //                 for (int i = 0; i < 6; i++)
@@ -440,8 +443,9 @@ namespace IMUSample
                     serialPort.Close();
                 }
                 serialPort.Open();
-               
-               // AddSeries(12);
+                Btn_SendInitialData.Enabled = true;
+
+                // AddSeries(12);
             }
             else
             {
@@ -473,6 +477,7 @@ namespace IMUSample
                 }
                 doubleDataSW.Close();
                 serialPort.Close();
+                Btn_SendInitialData.Enabled = false;
             }
            
         }
@@ -557,11 +562,30 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 38)
+            while ((serialData.buffer.Count >= 6 && serialData.buffer[0] == 0xEB && serialData.buffer[1] == 0x90)|| serialData.buffer.Count >= 38)
             {
                 //Int32 index = 0;
                 //Byte ch = 
-                if (serialData.buffer[0] == 0x5A && serialData.buffer[1] == 0xA5)
+                if (serialData.buffer[0] == 0xEB && serialData.buffer[1] == 0x90)
+                {
+                    CheckSumA = 0;
+                    for (int i = 2; i < 5; i++)
+                    {
+                        CheckSumA = CheckSumA + serialData.buffer[i];
+                    }
+                    CheckSumB = serialData.buffer[5];
+                    if ((CheckSumA & 0xff) == CheckSumB)
+                    {
+                        serialData.buffer.CopyTo(0, INSdata.arrayStatusData, 0, 6);
+                        this.Invoke(updateInfoText);
+                        serialData.buffer.RemoveRange(0, 6);
+                    }
+                    else
+                    {
+                        serialData.buffer.RemoveRange(0, 6);
+                    }
+                }
+                else if (serialData.buffer[0] == 0x5A && serialData.buffer[1] == 0xA5)
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
@@ -640,7 +664,7 @@ namespace IMUSample
                             saveData(INSdata.arrayIMUdata);
                         }
                         
-                        if (INSdata.TotalCounter % 400 == 0)
+                        if (INSdata.TotalCounter % 200 == 0)
                         {
                             INSdata.ListFogxData_1s.Add(INSdata.ListFogxData.ToArray().Average());
                             INSdata.ListFogyData_1s.Add(INSdata.ListFogyData.ToArray().Average());
@@ -799,6 +823,22 @@ namespace IMUSample
             doubleDataSW.WriteLine(sb.ToString());
             sb.Clear();
         }
+        private void UpdateInfoText()
+        {
+            if (INSdata.arrayStatusData[4] == 0x03)
+            {
+                textBox_Info.Text += "位置信息装订成功！" + "\r\n" + "收到的回传码是：";
+            }
+            if (INSdata.arrayStatusData[4] == 0x05)
+            {
+                textBox_Info.Text += "位置信息装订失败！" + "\r\n" + "收到的回传码是：";
+            }
+           
+            for (int i = 0; i < 6; i++)
+            {
+                textBox_Info.Text += INSdata.arrayStatusData[i].ToString("X2") + " ";
+            }
+        }
         private void showData()
         {
             tBox_FogX.Text = INSdata.data_1s[1].ToString();
@@ -874,53 +914,103 @@ namespace IMUSample
         private void Btn_SendInitialData_Click(object sender, EventArgs e)
         {
             double init_lati, init_longti, init_height;
+            
             int checksum = 0;
-            byte[] Sendbuff = new byte[17];
+            byte[] Sendbuff = new byte[18];
             Union[] trdata = new Union[3];
-            init_lati = Convert.ToDouble(tBox_InitLati.Text);
-            init_longti = Convert.ToDouble(tBox_InitLongti.Text);
-            init_height = Convert.ToDouble(tBox_InitHeight.Text);
-            trdata[0].i = Convert.ToInt32(init_lati   * 1e6);
-            trdata[1].i = Convert.ToInt32(init_longti * 1e6);
-            trdata[2].i = Convert.ToInt32(init_height * 100);
+            if (rBtn_SendInt.Checked)
+            {
+                init_lati = Convert.ToDouble(tBox_InitLati.Text);
+                init_longti = Convert.ToDouble(tBox_InitLongti.Text);
+                init_height = Convert.ToDouble(tBox_InitHeight.Text);
+                trdata[0].i = Convert.ToInt32(init_lati * 1e6);
+                trdata[1].i = Convert.ToInt32(init_longti * 1e6);
+                trdata[2].i = Convert.ToInt32(init_height * 100);
 
-            Sendbuff[0] = 0x5A;
-            Sendbuff[1] = 0xA5;
-            Sendbuff[2] = 0x03;
+                Sendbuff[0] = 0x5A;
+                Sendbuff[1] = 0xA5;
+                Sendbuff[2] = 0x03;
 
-            for (int i = 0; i < 3; i++)
-            {
-                Sendbuff[3 + 4 * i] = trdata[i].b0;
-                Sendbuff[4 + 4 * i] = trdata[i].b1;
-                Sendbuff[5 + 4 * i] = trdata[i].b2;
-                Sendbuff[6 + 4 * i] = trdata[i].b3;
-            }
-            for (int i = 2; i < 15; i++)
-            {
-                checksum += Sendbuff[i];
-            }
-            Sendbuff[15] = Convert.ToByte(checksum & 0xFF);
-            Sendbuff[16] = 0x55;
-            INSdata.TotalCounter = 0;
-            if (!serialPort.IsOpen)
-            {
-                Btn_OpenSerial.Text = "关闭串口...";
-                serialPort.Open();
+                for (int i = 0; i < 3; i++)
+                {
+                    Sendbuff[3 + 4 * i] = trdata[i].b0;
+                    Sendbuff[4 + 4 * i] = trdata[i].b1;
+                    Sendbuff[5 + 4 * i] = trdata[i].b2;
+                    Sendbuff[6 + 4 * i] = trdata[i].b3;
+                }
+                for (int i = 2; i < 15; i++)
+                {
+                    checksum += Sendbuff[i];
+                }
+                Sendbuff[15] = Convert.ToByte(checksum & 0xFF);
+                Sendbuff[16] = 0x55;
+                INSdata.TotalCounter = 0;
+                if (!serialPort.IsOpen)
+                {
+                    Btn_OpenSerial.Text = "关闭串口...";
+                    serialPort.Open();
+                }
+
+                textBox_Info.Text += "发送的纬度是：" + init_lati.ToString() + "\r\n";
+                textBox_Info.Text += "发送的经度是：" + init_longti.ToString() + "\r\n";
+                textBox_Info.Text += "发送的高度是：" + init_height.ToString() + "\r\n";
+                textBox_Info.Text += "对应数据码是：" + "\r\n";
+                serialPort.Write(Sendbuff, 0, 17);
+//                 for (int i = 0; i < Sendbuff.Length; i++)
+//                 {
+//                     textBox_Info.Text += "0x" + Sendbuff[i].ToString("X2") + " ";
+//                 }
+                for (int i = 0; i < 17; i++)
+                {
+                    textBox_Info.Text += Sendbuff[i].ToString("X2") + " ";
+                }
             }
 
-            serialPort.Write(Sendbuff, 0, 17);
-            textBox_Info.Text += "发送的纬度是：" + init_lati.ToString() + "\r\n";
-            textBox_Info.Text += "发送的经度是：" + init_longti.ToString() + "\r\n";
-            textBox_Info.Text += "发送的高度是：" + init_height.ToString() + "\r\n";
-            textBox_Info.Text += "对应数据码是：" + "\r\n";
-            for (int i = 0; i < Sendbuff.Length; i++)
+            if (rBtn_SendFloat.Checked)
             {
-                textBox_Info.Text += "0x" + Sendbuff[i].ToString("X2") + " ";
+                trdata[0].f = Convert.ToSingle(tBox_InitLati.Text);
+                trdata[1].f = Convert.ToSingle(tBox_InitLongti.Text);
+                trdata[2].f = Convert.ToSingle(tBox_InitHeight.Text);
+
+                Sendbuff[0] = 0xEB;
+                Sendbuff[1] = 0x90;
+                Sendbuff[2] = 0x01;
+                Sendbuff[3] = 0x0C;
+                for (int i = 0; i < 3; i++)
+                {
+                    Sendbuff[4 + 4 * i] = trdata[i].b0;
+                    Sendbuff[5 + 4 * i] = trdata[i].b1;
+                    Sendbuff[6 + 4 * i] = trdata[i].b2;
+                    Sendbuff[7 + 4 * i] = trdata[i].b3;
+                }
+                for (int i = 2; i < 16; i++)
+                {
+                    checksum += Sendbuff[i];
+                }
+                Sendbuff[16] = Convert.ToByte(checksum & 0xFF);
+                Sendbuff[17] = Convert.ToByte(checksum>>8 & 0xFF);
+                INSdata.TotalCounter = 0;
+                if (!serialPort.IsOpen)
+                {
+                    Btn_OpenSerial.Text = "关闭串口...";
+                    serialPort.Open();
+                }
+
+                textBox_Info.Text += "发送的纬度是：" + tBox_InitLati.Text +"\r\n";
+                textBox_Info.Text += "发送的经度是：" + tBox_InitLongti.Text +"\r\n";
+                textBox_Info.Text += "发送的高度是：" + tBox_InitHeight.Text + "\r\n";
+                textBox_Info.Text += "对应数据码是：" + "\r\n";
+                serialPort.Write(Sendbuff, 0, 18);
+//                 for (int i = 0; i < Sendbuff.Length; i++)
+//                 {
+//                     textBox_Info.Text += "0x" + Sendbuff[i].ToString("X2") + " ";
+//                 }
+                for (int i = 0; i < 18; i++)
+                {
+                    textBox_Info.Text += Sendbuff[i].ToString("X2") + " ";
+                }
             }
-            for (int i = 0; i < Sendbuff.Length; i++)
-            {
-                textBox_Info.Text += Sendbuff[i].ToString("X2") + " ";
-            }
+            
             textBox_Info.Text += "\r\n";
             //让文本框获取焦点 
             this.textBox_Info.Focus();

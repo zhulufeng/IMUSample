@@ -103,13 +103,15 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.rBtn_SendInt = new System.Windows.Forms.RadioButton();
+            this.rBtn_SendFloat = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_OpenSerial
             // 
-            this.Btn_OpenSerial.Location = new System.Drawing.Point(1136, 186);
+            this.Btn_OpenSerial.Location = new System.Drawing.Point(1126, 195);
             this.Btn_OpenSerial.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_OpenSerial.Name = "Btn_OpenSerial";
             this.Btn_OpenSerial.Size = new System.Drawing.Size(90, 26);
@@ -443,9 +445,9 @@
             // 
             // chart
             // 
-            this.chart.Location = new System.Drawing.Point(0, 224);
+            this.chart.Location = new System.Drawing.Point(0, 240);
             this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(1281, 607);
+            this.chart.Size = new System.Drawing.Size(1281, 637);
             this.chart.TabIndex = 12;
             this.chart.Text = "chart1";
             // 
@@ -658,7 +660,8 @@
             // 
             // Btn_SendInitialData
             // 
-            this.Btn_SendInitialData.Location = new System.Drawing.Point(1136, 145);
+            this.Btn_SendInitialData.Enabled = false;
+            this.Btn_SendInitialData.Location = new System.Drawing.Point(1126, 165);
             this.Btn_SendInitialData.Name = "Btn_SendInitialData";
             this.Btn_SendInitialData.Size = new System.Drawing.Size(90, 23);
             this.Btn_SendInitialData.TabIndex = 36;
@@ -738,13 +741,37 @@
             this.label24.TabIndex = 40;
             this.label24.Text = "俯仰角";
             // 
+            // rBtn_SendInt
+            // 
+            this.rBtn_SendInt.AutoSize = true;
+            this.rBtn_SendInt.Location = new System.Drawing.Point(1097, 138);
+            this.rBtn_SendInt.Name = "rBtn_SendInt";
+            this.rBtn_SendInt.Size = new System.Drawing.Size(83, 16);
+            this.rBtn_SendInt.TabIndex = 46;
+            this.rBtn_SendInt.Text = "按整型发送";
+            this.rBtn_SendInt.UseVisualStyleBackColor = true;
+            // 
+            // rBtn_SendFloat
+            // 
+            this.rBtn_SendFloat.AutoSize = true;
+            this.rBtn_SendFloat.Checked = true;
+            this.rBtn_SendFloat.Location = new System.Drawing.Point(1186, 138);
+            this.rBtn_SendFloat.Name = "rBtn_SendFloat";
+            this.rBtn_SendFloat.Size = new System.Drawing.Size(83, 16);
+            this.rBtn_SendFloat.TabIndex = 47;
+            this.rBtn_SendFloat.TabStop = true;
+            this.rBtn_SendFloat.Text = "按浮点发送";
+            this.rBtn_SendFloat.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1281, 830);
+            this.ClientSize = new System.Drawing.Size(1281, 875);
+            this.Controls.Add(this.rBtn_SendFloat);
+            this.Controls.Add(this.rBtn_SendInt);
             this.Controls.Add(this.tBox_Roll);
             this.Controls.Add(this.tBox_Yaw);
             this.Controls.Add(this.tBox_Pitch);
@@ -900,6 +927,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.RadioButton rBtn_SendInt;
+        private System.Windows.Forms.RadioButton rBtn_SendFloat;
     }
 }
 
