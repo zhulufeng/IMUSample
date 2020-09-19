@@ -562,7 +562,7 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while ((serialData.buffer.Count >= 6 && serialData.buffer[0] == 0xEB && serialData.buffer[1] == 0x90)|| serialData.buffer.Count >= 38)
+            while ((serialData.buffer.Count >= 6 && serialData.buffer[0] == 0xEB && serialData.buffer[1] == 0x90)|| serialData.buffer.Count >= 50)
             {
                 //Int32 index = 0;
                 //Byte ch = 
@@ -589,15 +589,15 @@ namespace IMUSample
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 3;i < 35;i++)
+                    for (int i = 3;i < 47;i++)
                     {
                         CheckSumA = CheckSumA + serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[36];
+                    CheckSumB = serialData.buffer[48];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[37] == 0x55) 
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[49] == 0x55) 
                     {
-                        serialData.buffer.CopyTo(0,INSdata.arrayOriginData, 0, 38);
+                        serialData.buffer.CopyTo(0,INSdata.arrayOriginData, 0, 50);
                         INSdata.TotalCounter++;
                         INSdata.nav_state = INSdata.arrayOriginData[2];
                         Union[] trdata = new Union[3];
@@ -608,11 +608,14 @@ namespace IMUSample
                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 10]) * 256  + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 9]));
                             INSdata.intAccData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 24]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 23]) * 256 * 256
                                                              + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 22]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 21]));
-                            INSdata.intFogTmp[i]  = (INSdata.arrayOriginData[34] * 256 * 256 * 256 + INSdata.arrayOriginData[33] * 256 * 256) / 256 / 256;
-                            INSdata.intAccTmp[i]  = (INSdata.arrayOriginData[34] * 256 * 256 * 256 + INSdata.arrayOriginData[33] * 256 * 256) / 256 / 256;
+                            INSdata.intfpData[i]  = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 36]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 35]) * 256 * 256
+                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 34]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 33]));
+                            INSdata.intFogTmp[i]  = (INSdata.arrayOriginData[46] * 256 * 256 * 256 + INSdata.arrayOriginData[45] * 256 * 256) / 256 / 256;
+                            INSdata.intAccTmp[i]  = (INSdata.arrayOriginData[46] * 256 * 256 * 256 + INSdata.arrayOriginData[45] * 256 * 256) / 256 / 256;
                             INSdata.doubleFogData[i] = Convert.ToDouble(INSdata.intFogData[i]) / 10000.0;
                             INSdata.doubleAttData[i] = Convert.ToDouble(INSdata.intAttData[i]) / 100.0;
                             INSdata.doubleAccData[i] = Convert.ToDouble(INSdata.intAccData[i]) / 10000.0;
+                            INSdata.doublefpData[i] = Convert.ToDouble(INSdata.intAccData[i]) / 10000.0;
                             INSdata.doubleFogTmp[i] = Convert.ToDouble(INSdata.intFogTmp[i]) / 100.0;
                             INSdata.doubleAccTmp[i] = Convert.ToDouble(INSdata.intAccTmp[i]) / 100.0;
 //                             trdata[i].b0 = INSdata.arrayOriginData[i * 4 + 16];
@@ -639,6 +642,7 @@ namespace IMUSample
                             INSdata.arrayIMUdata[7  + i]  = INSdata.doubleFogTmp[i];
                             INSdata.arrayIMUdata[10 + i]  = INSdata.doubleAccTmp[0];
                             INSdata.arrayIMUdata[13 + i]  = INSdata.doubleAttData[i];
+                            INSdata.arrayIMUdata[16 + i]  = INSdata.doublefpData[i];
                         }
 
                         INSdata.ListFogxData.Add(INSdata.arrayIMUdata[1]);
@@ -657,14 +661,17 @@ namespace IMUSample
                         INSdata.ListAttxData.Add(INSdata.arrayIMUdata[14]);
                         INSdata.ListAttyData.Add(INSdata.arrayIMUdata[13]);
                         INSdata.ListAttzData.Add(INSdata.arrayIMUdata[15]);
-                        INSdata.arrayIMUdata[16] = INSdata.Counter;
-                        INSdata.arrayIMUdata[17] = INSdata.Timer_cyc;
+                        INSdata.ListfpxData.Add(INSdata.arrayIMUdata[16]);
+                        INSdata.ListfpyData.Add(INSdata.arrayIMUdata[17]);
+                        INSdata.ListfpzData.Add(INSdata.arrayIMUdata[18]);
+                        INSdata.arrayIMUdata[19] = INSdata.Counter;
+                        INSdata.arrayIMUdata[20] = INSdata.Timer_cyc;
                         if (serialParameter.isHighFreq)
                         {
                             saveData(INSdata.arrayIMUdata);
                         }
                         
-                        if (INSdata.TotalCounter % 200 == 0)
+                        if (INSdata.TotalCounter % 400 == 0)
                         {
                             INSdata.ListFogxData_1s.Add(INSdata.ListFogxData.ToArray().Average());
                             INSdata.ListFogyData_1s.Add(INSdata.ListFogyData.ToArray().Average());
@@ -704,8 +711,12 @@ namespace IMUSample
                             INSdata.data_1s[14] = INSdata.ListAttyData.ToArray().Average();
                             INSdata.data_1s[15] = INSdata.ListAttzData.ToArray().Average();
 
-                            INSdata.data_1s[16] = INSdata.Counter;
-                            INSdata.data_1s[17] = INSdata.Timer_cyc;
+                            INSdata.data_1s[16] = INSdata.ListfpxData.ToArray().Average();
+                            INSdata.data_1s[17] = INSdata.ListfpyData.ToArray().Average();
+                            INSdata.data_1s[18] = INSdata.ListfpzData.ToArray().Average();
+
+                            INSdata.data_1s[19] = INSdata.Counter;
+                            INSdata.data_1s[20] = INSdata.Timer_cyc;
 
                             INSdata.ListFogxData.Clear();
                             INSdata.ListFogyData.Clear();
@@ -730,7 +741,7 @@ namespace IMUSample
                             
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 38);
+                        serialData.buffer.RemoveRange(0, 50);
 
                     }
                     else
@@ -781,7 +792,7 @@ namespace IMUSample
             sb.AppendFormat("{0:0000.000}\t",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
             sb.Append(DateTime.Now.ToString("HH:mm:ss:fff:ffffff"));
             //sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
-            for (int i = 1;i <= 15;i++)
+            for (int i = 1;i <= 18;i++)
            {
                 if (i >= 0 && i <= 3)
                 {
@@ -876,13 +887,13 @@ namespace IMUSample
             tBox_FogyT.Text = INSdata.doubleFogTmp[1].ToString();
             tBox_FogzT.Text = INSdata.doubleFogTmp[2].ToString();
 
-            tBox_AccxT.Text = INSdata.doubleAccTmp[0].ToString();
-            tBox_AccyT.Text = INSdata.doubleAccTmp[1].ToString();
-            tBox_AcczT.Text = INSdata.doubleAccTmp[2].ToString();
+            tBox_fpx.Text = INSdata.data_1s[16].ToString();
+            tBox_fpy.Text = INSdata.data_1s[17].ToString();
+            tBox_fpz.Text = INSdata.data_1s[18].ToString();
 
-            tBox_Pitch.Text = (INSdata.data_1s[13]).ToString("###0.0000");
-            tBox_Roll.Text =  (INSdata.data_1s[14]).ToString("###0.0000");
-            tBox_Yaw.Text =   (INSdata.data_1s[15]).ToString("###0.0000");
+            tBox_Pitch.Text = (INSdata.doubleAttData[0]).ToString("###0.0000");
+            tBox_Roll.Text =  (INSdata.doubleAttData[1]).ToString("###0.0000");
+            tBox_Yaw.Text =   (INSdata.doubleAttData[2]).ToString("###0.0000");
 
 
             tBox_Counter.Text = (INSdata.TotalCounter / 400.0).ToString();

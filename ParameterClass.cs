@@ -28,7 +28,7 @@ namespace IMUSample
 
     class IMUData
     {
-        public  double[] arrayIMUdata = new double[46];
+        public  double[] arrayIMUdata = new double[99];
         public  List <double>ListFogxData = new List<double>();
         public  List<double> ListFogyData = new List<double>();
         public  List<double> ListFogzData = new List<double>();
@@ -36,6 +36,10 @@ namespace IMUSample
         public  List<double> ListAccxData = new List<double>();
         public  List<double> ListAccyData = new List<double>();
         public  List<double> ListAcczData = new List<double>();
+
+        public List<double> ListfpxData = new List<double>();
+        public List<double> ListfpyData = new List<double>();
+        public List<double> ListfpzData = new List<double>();
 
         public  List<double> ListTemFogxData = new List<double>();
         public  List<double> ListTemFogyData = new List<double>();
@@ -65,13 +69,14 @@ namespace IMUSample
         public  List<double> ListTemAccyData_1s = new List<double>();
         public  List<double> ListTemAcczData_1s = new List<double>();
 
-        public  double[] data_1s = new double[19];
-        public  byte[] arrayOriginData = new byte[46];
+        public  double[] data_1s = new double[99];
+        public  byte[] arrayOriginData = new byte[99];
         public byte[] arrayStatusData = new byte[6];
         public  int[] intFogData = new int[3];
         public  int[] intAttData = new int[3];
         public  int[] intFogTmp = new int[3];
         public  int[] intAccData = new int[3];
+        public  int[] intfpData = new int[3];
         public  int[] intAccTmp = new int[3];
         public  int Counter;
         public  int TotalCounter;
@@ -81,8 +86,10 @@ namespace IMUSample
         public  double[] doubleAttData = new double[3];
         public  double[] doubleFogTmp = new double[3];
         public  double[] doubleAccData = new double[3];
+        public  double[] doublefpData = new double[3];
         public  double[] doubleAccTmp = new double[3];
         public  float[] floatAccData = new float[3];
+        public  float[] floatfpData = new float[3];
         public  float[] floatAccTmp = new float[3];
     }
 

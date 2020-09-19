@@ -41,7 +41,7 @@
             this.tBox_AccX = new System.Windows.Forms.TextBox();
             this.tBox_AccY = new System.Windows.Forms.TextBox();
             this.tBox_AccZ = new System.Windows.Forms.TextBox();
-            this.tBox_AccxT = new System.Windows.Forms.TextBox();
+            this.tBox_fpx = new System.Windows.Forms.TextBox();
             this.tBox_FogX = new System.Windows.Forms.TextBox();
             this.tBox_FogY = new System.Windows.Forms.TextBox();
             this.tBox_FogZ = new System.Windows.Forms.TextBox();
@@ -59,8 +59,8 @@
             this.tBox_FogyT = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.tBox_AccyT = new System.Windows.Forms.TextBox();
-            this.tBox_AcczT = new System.Windows.Forms.TextBox();
+            this.tBox_fpy = new System.Windows.Forms.TextBox();
+            this.tBox_fpz = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tBox_Counter = new System.Windows.Forms.TextBox();
@@ -205,13 +205,13 @@
             this.tBox_AccZ.Size = new System.Drawing.Size(89, 21);
             this.tBox_AccZ.TabIndex = 6;
             // 
-            // tBox_AccxT
+            // tBox_fpx
             // 
-            this.tBox_AccxT.Location = new System.Drawing.Point(842, 145);
-            this.tBox_AccxT.Margin = new System.Windows.Forms.Padding(2);
-            this.tBox_AccxT.Name = "tBox_AccxT";
-            this.tBox_AccxT.Size = new System.Drawing.Size(89, 21);
-            this.tBox_AccxT.TabIndex = 6;
+            this.tBox_fpx.Location = new System.Drawing.Point(842, 145);
+            this.tBox_fpx.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_fpx.Name = "tBox_fpx";
+            this.tBox_fpx.Size = new System.Drawing.Size(89, 21);
+            this.tBox_fpx.TabIndex = 6;
             // 
             // tBox_FogX
             // 
@@ -321,9 +321,9 @@
             this.label8.Location = new System.Drawing.Point(794, 149);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 12);
+            this.label8.Size = new System.Drawing.Size(23, 12);
             this.label8.TabIndex = 7;
-            this.label8.Text = "AccXT";
+            this.label8.Text = "fpx";
             // 
             // textBox_Info
             // 
@@ -371,21 +371,21 @@
             this.label10.TabIndex = 11;
             this.label10.Text = "FogYT";
             // 
-            // tBox_AccyT
+            // tBox_fpy
             // 
-            this.tBox_AccyT.Location = new System.Drawing.Point(842, 172);
-            this.tBox_AccyT.Margin = new System.Windows.Forms.Padding(2);
-            this.tBox_AccyT.Name = "tBox_AccyT";
-            this.tBox_AccyT.Size = new System.Drawing.Size(89, 21);
-            this.tBox_AccyT.TabIndex = 6;
+            this.tBox_fpy.Location = new System.Drawing.Point(842, 172);
+            this.tBox_fpy.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_fpy.Name = "tBox_fpy";
+            this.tBox_fpy.Size = new System.Drawing.Size(89, 21);
+            this.tBox_fpy.TabIndex = 6;
             // 
-            // tBox_AcczT
+            // tBox_fpz
             // 
-            this.tBox_AcczT.Location = new System.Drawing.Point(842, 200);
-            this.tBox_AcczT.Margin = new System.Windows.Forms.Padding(2);
-            this.tBox_AcczT.Name = "tBox_AcczT";
-            this.tBox_AcczT.Size = new System.Drawing.Size(89, 21);
-            this.tBox_AcczT.TabIndex = 6;
+            this.tBox_fpz.Location = new System.Drawing.Point(842, 200);
+            this.tBox_fpz.Margin = new System.Windows.Forms.Padding(2);
+            this.tBox_fpz.Name = "tBox_fpz";
+            this.tBox_fpz.Size = new System.Drawing.Size(89, 21);
+            this.tBox_fpz.TabIndex = 6;
             // 
             // label11
             // 
@@ -403,9 +403,9 @@
             this.label12.Location = new System.Drawing.Point(794, 176);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(35, 12);
+            this.label12.Size = new System.Drawing.Size(23, 12);
             this.label12.TabIndex = 7;
-            this.label12.Text = "AccYT";
+            this.label12.Text = "fpy";
             // 
             // tBox_Counter
             // 
@@ -439,9 +439,9 @@
             this.label14.Location = new System.Drawing.Point(794, 204);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(35, 12);
+            this.label14.Size = new System.Drawing.Size(23, 12);
             this.label14.TabIndex = 7;
-            this.label14.Text = "AccZT";
+            this.label14.Text = "fpz";
             // 
             // chart
             // 
@@ -828,9 +828,9 @@
             this.Controls.Add(this.tBox_FogxT);
             this.Controls.Add(this.tBox_Timer);
             this.Controls.Add(this.tBox_Counter);
-            this.Controls.Add(this.tBox_AcczT);
-            this.Controls.Add(this.tBox_AccyT);
-            this.Controls.Add(this.tBox_AccxT);
+            this.Controls.Add(this.tBox_fpz);
+            this.Controls.Add(this.tBox_fpy);
+            this.Controls.Add(this.tBox_fpx);
             this.Controls.Add(this.tBox_FogZ);
             this.Controls.Add(this.tBox_AccZ);
             this.Controls.Add(this.tBox_FogY);
@@ -860,7 +860,7 @@
         private System.Windows.Forms.TextBox tBox_AccX;
         private System.Windows.Forms.TextBox tBox_AccY;
         private System.Windows.Forms.TextBox tBox_AccZ;
-        private System.Windows.Forms.TextBox tBox_AccxT;
+        private System.Windows.Forms.TextBox tBox_fpx;
         private System.Windows.Forms.TextBox tBox_FogX;
         private System.Windows.Forms.TextBox tBox_FogY;
         private System.Windows.Forms.TextBox tBox_FogZ;
@@ -883,8 +883,8 @@
         private System.Windows.Forms.TextBox tBox_FogyT;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox tBox_AccyT;
-        private System.Windows.Forms.TextBox tBox_AcczT;
+        private System.Windows.Forms.TextBox tBox_fpy;
+        private System.Windows.Forms.TextBox tBox_fpz;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tBox_Counter;
