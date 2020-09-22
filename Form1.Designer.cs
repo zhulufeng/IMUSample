@@ -97,13 +97,15 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.Btn_Set_SF = new System.Windows.Forms.Button();
+            this.Btn_CaliStatus = new System.Windows.Forms.Button();
+            this.tBox_CaliInfo = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_OpenSerial
             // 
-            this.Btn_OpenSerial.Location = new System.Drawing.Point(984, 150);
+            this.Btn_OpenSerial.Location = new System.Drawing.Point(984, 124);
             this.Btn_OpenSerial.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_OpenSerial.Name = "Btn_OpenSerial";
             this.Btn_OpenSerial.Size = new System.Drawing.Size(109, 29);
@@ -625,7 +627,7 @@
             // 
             // tBox_Fog_SFX
             // 
-            this.tBox_Fog_SFX.Location = new System.Drawing.Point(1152, 58);
+            this.tBox_Fog_SFX.Location = new System.Drawing.Point(1151, 32);
             this.tBox_Fog_SFX.Name = "tBox_Fog_SFX";
             this.tBox_Fog_SFX.Size = new System.Drawing.Size(100, 21);
             this.tBox_Fog_SFX.TabIndex = 33;
@@ -633,7 +635,7 @@
             // 
             // tBox_Fog_SFZ
             // 
-            this.tBox_Fog_SFZ.Location = new System.Drawing.Point(1152, 112);
+            this.tBox_Fog_SFZ.Location = new System.Drawing.Point(1151, 86);
             this.tBox_Fog_SFZ.Name = "tBox_Fog_SFZ";
             this.tBox_Fog_SFZ.Size = new System.Drawing.Size(100, 21);
             this.tBox_Fog_SFZ.TabIndex = 34;
@@ -641,7 +643,7 @@
             // 
             // tBox_Fog_SFY
             // 
-            this.tBox_Fog_SFY.Location = new System.Drawing.Point(1152, 85);
+            this.tBox_Fog_SFY.Location = new System.Drawing.Point(1151, 59);
             this.tBox_Fog_SFY.Name = "tBox_Fog_SFY";
             this.tBox_Fog_SFY.Size = new System.Drawing.Size(100, 21);
             this.tBox_Fog_SFY.TabIndex = 35;
@@ -650,7 +652,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1118, 64);
+            this.label19.Location = new System.Drawing.Point(1117, 38);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(23, 12);
@@ -660,7 +662,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(1118, 116);
+            this.label20.Location = new System.Drawing.Point(1117, 90);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(23, 12);
@@ -670,7 +672,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1118, 90);
+            this.label21.Location = new System.Drawing.Point(1117, 64);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(23, 12);
@@ -679,13 +681,31 @@
             // 
             // Btn_Set_SF
             // 
-            this.Btn_Set_SF.Location = new System.Drawing.Point(1120, 150);
+            this.Btn_Set_SF.Location = new System.Drawing.Point(1119, 124);
             this.Btn_Set_SF.Name = "Btn_Set_SF";
-            this.Btn_Set_SF.Size = new System.Drawing.Size(132, 29);
+            this.Btn_Set_SF.Size = new System.Drawing.Size(150, 29);
             this.Btn_Set_SF.TabIndex = 39;
             this.Btn_Set_SF.Text = "设置陀螺标度参数";
             this.Btn_Set_SF.UseVisualStyleBackColor = true;
             this.Btn_Set_SF.Click += new System.EventHandler(this.Btn_Set_SF_Click);
+            // 
+            // Btn_CaliStatus
+            // 
+            this.Btn_CaliStatus.Location = new System.Drawing.Point(984, 163);
+            this.Btn_CaliStatus.Name = "Btn_CaliStatus";
+            this.Btn_CaliStatus.Size = new System.Drawing.Size(109, 36);
+            this.Btn_CaliStatus.TabIndex = 40;
+            this.Btn_CaliStatus.Text = "进入转动状态";
+            this.Btn_CaliStatus.UseVisualStyleBackColor = true;
+            this.Btn_CaliStatus.Click += new System.EventHandler(this.Btn_CaliStatus_Click);
+            // 
+            // tBox_CaliInfo
+            // 
+            this.tBox_CaliInfo.Location = new System.Drawing.Point(1117, 159);
+            this.tBox_CaliInfo.Multiline = true;
+            this.tBox_CaliInfo.Name = "tBox_CaliInfo";
+            this.tBox_CaliInfo.Size = new System.Drawing.Size(152, 40);
+            this.tBox_CaliInfo.TabIndex = 41;
             // 
             // Form1
             // 
@@ -694,6 +714,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1281, 830);
+            this.Controls.Add(this.tBox_CaliInfo);
+            this.Controls.Add(this.Btn_CaliStatus);
             this.Controls.Add(this.Btn_Set_SF);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
@@ -837,6 +859,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button Btn_Set_SF;
+        private System.Windows.Forms.Button Btn_CaliStatus;
+        private System.Windows.Forms.TextBox tBox_CaliInfo;
     }
 }
 

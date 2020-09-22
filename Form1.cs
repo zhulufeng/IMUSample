@@ -21,9 +21,11 @@ namespace IMUSample
         UpdateDataEventHandler updateText;
         StreamWriter intDataSW ;
         StreamWriter doubleDataSW;//= new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
+        StreamWriter CaliDataSW;
         TimePara timePara = new TimePara();
         bool[] zoomed_flag = new bool[6];
-
+        bool rate_flag = false;
+        double G0 = 9.8221625;
         //定义联合体
         [StructLayout(LayoutKind.Explicit, Size = 4)]
 
@@ -380,6 +382,7 @@ namespace IMUSample
                 }
                
                 doubleDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
+                CaliDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataCalidata.txt");
                 for (int i = 0; i < 6; i++)
                 {
                     timePara.drawIndexTime.Add(0);
@@ -474,6 +477,7 @@ namespace IMUSample
                     intDataSW.Close();
                 }
                 doubleDataSW.Close();
+                CaliDataSW.Close();
                 serialPort.Close();
             }
            
@@ -740,8 +744,8 @@ namespace IMUSample
            
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 400.0);
-           for (int i = 1;i <= 12;i++)
-           {
+            for (int i = 1;i <= 12;i++)
+            {
                 if (i >= 0 && i <= 3)
                 {
                     if (Datalist[i] >= 0)
@@ -780,6 +784,42 @@ namespace IMUSample
             sb.AppendFormat("\t{0:000} ", Datalist[13]);
             sb.AppendFormat("\t{0:0000} ", Datalist[14]);
             doubleDataSW.WriteLine(sb.ToString());
+            sb.Clear();
+            sb.AppendFormat("{0:0000.000}", (Convert.ToDouble(IMUData.TotalCounter)));
+            for (int i = 1; i <= 6; i++)
+            {
+                if (i >= 0 && i <= 3)
+                {
+                    if (Datalist[i] >= 0)
+                    {
+                        sb.AppendFormat("\t{0: #####000} ", Datalist[i]);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("\t{0:#####000} ", Datalist[i]);
+                    }
+                }
+                if (i >= 4 && i <= 6)
+                {
+                    if (Datalist[i] >= 0)
+                    {
+                        sb.AppendFormat("\t{0: ##0.00000000} ", Datalist[i] * G0);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("\t{0:###0.00000000} ", Datalist[i] * G0);
+                    }
+                }
+            }
+            if (rate_flag)
+            {
+                sb.Append("\t" + "1");
+            }
+            else
+            {
+                sb.Append("\t" + "0");
+            }
+            CaliDataSW.WriteLine(sb.ToString());
             sb.Clear();
         }
         private void showData()
@@ -854,7 +894,26 @@ namespace IMUSample
             IMUData.Fogx_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFX.Text);
             IMUData.Fogy_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFY.Text);
             IMUData.Fogz_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFZ.Text);
-            
+            IMUData.Fog_SF[0] = Convert.ToDouble(tBox_Fog_SFX.Text);
+            IMUData.Fog_SF[1] = Convert.ToDouble(tBox_Fog_SFY.Text);
+            IMUData.Fog_SF[2] = Convert.ToDouble(tBox_Fog_SFZ.Text);
+
+        }
+
+        private void Btn_CaliStatus_Click(object sender, EventArgs e)
+        {
+            if(Btn_CaliStatus.Text == "进入转动状态")
+            {
+                rate_flag = true;
+                Btn_CaliStatus.Text = "进入静止状态";
+                tBox_CaliInfo.Text = "由静止状态进入转动状态，标志位由0变1";
+            }
+            else
+            {
+                rate_flag = false;
+                Btn_CaliStatus.Text = "进入转动状态";
+                tBox_CaliInfo.Text = "由转动状态进入静止状态，标志位由1变0";
+            }
         }
     }
 }
