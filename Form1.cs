@@ -781,7 +781,7 @@ namespace IMUSample
             sb.AppendFormat("{0:0000.000}\t",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
             sb.Append(DateTime.Now.ToString("HH:mm:ss:fff:ffffff"));
             //sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
-            for (int i = 1;i <= 15;i++)
+            for (int i = 1;i <= 17;i++)
            {
                 if (i >= 0 && i <= 3)
                 {
@@ -885,7 +885,7 @@ namespace IMUSample
             tBox_Yaw.Text =   (INSdata.data_1s[15]).ToString("###0.0000");
 
 
-            tBox_Counter.Text = (INSdata.TotalCounter / 400.0).ToString();
+            tBox_Counter.Text = (INSdata.TotalCounter / 200.0).ToString();
             tBox_Timer.Text = INSdata.nav_state.ToString();
 
             DrawIMUData();
