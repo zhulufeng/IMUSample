@@ -25,6 +25,7 @@ namespace IMUSample
         TimePara timePara = new TimePara();
         bool[] zoomed_flag = new bool[6];
         IMUData INSdata = new IMUData();
+        int data_legth = 56;
         //定义联合体
         [StructLayout(LayoutKind.Explicit, Size = 4)]
 
@@ -562,7 +563,7 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while ((serialData.buffer.Count >= 6 && serialData.buffer[0] == 0xEB && serialData.buffer[1] == 0x90)|| serialData.buffer.Count >= 50)
+            while ((serialData.buffer.Count >= 6 && serialData.buffer[0] == 0xEB && serialData.buffer[1] == 0x90)|| serialData.buffer.Count >= data_legth)
             {
                 //Int32 index = 0;
                 //Byte ch = 
@@ -589,31 +590,38 @@ namespace IMUSample
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 3;i < 47;i++)
+                    for (int i = 3;i < 53;i++)
                     {
                         CheckSumA = CheckSumA + serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[48];
+                    CheckSumB = serialData.buffer[54];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[49] == 0x55) 
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[55] == 0x55) 
                     {
-                        serialData.buffer.CopyTo(0,INSdata.arrayOriginData, 0, 50);
+                        serialData.buffer.CopyTo(0,INSdata.arrayOriginData, 0, data_legth);
                         INSdata.TotalCounter++;
                         INSdata.nav_state = INSdata.arrayOriginData[2];
                         Union[] trdata = new Union[3];
                         for (int i = 0; i < 3; i++)
                         {
-                            INSdata.intAttData[i] = (Convert.ToInt32(Convert.ToInt32(INSdata.arrayOriginData[2 * i + 4]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[2 * i + 3]) * 256 * 256)) / 256 / 256;
-                            INSdata.intFogData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 12]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 11])  * 256 * 256
-                                                            + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 10]) * 256  + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 9]));
-                            INSdata.intAccData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 24]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 23]) * 256 * 256
-                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 22]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 21]));
-                            INSdata.intfpData[i]  = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 36]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 35]) * 256 * 256
-                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 34]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 33]));
-                            INSdata.intFogTmp[i]  = (INSdata.arrayOriginData[46] * 256 * 256 * 256 + INSdata.arrayOriginData[45] * 256 * 256) / 256 / 256;
-                            INSdata.intAccTmp[i]  = (INSdata.arrayOriginData[46] * 256 * 256 * 256 + INSdata.arrayOriginData[45] * 256 * 256) / 256 / 256;
+                            INSdata.intAttData[i] = Convert.ToInt32(Convert.ToInt32(INSdata.arrayOriginData[4 * i + 6]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 5]) * 256 * 256
+                                 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 4]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 3]));
+
+
+                            INSdata.intFogData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 18]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 17])  * 256 * 256
+                                                            + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 16]) * 256  + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 15]));
+
+
+                            INSdata.intAccData[i] = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 30]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 29]) * 256 * 256
+                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 28]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 27]));
+
+
+                            INSdata.intfpData[i]  = (Convert.ToInt32(INSdata.arrayOriginData[4 * i + 42]) * 256 * 256 * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 41]) * 256 * 256
+                                                             + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 40]) * 256 + Convert.ToInt32(INSdata.arrayOriginData[4 * i + 39]));
+                            INSdata.intFogTmp[i]  = (INSdata.arrayOriginData[52] * 256 * 256 * 256 + INSdata.arrayOriginData[51] * 256 * 256) / 256 / 256;
+                            INSdata.intAccTmp[i]  = (INSdata.arrayOriginData[52] * 256 * 256 * 256 + INSdata.arrayOriginData[51] * 256 * 256) / 256 / 256;
                             INSdata.doubleFogData[i] = Convert.ToDouble(INSdata.intFogData[i]) / 10000.0;
-                            INSdata.doubleAttData[i] = Convert.ToDouble(INSdata.intAttData[i]) / 100.0;
+                            INSdata.doubleAttData[i] = Convert.ToDouble(INSdata.intAttData[i]) / 1000.0;
                             INSdata.doubleAccData[i] = Convert.ToDouble(INSdata.intAccData[i]) / 10000.0;
                             INSdata.doublefpData[i] = Convert.ToDouble(INSdata.intAccData[i]) / 10000.0;
                             INSdata.doubleFogTmp[i] = Convert.ToDouble(INSdata.intFogTmp[i]) / 100.0;
@@ -741,7 +749,7 @@ namespace IMUSample
                             
                             this.Invoke(updateText);
                         }
-                        serialData.buffer.RemoveRange(0, 50);
+                        serialData.buffer.RemoveRange(0, data_legth);
 
                     }
                     else
