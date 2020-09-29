@@ -631,7 +631,7 @@
             this.tBox_Fog_SFX.Name = "tBox_Fog_SFX";
             this.tBox_Fog_SFX.Size = new System.Drawing.Size(100, 21);
             this.tBox_Fog_SFX.TabIndex = 33;
-            this.tBox_Fog_SFX.Text = "2263936.861";
+            this.tBox_Fog_SFX.Text = "2300000.0";
             // 
             // tBox_Fog_SFZ
             // 
@@ -639,7 +639,7 @@
             this.tBox_Fog_SFZ.Name = "tBox_Fog_SFZ";
             this.tBox_Fog_SFZ.Size = new System.Drawing.Size(100, 21);
             this.tBox_Fog_SFZ.TabIndex = 34;
-            this.tBox_Fog_SFZ.Text = "2283573.475";
+            this.tBox_Fog_SFZ.Text = "2300000.0";
             // 
             // tBox_Fog_SFY
             // 
@@ -647,7 +647,7 @@
             this.tBox_Fog_SFY.Name = "tBox_Fog_SFY";
             this.tBox_Fog_SFY.Size = new System.Drawing.Size(100, 21);
             this.tBox_Fog_SFY.TabIndex = 35;
-            this.tBox_Fog_SFY.Text = "-2261332.189";
+            this.tBox_Fog_SFY.Text = "2300000.0";
             // 
             // label19
             // 

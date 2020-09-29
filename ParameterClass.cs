@@ -45,6 +45,23 @@ namespace IMUSample
         public static List<double> ListTemAccyData = new List<double>();
         public static List<double> ListTemAcczData = new List<double>();
 
+        public static List<double> ListFogxData_cali = new List<double>();
+        public static List<double> ListFogyData_cali = new List<double>();
+        public static List<double> ListFogzData_cali = new List<double>();
+
+        public static List<double> ListAccxData_cali = new List<double>();
+        public static List<double> ListAccyData_cali = new List<double>();
+        public static List<double> ListAcczData_cali = new List<double>();
+
+        public static List<double> ListTemFogxData_cali = new List<double>();
+        public static List<double> ListTemFogyData_cali = new List<double>();
+        public static List<double> ListTemFogzData_cali = new List<double>();
+
+        public static List<double> ListTemAccxData_cali = new List<double>();
+        public static List<double> ListTemAccyData_cali = new List<double>();
+        public static List<double> ListTemAcczData_cali = new List<double>();
+        public static double[] data_Cali = new double[19];
+
         public static List<double> ListFogxData_1s = new List<double>();
         public static List<double> ListFogyData_1s = new List<double>();
         public static List<double> ListFogzData_1s = new List<double>();

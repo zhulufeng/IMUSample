@@ -53,9 +53,16 @@ namespace IMUSample
             AddSeries(12);
             AddChartArea(6);
             IMUData.TotalCounter = 0;
-            IMUData.Fogx_SF = 2263936.861;
-            IMUData.Fogy_SF = 2263936.861;
-            IMUData.Fogz_SF = 2263936.861;
+//             IMUData.Fogx_SF = 2263936.861;
+//             IMUData.Fogy_SF = 2263936.861;
+//             IMUData.Fogz_SF = 2263936.861;
+
+            IMUData.Fogx_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFX.Text);
+            IMUData.Fogy_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFY.Text);
+            IMUData.Fogz_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFZ.Text);
+            IMUData.Fog_SF[0] = Convert.ToDouble(tBox_Fog_SFX.Text);
+            IMUData.Fog_SF[1] = Convert.ToDouble(tBox_Fog_SFY.Text);
+            IMUData.Fog_SF[2] = Convert.ToDouble(tBox_Fog_SFZ.Text);
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
             for (int i = 0; i < 13; i++)
             {
@@ -435,6 +442,7 @@ namespace IMUSample
                 }
 
                 doubleDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataDouble.txt");
+                CaliDataSW = new StreamWriter(PathString.IMUDataCurrentDirectory + @"\" + "imuDataCalidata.txt");
                 for (int i = 0; i < 6; i++)
                 {
                     timePara.drawIndexTime.Add(0);
@@ -629,14 +637,65 @@ namespace IMUSample
                         IMUData.ListTemAccyData.Add(IMUData.arrayIMUdata[11]);
                         IMUData.ListTemAcczData.Add(IMUData.arrayIMUdata[12]);
 
+                        IMUData.ListFogxData_cali.Add(IMUData.arrayIMUdata[1]);
+                        IMUData.ListFogyData_cali.Add(IMUData.arrayIMUdata[2]);
+                        IMUData.ListFogzData_cali.Add(IMUData.arrayIMUdata[3]);
+                        IMUData.ListAccxData_cali.Add(IMUData.arrayIMUdata[4]);
+                        IMUData.ListAccyData_cali.Add(IMUData.arrayIMUdata[5]);
+                        IMUData.ListAcczData_cali.Add(IMUData.arrayIMUdata[6]);
+
+                        IMUData.ListTemFogxData_cali.Add(IMUData.arrayIMUdata[7]);
+                        IMUData.ListTemFogyData_cali.Add(IMUData.arrayIMUdata[8]);
+                        IMUData.ListTemFogzData_cali.Add(IMUData.arrayIMUdata[9]);
+                        IMUData.ListTemAccxData_cali.Add(IMUData.arrayIMUdata[10]);
+                        IMUData.ListTemAccyData_cali.Add(IMUData.arrayIMUdata[11]);
+                        IMUData.ListTemAcczData_cali.Add(IMUData.arrayIMUdata[12]);
+
                         IMUData.arrayIMUdata[13] = IMUData.Counter;
                         IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
                         if (serialParameter.isHighFreq)
                         {
-                            saveData(IMUData.arrayIMUdata);
+                            if (IMUData.TotalCounter % 8 == 0)
+                            {
+                                IMUData.data_Cali[1] = IMUData.ListFogxData.ToArray().Sum();
+                                IMUData.data_Cali[2] = IMUData.ListFogyData.ToArray().Sum();
+                                IMUData.data_Cali[3] = IMUData.ListFogzData.ToArray().Sum();
+
+                                IMUData.data_Cali[4] = IMUData.ListAccxData.ToArray().Average();
+                                IMUData.data_Cali[5] = IMUData.ListAccyData.ToArray().Average();
+                                IMUData.data_Cali[6] = IMUData.ListAcczData.ToArray().Average();
+
+                                IMUData.data_Cali[7] = IMUData.ListTemFogxData.ToArray().Average();
+                                IMUData.data_Cali[8] = IMUData.ListTemFogyData.ToArray().Average();
+                                IMUData.data_Cali[9] = IMUData.ListTemFogzData.ToArray().Average();
+
+                                IMUData.data_Cali[10] = IMUData.ListTemAccxData.ToArray().Average();
+                                IMUData.data_Cali[11] = IMUData.ListTemAccyData.ToArray().Average();
+                                IMUData.data_Cali[12] = IMUData.ListTemAcczData.ToArray().Average();
+
+                                IMUData.data_Cali[13] = IMUData.Counter;
+                                IMUData.data_Cali[14] = IMUData.Timer_cyc;
+
+                                IMUData.ListFogxData_cali.Clear();
+                                IMUData.ListFogyData_cali.Clear();
+                                IMUData.ListFogzData_cali.Clear();
+                                IMUData.ListAccxData_cali.Clear();
+                                IMUData.ListAccyData_cali.Clear();
+                                IMUData.ListAcczData_cali.Clear();
+
+                                IMUData.ListTemFogxData_cali.Clear();
+                                IMUData.ListTemFogyData_cali.Clear();
+                                IMUData.ListTemFogzData_cali.Clear();
+                                IMUData.ListTemAccxData_cali.Clear();
+                                IMUData.ListTemAccyData_cali.Clear();
+                                IMUData.ListTemAcczData_cali.Clear();
+
+                                saveData(IMUData.data_Cali);
+                            }
+                            
                         }
                         
-                        if (IMUData.TotalCounter % 400 == 0)
+                        if (IMUData.TotalCounter % 400.0 == 0)
                         {
                             IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.ToArray().Sum());
                             IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.ToArray().Sum());
@@ -743,7 +802,7 @@ namespace IMUSample
             }           
            
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 400.0);
+            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 8.0);
             for (int i = 1;i <= 12;i++)
             {
                 if (i >= 0 && i <= 3)
@@ -785,7 +844,7 @@ namespace IMUSample
             sb.AppendFormat("\t{0:0000} ", Datalist[14]);
             doubleDataSW.WriteLine(sb.ToString());
             sb.Clear();
-            sb.AppendFormat("{0:0000.000}", (Convert.ToDouble(IMUData.TotalCounter)));
+            sb.AppendFormat("{0:0000.000}", (Convert.ToDouble(IMUData.TotalCounter) / 8.0 * 0.02));
             for (int i = 1; i <= 6; i++)
             {
                 if (i >= 0 && i <= 3)
@@ -863,7 +922,7 @@ namespace IMUSample
             tBox_AccyT.Text = IMUData.doubleAccTmp[1].ToString();
             tBox_AcczT.Text = IMUData.doubleAccTmp[2].ToString();
 
-            tBox_Counter.Text = (IMUData.TotalCounter / 400).ToString();
+            tBox_Counter.Text = (IMUData.TotalCounter / 400.0).ToString();
             tBox_Timer.Text = IMUData.Timer_cyc.ToString();
 
             DrawIMUData();
