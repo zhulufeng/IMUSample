@@ -797,7 +797,7 @@ namespace IMUSample
             }           
            
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}\t",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
+            sb.AppendFormat("{0:0000.000}\t",(Convert.ToDouble(INSdata.TotalCounter)) / 400.0);
             sb.Append(DateTime.Now.ToString("HH:mm:ss:fff:ffffff"));
             //sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(INSdata.TotalCounter)) / 100.0);
             for (int i = 1;i <= 18;i++)
@@ -806,11 +806,11 @@ namespace IMUSample
                 {
                     if (Datalist[i] >= 0)
                     {
-                        sb.AppendFormat("\t{0: #####000} ", Datalist[i]);
+                        sb.AppendFormat("\t{0: ##0.00000000} ", Datalist[i]);
                     }
                     else
                     {
-                        sb.AppendFormat("\t{0:#####000} ", Datalist[i]);
+                        sb.AppendFormat("\t{0:##0.00000000} ", Datalist[i]);
                     }
                 }
                 if (i >= 4 && i <= 6)
