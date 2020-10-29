@@ -51,9 +51,9 @@ namespace IMUSample
             AddSeries(12);
             AddChartArea(6);
             IMUData.TotalCounter = 0;
-            IMUData.Fogx_SF = 2263936.861;
-            IMUData.Fogy_SF = 2263936.861;
-            IMUData.Fogz_SF = 2263936.861;
+            IMUData.Fogx_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFX.Text);
+            IMUData.Fogy_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFY.Text);
+            IMUData.Fogz_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFZ.Text);
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
             for (int i = 0; i < 13; i++)
             {
@@ -856,5 +856,7 @@ namespace IMUSample
             IMUData.Fogz_SF = 3600.0 / Convert.ToDouble(tBox_Fog_SFZ.Text);
             
         }
+
+      
     }
 }
