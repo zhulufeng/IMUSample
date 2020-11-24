@@ -674,12 +674,12 @@ namespace IMUSample
                         INSdata.ListfpzData.Add(INSdata.arrayIMUdata[18]);
                         INSdata.arrayIMUdata[19] = INSdata.Counter;
                         INSdata.arrayIMUdata[20] = INSdata.Timer_cyc;
-                        if (serialParameter.isHighFreq)
+                        if (serialParameter.isHighFreq )
                         {
                             saveData(INSdata.arrayIMUdata);
                         }
                         
-                        if (INSdata.TotalCounter % 400 == 0)
+                        if (INSdata.TotalCounter % 400 == 0 && INSdata.TotalCounter > 400 )
                         {
                             INSdata.ListFogxData_1s.Add(INSdata.ListFogxData.ToArray().Average());
                             INSdata.ListFogyData_1s.Add(INSdata.ListFogyData.ToArray().Average());
