@@ -638,42 +638,52 @@ namespace IMUSample
                         
                         if (IMUData.TotalCounter % 400 == 0)
                         {
-                            IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.ToArray().Sum());
-                            IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.ToArray().Sum());
-                            IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.ToArray().Sum());
+                            if (IMUData.TotalCounter > 400)
+                            {
+                                IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.ToArray().Sum());
+                                IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.ToArray().Sum());
+                                IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.ToArray().Sum());
 
-                            IMUData.data_1s[1] = IMUData.ListFogxData.ToArray().Sum();
-                            IMUData.data_1s[2] = IMUData.ListFogyData.ToArray().Sum();
-                            IMUData.data_1s[3] = IMUData.ListFogzData.ToArray().Sum();
-
-                             
-                            IMUData.ListAccxData_1s.Add(IMUData.ListAccxData.ToArray().Average());
-                            IMUData.ListAccyData_1s.Add(IMUData.ListAccyData.ToArray().Average());
-                            IMUData.ListAcczData_1s.Add(IMUData.ListAcczData.ToArray().Average());
-
-                            IMUData.data_1s[4] = IMUData.ListAccxData.ToArray().Average();
-                            IMUData.data_1s[5] = IMUData.ListAccyData.ToArray().Average();
-                            IMUData.data_1s[6] = IMUData.ListAcczData.ToArray().Average();
-                            ////////////////////////温度
-                            IMUData.ListTemFogxData_1s.Add(IMUData.ListTemFogxData.ToArray().Average());
-                            IMUData.ListTemFogyData_1s.Add(IMUData.ListTemFogyData.ToArray().Average());
-                            IMUData.ListTemFogzData_1s.Add(IMUData.ListTemFogzData.ToArray().Average());
-
-                            IMUData.data_1s[7] = IMUData.ListTemFogxData.ToArray().Average();
-                            IMUData.data_1s[8] = IMUData.ListTemFogyData.ToArray().Average();
-                            IMUData.data_1s[9] = IMUData.ListTemFogzData.ToArray().Average();
+                                IMUData.data_1s[1] = IMUData.ListFogxData.ToArray().Sum();
+                                IMUData.data_1s[2] = IMUData.ListFogyData.ToArray().Sum();
+                                IMUData.data_1s[3] = IMUData.ListFogzData.ToArray().Sum();
 
 
-                            IMUData.ListTemAccxData_1s.Add(IMUData.ListTemAccxData.ToArray().Average());
-                            IMUData.ListTemAccyData_1s.Add(IMUData.ListTemAccyData.ToArray().Average());
-                            IMUData.ListTemAcczData_1s.Add(IMUData.ListTemAcczData.ToArray().Average());
+                                IMUData.ListAccxData_1s.Add(IMUData.ListAccxData.ToArray().Average());
+                                IMUData.ListAccyData_1s.Add(IMUData.ListAccyData.ToArray().Average());
+                                IMUData.ListAcczData_1s.Add(IMUData.ListAcczData.ToArray().Average());
 
-                            IMUData.data_1s[10] = IMUData.ListTemAccxData.ToArray().Average();
-                            IMUData.data_1s[11] = IMUData.ListTemAccyData.ToArray().Average();
-                            IMUData.data_1s[12] = IMUData.ListTemAcczData.ToArray().Average();
+                                IMUData.data_1s[4] = IMUData.ListAccxData.ToArray().Average();
+                                IMUData.data_1s[5] = IMUData.ListAccyData.ToArray().Average();
+                                IMUData.data_1s[6] = IMUData.ListAcczData.ToArray().Average();
+                                ////////////////////////温度
+                                IMUData.ListTemFogxData_1s.Add(IMUData.ListTemFogxData.ToArray().Average());
+                                IMUData.ListTemFogyData_1s.Add(IMUData.ListTemFogyData.ToArray().Average());
+                                IMUData.ListTemFogzData_1s.Add(IMUData.ListTemFogzData.ToArray().Average());
 
-                            IMUData.data_1s[13] = IMUData.Counter;
-                            IMUData.data_1s[14] = IMUData.Timer_cyc;
+                                IMUData.data_1s[7] = IMUData.ListTemFogxData.ToArray().Average();
+                                IMUData.data_1s[8] = IMUData.ListTemFogyData.ToArray().Average();
+                                IMUData.data_1s[9] = IMUData.ListTemFogzData.ToArray().Average();
+
+
+                                IMUData.ListTemAccxData_1s.Add(IMUData.ListTemAccxData.ToArray().Average());
+                                IMUData.ListTemAccyData_1s.Add(IMUData.ListTemAccyData.ToArray().Average());
+                                IMUData.ListTemAcczData_1s.Add(IMUData.ListTemAcczData.ToArray().Average());
+
+                                IMUData.data_1s[10] = IMUData.ListTemAccxData.ToArray().Average();
+                                IMUData.data_1s[11] = IMUData.ListTemAccyData.ToArray().Average();
+                                IMUData.data_1s[12] = IMUData.ListTemAcczData.ToArray().Average();
+
+                                IMUData.data_1s[13] = IMUData.Counter;
+                                IMUData.data_1s[14] = IMUData.Timer_cyc;
+
+                                if (!serialParameter.isHighFreq)
+                                {
+                                    saveData(IMUData.data_1s);
+                                }
+                                this.Invoke(updateText);
+                            }
+                            
 
                             IMUData.ListFogxData.Clear();
                             IMUData.ListFogyData.Clear();
@@ -688,12 +698,7 @@ namespace IMUSample
                             IMUData.ListTemAccxData.Clear();
                             IMUData.ListTemAccyData.Clear();
                             IMUData.ListTemAcczData.Clear();
-                            if (!serialParameter.isHighFreq)
-                            {
-                                saveData(IMUData.data_1s);
-                            }
                             
-                            this.Invoke(updateText);
                         }
                         serialData.buffer.RemoveRange(0, 42);
 
