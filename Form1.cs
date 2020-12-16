@@ -26,6 +26,7 @@ namespace IMUSample
         bool[] zoomed_flag = new bool[6];
         bool rate_flag = false;
         double G0 = 9.8221625;
+        int datalen = 49;
         //定义联合体
         [StructLayout(LayoutKind.Explicit, Size = 4)]
 
@@ -53,9 +54,9 @@ namespace IMUSample
             AddSeries(12);
             AddChartArea(6);
             IMUData.TotalCounter = 0;
-            IMUData.Fogx_SF = 2263936.861;
-            IMUData.Fogy_SF = 2263936.861;
-            IMUData.Fogz_SF = 2263936.861;
+            IMUData.Fogx_SF = 1.0;
+            IMUData.Fogy_SF = 1.0;
+            IMUData.Fogz_SF = 1.0;
             //MessageBox.Show(System.AppDomain.CurrentDomain.BaseDirectory);
             for (int i = 0; i < 13; i++)
             {
@@ -235,7 +236,7 @@ namespace IMUSample
             chartArea.AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.All;//启用X轴滚动条按钮
             chartArea.AxisY.ScaleView.Zoomable = false;
 
-            chartArea.AxisY.LabelStyle.Format = "#########0.0";
+            chartArea.AxisY.LabelStyle.Format = "###0.0000000";
             chartArea.AxisY2.LabelStyle.Format = "##0.0000";
             chartArea.AxisY.LabelStyle.ForeColor = Color.FromArgb(255, 146, 175, 207);
             chartArea.AxisY2.LabelStyle.ForeColor = Color.FromArgb(255, 146, 175, 207);
@@ -263,8 +264,8 @@ namespace IMUSample
                     switch (index)
                     {
                         case 0:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogxData_1s.ToArray().Max() + 100) * IMUData.Fogx_SF;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogxData_1s.ToArray().Min() - 100) * IMUData.Fogx_SF;
+                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogxData_1s.ToArray().Max() + 0.0001) * IMUData.Fogx_SF;
+                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogxData_1s.ToArray().Min() - 0.0001) * IMUData.Fogx_SF;
                             chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogxData_1s.ToArray().Max() + 1;
                             chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogxData_1s.ToArray().Min() - 1;
 
@@ -276,8 +277,8 @@ namespace IMUSample
                             break;
 
                         case 1:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogyData_1s.ToArray().Max() + 100) * IMUData.Fogy_SF;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogyData_1s.ToArray().Min() - 100) * IMUData.Fogy_SF;
+                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogyData_1s.ToArray().Max() + 0.0001) * IMUData.Fogy_SF;
+                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogyData_1s.ToArray().Min() - 0.0001) * IMUData.Fogy_SF;
                             chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogyData_1s.ToArray().Max() + 1;
                             chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogyData_1s.ToArray().Min() - 1;
 
@@ -289,8 +290,8 @@ namespace IMUSample
                             break;
 
                         case 2:
-                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogzData_1s.ToArray().Max() + 100) * IMUData.Fogz_SF;
-                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogzData_1s.ToArray().Min() - 100) * IMUData.Fogz_SF;
+                            chart.ChartAreas[index].AxisY.Maximum = (IMUData.ListFogzData_1s.ToArray().Max() + 0.0001) * IMUData.Fogz_SF;
+                            chart.ChartAreas[index].AxisY.Minimum = (IMUData.ListFogzData_1s.ToArray().Min() - 0.0001) * IMUData.Fogz_SF;
                             chart.ChartAreas[index].AxisY2.Maximum = IMUData.ListTemFogzData_1s.ToArray().Max() + 1;
                             chart.ChartAreas[index].AxisY2.Minimum = IMUData.ListTemFogzData_1s.ToArray().Min() - 1;
 
@@ -348,7 +349,7 @@ namespace IMUSample
                 chart.Series[2 * index + 1].ChartArea = chart.ChartAreas[index].Name;
                 if (index < 3)
                 {
-                    chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1] * 0.0017);
+                    chart.Series[2 * index].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1] * IMUData.Fogz_SF);
                     chart.Series[2 * index + 1].Points.AddXY(timePara.drawIndexTime[index], IMUData.data_1s[index + 1 + 6]);
                 }
                 else 
@@ -477,7 +478,7 @@ namespace IMUSample
                     intDataSW.Close();
                 }
                 doubleDataSW.Close();
-                CaliDataSW.Close();
+                //CaliDataSW.Close();
                 serialPort.Close();
             }
            
@@ -491,11 +492,26 @@ namespace IMUSample
             FrmSerialCfg serialCfgDlg = new FrmSerialCfg();
             if (serialCfgDlg.ShowDialog() != DialogResult.Cancel)
             {
-                textBox_Info.Text = "串口号：" + serialParameter.comName + "\r\n";
+                
+                textBox_Info.Text = "惯组编号：" + serialParameter.IMU_id+ "\r\n";
+                textBox_Info.Text += "串口号：" + serialParameter.comName + "\r\n";
                 textBox_Info.Text += "波特率：" + serialParameter.baudRate + "\r\n";
                 textBox_Info.Text += "数据位：" + serialParameter.dataBit + "\r\n";
                 textBox_Info.Text += "停止位：" + serialParameter.stopBit + "\r\n";
                 textBox_Info.Text += "校验位：" + serialParameter.parityBit + "\r\n";
+                textBox_Info.Text += "更新率：" + serialParameter.Upd_rate + "\r\n";
+                string testStr = "";
+                if (serialParameter.isTest)
+                {
+                    testStr = "测试状态";
+                    datalen = 49;
+                }
+                else
+                {
+                    testStr = "产品状态";
+                    datalen = 37;
+                }
+                textBox_Info.Text += "测试状态：" + testStr + "\r\n";
                 textBox_Info.Text += "************"  + "\r\n";
                 if (serialParameter.isHighFreq)
                 {
@@ -559,7 +575,7 @@ namespace IMUSample
             serialData.buffer.AddRange(readBuffer);
             UInt32 CheckSumA = 0;
             UInt32 CheckSumB = 0;
-            while (serialData.buffer.Count >= 42)
+            while (serialData.buffer.Count >= datalen)
             {
                 //Int32 index = 0;
                 //Byte ch = 
@@ -567,39 +583,82 @@ namespace IMUSample
                 {
                     CheckSumA = 0;
                     CheckSumB = 0;
-                    for (int i = 4;i <= 39;i++)
+                    for (int i = 2;i <= datalen - 3; i++)
                     {
                         CheckSumA = CheckSumA ^ serialData.buffer[i];
                     }
-                    CheckSumB = serialData.buffer[40];
+                    CheckSumB = serialData.buffer[datalen-2];
                    // MessageBox.Show("CheckSumA is :" + CheckSumA.ToString() + "\nCheckSumB is :" + CheckSumB.ToString());
-                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[41] == 0xBB) 
+                    if ((CheckSumA & 0xff) == CheckSumB && serialData.buffer[datalen-1] == 0xBB) 
                     {
-                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, 42);
+                        serialData.buffer.CopyTo(0,IMUData.arrayOriginData, 0, datalen);
                         IMUData.TotalCounter++;
                         Union[] trdata = new Union[3];
+                        Union[] ftrdata = new Union[3];
+                        Union[] fbctrdata = new Union[3];
                         for (int i = 0; i < 3; i++)
                         {
-                            IMUData.intFogData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 7]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 6])  * 256 * 256
-                                                            + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 5]) * 256  + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 4]));
-//                             IMUData.intAccData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 19]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 18]) * 256 * 256
+//                             IMUData.intFogData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 7]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 6])  * 256 * 256
+//                                                             + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 5]) * 256  + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 4]));
+// //                             IMUData.intAccData[i] = (Convert.ToInt32(IMUData.arrayOriginData[4 * i + 19]) * 256 * 256 * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 18]) * 256 * 256
 //                                                             + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 17]) * 256 + Convert.ToInt32(IMUData.arrayOriginData[4 * i + 16]));
-                            IMUData.intFogTmp[i]  = (IMUData.arrayOriginData[2 * i + 29] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 28] * 256 * 256) / 256 / 256;
-                            IMUData.intAccTmp[i]  = (IMUData.arrayOriginData[2 * i + 35] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 34] * 256 * 256) / 256 / 256;
-                            IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
-                            IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
-                            IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
-                            IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 16.0;
-                            trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 16];
-                            trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 17];
-                            trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 18];
-                            trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 19];
+                            if(serialParameter.isTest)
+                            {
+                                IMUData.intFogTmp[i] = (IMUData.arrayOriginData[2 * i + 40] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 39] * 256 * 256) / 256 / 256;
+                                IMUData.intAccTmp[i] = (IMUData.arrayOriginData[46] * 256 * 256 * 256 + IMUData.arrayOriginData[45] * 256 * 256) / 256 / 256;
+                                IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
+                                IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
+                                IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
+                                IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 16.0;
 
-//                             trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 19];
-//                             trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 18];
-//                             trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 17];
-//                             trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 16];
-                            IMUData.floatAccData[i] = trdata[i].f;
+                                ftrdata[i].b0 = IMUData.arrayOriginData[i * 4 + 3];
+                                ftrdata[i].b1 = IMUData.arrayOriginData[i * 4 + 4];
+                                ftrdata[i].b2 = IMUData.arrayOriginData[i * 4 + 5];
+                                ftrdata[i].b3 = IMUData.arrayOriginData[i * 4 + 6];
+
+                                trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 15];
+                                trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 16];
+                                trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 17];
+                                trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 18];
+
+                                fbctrdata[i].b0 = IMUData.arrayOriginData[i * 4 + 27];
+                                fbctrdata[i].b1 = IMUData.arrayOriginData[i * 4 + 28];
+                                fbctrdata[i].b2 = IMUData.arrayOriginData[i * 4 + 29];
+                                fbctrdata[i].b3 = IMUData.arrayOriginData[i * 4 + 30];
+                                //                             trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 19];
+                                //                             trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 18];
+                                //                             trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 17];
+                                //                             trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 16];
+                                IMUData.floatAccData[i] = trdata[i].f;
+                                IMUData.floatFogData[i] = ftrdata[i].f;
+                                IMUData.floatFogData_BC[i] = fbctrdata[i].f;
+                            }
+                            else 
+                            {
+                                IMUData.intFogTmp[i] = (IMUData.arrayOriginData[2 * i + 28] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 27] * 256 * 256) / 256 / 256;
+                                IMUData.intAccTmp[i] = (IMUData.arrayOriginData[34] * 256 * 256 * 256 + IMUData.arrayOriginData[33] * 256 * 256) / 256 / 256;
+                                IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
+                                IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
+                                IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
+                                IMUData.doubleAccTmp[i] = Convert.ToDouble(IMUData.intAccTmp[i]) / 16.0;
+
+                                ftrdata[i].b0 = IMUData.arrayOriginData[i * 4 + 3];
+                                ftrdata[i].b1 = IMUData.arrayOriginData[i * 4 + 4];
+                                ftrdata[i].b2 = IMUData.arrayOriginData[i * 4 + 5];
+                                ftrdata[i].b3 = IMUData.arrayOriginData[i * 4 + 6];
+
+                                trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 15];
+                                trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 16];
+                                trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 17];
+                                trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 18];
+
+                                //                             trdata[i].b0 = IMUData.arrayOriginData[i * 4 + 19];
+                                //                             trdata[i].b1 = IMUData.arrayOriginData[i * 4 + 18];
+                                //                             trdata[i].b2 = IMUData.arrayOriginData[i * 4 + 17];
+                                //                             trdata[i].b3 = IMUData.arrayOriginData[i * 4 + 16];
+                                IMUData.floatAccData[i] = trdata[i].f;
+                                IMUData.floatFogData[i] = ftrdata[i].f;
+                            }
 
                         }
                         
@@ -609,44 +668,50 @@ namespace IMUSample
                         IMUData.arrayIMUdata[0] = IMUData.Counter;
                         for (int i = 0; i < 3; i++)
                         {
-                            IMUData.arrayIMUdata[1  + i]  = IMUData.doubleFogData[i];
+                            IMUData.arrayIMUdata[1  + i]  = IMUData.floatFogData[i];
                             IMUData.arrayIMUdata[4  + i]  = IMUData.floatAccData[i];
                             IMUData.arrayIMUdata[7  + i]  = IMUData.doubleFogTmp[i];
                             IMUData.arrayIMUdata[10 + i]  = IMUData.doubleAccTmp[0];
+                            IMUData.arrayIMUdata[13 + i] = IMUData.floatFogData_BC[i];
                         }
+                        if (IMUData.TotalCounter > serialParameter.Upd_rate)
+                        {
+                            IMUData.ListFogxData.Add(IMUData.arrayIMUdata[1]);
+                            IMUData.ListFogyData.Add(IMUData.arrayIMUdata[2]);
+                            IMUData.ListFogzData.Add(IMUData.arrayIMUdata[3]);
+                            IMUData.ListAccxData.Add(IMUData.arrayIMUdata[4]);
+                            IMUData.ListAccyData.Add(IMUData.arrayIMUdata[5]);
+                            IMUData.ListAcczData.Add(IMUData.arrayIMUdata[6]);
+                            IMUData.ListFogxData_BC.Add(IMUData.arrayIMUdata[13]);
+                            IMUData.ListFogyData_BC.Add(IMUData.arrayIMUdata[14]);
+                            IMUData.ListFogzData_BC.Add(IMUData.arrayIMUdata[15]);
 
-                        IMUData.ListFogxData.Add(IMUData.arrayIMUdata[1]);
-                        IMUData.ListFogyData.Add(IMUData.arrayIMUdata[2]);
-                        IMUData.ListFogzData.Add(IMUData.arrayIMUdata[3]);
-                        IMUData.ListAccxData.Add(IMUData.arrayIMUdata[4]);
-                        IMUData.ListAccyData.Add(IMUData.arrayIMUdata[5]);
-                        IMUData.ListAcczData.Add(IMUData.arrayIMUdata[6]);
+                            IMUData.ListTemFogxData.Add(IMUData.arrayIMUdata[7]);
+                            IMUData.ListTemFogyData.Add(IMUData.arrayIMUdata[8]);
+                            IMUData.ListTemFogzData.Add(IMUData.arrayIMUdata[9]);
+                            IMUData.ListTemAccxData.Add(IMUData.arrayIMUdata[10]);
+                            IMUData.ListTemAccyData.Add(IMUData.arrayIMUdata[11]);
+                            IMUData.ListTemAcczData.Add(IMUData.arrayIMUdata[12]);
 
-                        IMUData.ListTemFogxData.Add(IMUData.arrayIMUdata[7]);
-                        IMUData.ListTemFogyData.Add(IMUData.arrayIMUdata[8]);
-                        IMUData.ListTemFogzData.Add(IMUData.arrayIMUdata[9]);
-                        IMUData.ListTemAccxData.Add(IMUData.arrayIMUdata[10]);
-                        IMUData.ListTemAccyData.Add(IMUData.arrayIMUdata[11]);
-                        IMUData.ListTemAcczData.Add(IMUData.arrayIMUdata[12]);
-
-                        IMUData.arrayIMUdata[13] = IMUData.Counter;
-                        IMUData.arrayIMUdata[14] = IMUData.Timer_cyc;
+                            IMUData.arrayIMUdata[16] = IMUData.Counter;
+                            IMUData.arrayIMUdata[17] = IMUData.Timer_cyc;
+                        }
                         if (serialParameter.isHighFreq)
                         {
                             saveData(IMUData.arrayIMUdata);
                         }
                         
-                        if (IMUData.TotalCounter % 400 == 0)
+                        if (IMUData.TotalCounter % serialParameter.Upd_rate == 0)
                         {
-                            if (IMUData.TotalCounter > 400)
+                            if (IMUData.TotalCounter > serialParameter.Upd_rate)
                             {
-                                IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.ToArray().Sum());
-                                IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.ToArray().Sum());
-                                IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.ToArray().Sum());
+                                IMUData.ListFogxData_1s.Add(IMUData.ListFogxData.ToArray().Average());
+                                IMUData.ListFogyData_1s.Add(IMUData.ListFogyData.ToArray().Average());
+                                IMUData.ListFogzData_1s.Add(IMUData.ListFogzData.ToArray().Average());
 
-                                IMUData.data_1s[1] = IMUData.ListFogxData.ToArray().Sum();
-                                IMUData.data_1s[2] = IMUData.ListFogyData.ToArray().Sum();
-                                IMUData.data_1s[3] = IMUData.ListFogzData.ToArray().Sum();
+                                IMUData.data_1s[1] = IMUData.ListFogxData.ToArray().Average();
+                                IMUData.data_1s[2] = IMUData.ListFogyData.ToArray().Average();
+                                IMUData.data_1s[3] = IMUData.ListFogzData.ToArray().Average();
 
 
                                 IMUData.ListAccxData_1s.Add(IMUData.ListAccxData.ToArray().Average());
@@ -674,8 +739,16 @@ namespace IMUSample
                                 IMUData.data_1s[11] = IMUData.ListTemAccyData.ToArray().Average();
                                 IMUData.data_1s[12] = IMUData.ListTemAcczData.ToArray().Average();
 
-                                IMUData.data_1s[13] = IMUData.Counter;
-                                IMUData.data_1s[14] = IMUData.Timer_cyc;
+                                IMUData.ListFogxData_1s_BC.Add(IMUData.ListFogxData_BC.ToArray().Average());
+                                IMUData.ListFogyData_1s_BC.Add(IMUData.ListFogyData_BC.ToArray().Average());
+                                IMUData.ListFogzData_1s_BC.Add(IMUData.ListFogzData_BC.ToArray().Average());
+
+                                IMUData.data_1s[13] = IMUData.ListFogxData_BC.ToArray().Average();
+                                IMUData.data_1s[14] = IMUData.ListFogyData_BC.ToArray().Average();
+                                IMUData.data_1s[15] = IMUData.ListFogzData_BC.ToArray().Average();
+
+                                IMUData.data_1s[16] = IMUData.Counter;
+                                IMUData.data_1s[17] = IMUData.Timer_cyc;
 
                                 if (!serialParameter.isHighFreq)
                                 {
@@ -691,7 +764,9 @@ namespace IMUSample
                             IMUData.ListAccxData.Clear();
                             IMUData.ListAccyData.Clear();
                             IMUData.ListAcczData.Clear();
-
+                            IMUData.ListFogxData_BC.Clear();
+                            IMUData.ListFogyData_BC.Clear();
+                            IMUData.ListFogzData_BC.Clear();
                             IMUData.ListTemFogxData.Clear();
                             IMUData.ListTemFogyData.Clear();
                             IMUData.ListTemFogzData.Clear();
@@ -700,7 +775,7 @@ namespace IMUSample
                             IMUData.ListTemAcczData.Clear();
                             
                         }
-                        serialData.buffer.RemoveRange(0, 42);
+                        serialData.buffer.RemoveRange(0, datalen-1);
 
                     }
                     else
@@ -748,18 +823,18 @@ namespace IMUSample
             }           
            
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / 400.0);
-            for (int i = 1;i <= 12;i++)
+            sb.AppendFormat("{0:0000.000}",(Convert.ToDouble(IMUData.TotalCounter)) / Convert.ToDouble(serialParameter.Upd_rate));
+            for (int i = 1;i <= 15;i++)
             {
                 if (i >= 0 && i <= 3)
                 {
                     if (Datalist[i] >= 0)
                     {
-                        sb.AppendFormat("\t{0: #####000} ", Datalist[i]);
+                        sb.AppendFormat("\t{0: ##0.00000000} ", Datalist[i]);
                     }
                     else
                     {
-                        sb.AppendFormat("\t{0:#####000} ", Datalist[i]);
+                        sb.AppendFormat("\t{0:##0.00000000} ", Datalist[i]);
                     }
                 }
                 if (i >= 4 && i <= 6)
@@ -773,7 +848,7 @@ namespace IMUSample
                         sb.AppendFormat("\t{0:###0.00000000} ", Datalist[i]);
                     }
                 }
-                if (i >= 7)
+                if (i >= 7 && i <= 12)
                 {
                     if (Datalist[i] >= 0)
                     {
@@ -784,10 +859,20 @@ namespace IMUSample
                         sb.AppendFormat("\t{0:###0.0000} ", Datalist[i]);
                     }
                 }
-                
+                if (i >= 13 && i <= 15)
+                {
+                    if (Datalist[i] >= 0)
+                    {
+                        sb.AppendFormat("\t{0: ##0.00000000} ", Datalist[i]);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("\t{0:##0.00000000} ", Datalist[i]);
+                    }
+                }
             }
-            sb.AppendFormat("\t{0:000} ", Datalist[13]);
-            sb.AppendFormat("\t{0:0000} ", Datalist[14]);
+            sb.AppendFormat("\t{0:000} ", Datalist[16]);
+            sb.AppendFormat("\t{0:0000} ", Datalist[17]);
             doubleDataSW.WriteLine(sb.ToString());
             sb.Clear();
             sb.AppendFormat("{0:0000.000}", (Convert.ToDouble(IMUData.TotalCounter)));
@@ -824,21 +909,21 @@ namespace IMUSample
             {
                 sb.Append("\t" + "0");
             }
-            CaliDataSW.WriteLine(sb.ToString());
+            //CaliDataSW.WriteLine(sb.ToString());
             sb.Clear();
         }
         private void showData()
         {
-            tBox_FogX.Text = IMUData.data_1s[1].ToString();
-            tBox_FogY.Text = IMUData.data_1s[2].ToString();
-            tBox_FogZ.Text = IMUData.data_1s[3].ToString();
-            tBox_Fogx_Com.Text = (IMUData.data_1s[1] * IMUData.Fogx_SF).ToString();
-            tBox_Fogy_Com.Text = (IMUData.data_1s[2] * IMUData.Fogy_SF).ToString();
-            tBox_Fogz_Com.Text = (IMUData.data_1s[3] * IMUData.Fogz_SF).ToString();
+            tBox_FogX.Text = IMUData.data_1s[1].ToString("##0.000000");
+            tBox_FogY.Text = IMUData.data_1s[2].ToString("##0.000000");
+            tBox_FogZ.Text = IMUData.data_1s[3].ToString("##0.000000");
+            tBox_Fogx_Com.Text = (IMUData.data_1s[1] * IMUData.Fogx_SF * 3600).ToString("##0.000000");
+            tBox_Fogy_Com.Text = (IMUData.data_1s[2] * IMUData.Fogy_SF * 3600).ToString("##0.000000");
+            tBox_Fogz_Com.Text = (IMUData.data_1s[3] * IMUData.Fogz_SF * 3600).ToString("##0.000000");
 
-            tBox_Fogx_Std.Text = (CalculateStdDev(IMUData.ListFogxData_1s) * IMUData.Fogx_SF).ToString("##0.000000");
-            tBox_Fogy_Std.Text = (CalculateStdDev(IMUData.ListFogyData_1s) * IMUData.Fogy_SF).ToString("##0.000000");
-            tBox_Fogz_Std.Text = (CalculateStdDev(IMUData.ListFogzData_1s) * IMUData.Fogz_SF).ToString("##0.000000");
+            tBox_Fogx_Std.Text = (CalculateStdDev(IMUData.ListFogxData_1s) * IMUData.Fogx_SF * 3600).ToString("##0.000000");
+            tBox_Fogy_Std.Text = (CalculateStdDev(IMUData.ListFogyData_1s) * IMUData.Fogy_SF * 3600).ToString("##0.000000");
+            tBox_Fogz_Std.Text = (CalculateStdDev(IMUData.ListFogzData_1s) * IMUData.Fogz_SF * 3600).ToString("##0.000000");
 
             tBox_Fogx_ave.Text = (IMUData.ListFogxData_1s.ToArray().Average() * IMUData.Fogx_SF).ToString("##0.000000");
             tBox_Fogy_ave.Text = (IMUData.ListFogyData_1s.ToArray().Average() * IMUData.Fogy_SF).ToString("##0.000000");
@@ -868,7 +953,7 @@ namespace IMUSample
             tBox_AccyT.Text = IMUData.doubleAccTmp[1].ToString();
             tBox_AcczT.Text = IMUData.doubleAccTmp[2].ToString();
 
-            tBox_Counter.Text = (IMUData.TotalCounter / 400).ToString();
+            tBox_Counter.Text = (IMUData.TotalCounter / Convert.ToDouble(serialParameter.Upd_rate)).ToString();
             tBox_Timer.Text = IMUData.Timer_cyc.ToString();
 
             DrawIMUData();

@@ -544,38 +544,38 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(376, 34);
+            this.label15.Location = new System.Drawing.Point(361, 34);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 12);
+            this.label15.Size = new System.Drawing.Size(89, 12);
             this.label15.TabIndex = 25;
-            this.label15.Text = "当前值";
+            this.label15.Text = "当前值（°/s）";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(477, 34);
+            this.label16.Location = new System.Drawing.Point(465, 34);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 12);
+            this.label16.Size = new System.Drawing.Size(89, 12);
             this.label16.TabIndex = 25;
-            this.label16.Text = "补偿值";
+            this.label16.Text = "补偿值（°/h）";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(693, 35);
+            this.label17.Location = new System.Drawing.Point(685, 34);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 12);
+            this.label17.Size = new System.Drawing.Size(89, 12);
             this.label17.TabIndex = 25;
-            this.label17.Text = "稳定性";
+            this.label17.Text = "稳定性（°/h）";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(579, 36);
+            this.label18.Location = new System.Drawing.Point(579, 34);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(29, 12);
+            this.label18.Size = new System.Drawing.Size(77, 12);
             this.label18.TabIndex = 32;
-            this.label18.Text = "均值";
+            this.label18.Text = "均值（°/s）";
             // 
             // tBox_Accz_ave
             // 

@@ -11,6 +11,7 @@ namespace IMUSample
     }
     class serialParameter
     {
+        
         public static string comName = "COM1";
         public static string baudRate = "38400";
         public static string dataBit = "8";
@@ -19,6 +20,8 @@ namespace IMUSample
         public static bool isHighFreq = false;
         public static bool isSaveHex = false;
         public static string IMU_id = "001";
+        public static int Upd_rate = 50;
+        public static bool isTest = true;
     }
     class serialData
     {
@@ -32,6 +35,10 @@ namespace IMUSample
         public static List <double>ListFogxData = new List<double>();
         public static List<double> ListFogyData = new List<double>();
         public static List<double> ListFogzData = new List<double>();
+
+        public static List<double> ListFogxData_BC = new List<double>();
+        public static List<double> ListFogyData_BC = new List<double>();
+        public static List<double> ListFogzData_BC = new List<double>();
 
         public static List<double> ListAccxData = new List<double>();
         public static List<double> ListAccyData = new List<double>();
@@ -49,6 +56,10 @@ namespace IMUSample
         public static List<double> ListFogyData_1s = new List<double>();
         public static List<double> ListFogzData_1s = new List<double>();
 
+        public static List<double> ListFogxData_1s_BC = new List<double>();
+        public static List<double> ListFogyData_1s_BC = new List<double>();
+        public static List<double> ListFogzData_1s_BC = new List<double>();
+
         public static List<double> ListAccxData_1s = new List<double>();
         public static List<double> ListAccyData_1s = new List<double>();
         public static List<double> ListAcczData_1s = new List<double>();
@@ -62,9 +73,10 @@ namespace IMUSample
         public static List<double> ListTemAcczData_1s = new List<double>();
 
         public static double[] data_1s = new double[19];
-        public static byte[] arrayOriginData = new byte[46];
+        public static byte[] arrayOriginData = new byte[50];
         public static int[] intFogData = new int[3];
         public static int[] intFogTmp = new int[3];
+        public static int[] intFogData_BC = new int[3];
         public static int[] intAccData = new int[3];
         public static int[] intAccTmp = new int[3];
         public static int Counter;
@@ -76,7 +88,8 @@ namespace IMUSample
         public static double[] doubleAccTmp = new double[3];
         public static float[] floatAccData = new float[3];
         public static float[] floatAccTmp = new float[3];
-
+        public static float[] floatFogData = new float[3];
+        public static float[] floatFogData_BC = new float[3];
         public static double Fogx_SF, Fogy_SF, Fogz_SF;
         public static double[] Fog_SF   = new double[3];
         public static double[] Fog_Bias = new double[3];

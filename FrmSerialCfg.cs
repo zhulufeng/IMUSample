@@ -21,7 +21,8 @@ namespace IMUSample
             cmbox__DataBit.SelectedIndex = 1;
             cmbox_StopBit.SelectedIndex = 1;
             cmbox_ParityBit.SelectedIndex = 2;
-
+            comboBox_updrate.SelectedIndex = 3;
+            comboBox_isTest.SelectedIndex = 0;
         }
 
      
@@ -47,10 +48,19 @@ namespace IMUSample
             serialParameter.parityBit = cmbox_ParityBit.SelectedItem.ToString();
             serialParameter.isHighFreq = radioButton_HighFreq.Checked;
             serialParameter.isSaveHex = radioButton_hexenable.Checked;
+            serialParameter.Upd_rate = Convert.ToInt32(comboBox_updrate.SelectedItem);
+            serialParameter.IMU_id = textBox_imu_id.Text;
             if (textBox_imu_id.Text != null)
                 serialParameter.IMU_id = textBox_imu_id.Text;
+            if(comboBox_isTest.SelectedItem.ToString() == "测试状态")
+            {
+                serialParameter.isTest = true;
+            }
+            else
+            {
+                serialParameter.isTest = false;
+            }
         }
 
-  
     }
 }
