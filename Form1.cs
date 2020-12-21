@@ -798,11 +798,11 @@ namespace IMUSample
                 {
                     if (Datalist[i] >= 0)
                     {
-                        sb.AppendFormat("\t{0: #####000} ", Datalist[i]);
+                        sb.AppendFormat("\t{0: ##0.00000000} ", Datalist[i]);
                     }
                     else
                     {
-                        sb.AppendFormat("\t{0:#####000} ", Datalist[i]);
+                        sb.AppendFormat("\t{0:##0.00000000} ", Datalist[i]);
                     }
                 }
                 if (i >= 4 && i <= 6)

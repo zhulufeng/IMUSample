@@ -33,3 +33,15 @@ E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csproj.GenerateResou
 E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.exe
 E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.pdb
 E:\MyCode\C#Code\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csproj.CoreCompileInputs.cache
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\bin\Debug\IMUSample.exe.config
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\bin\Debug\IMUSample.exe
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\bin\Debug\IMUSample.pdb
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csprojAssemblyReference.cache
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.DirectoryClearDlg.resources
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.Form1.resources
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.FrmSerialCfg.resources
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.Properties.Resources.resources
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csproj.GenerateResource.cache
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.csproj.CoreCompileInputs.cache
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.exe
+C:\Users\NS\Desktop\IMUSample_DI(3)\IMUSample_DI\IMUSample\obj\Debug\IMUSample.pdb
