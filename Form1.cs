@@ -26,7 +26,7 @@ namespace IMUSample
         bool[] zoomed_flag = new bool[6];
         bool rate_flag = false;
         double G0 = 9.8221625;
-        int datalen = 49;
+        int datalen = 53;
         //定义联合体
         [StructLayout(LayoutKind.Explicit, Size = 4)]
 
@@ -504,12 +504,12 @@ namespace IMUSample
                 if (serialParameter.isTest)
                 {
                     testStr = "测试状态";
-                    datalen = 49;
+                    datalen = 53;
                 }
                 else
                 {
                     testStr = "产品状态";
-                    datalen = 37;
+                    datalen = 41;
                 }
                 textBox_Info.Text += "测试状态：" + testStr + "\r\n";
                 textBox_Info.Text += "************"  + "\r\n";
@@ -605,7 +605,7 @@ namespace IMUSample
                             if(serialParameter.isTest)
                             {
                                 IMUData.intFogTmp[i] = (IMUData.arrayOriginData[2 * i + 40] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 39] * 256 * 256) / 256 / 256;
-                                IMUData.intAccTmp[i] = (IMUData.arrayOriginData[46] * 256 * 256 * 256 + IMUData.arrayOriginData[45] * 256 * 256) / 256 / 256;
+                                IMUData.intAccTmp[i] = (IMUData.arrayOriginData[2 * i + 46] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 45] * 256 * 256) / 256 / 256;
                                 IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
                                 IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
                                 IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
@@ -636,7 +636,7 @@ namespace IMUSample
                             else 
                             {
                                 IMUData.intFogTmp[i] = (IMUData.arrayOriginData[2 * i + 28] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 27] * 256 * 256) / 256 / 256;
-                                IMUData.intAccTmp[i] = (IMUData.arrayOriginData[34] * 256 * 256 * 256 + IMUData.arrayOriginData[33] * 256 * 256) / 256 / 256;
+                                IMUData.intAccTmp[i] = (IMUData.arrayOriginData[2 * i + 34] * 256 * 256 * 256 + IMUData.arrayOriginData[2 * i + 33] * 256 * 256) / 256 / 256;
                                 IMUData.doubleFogData[i] = Convert.ToDouble(IMUData.intFogData[i]) / 1.0;
                                 IMUData.doubleAccData[i] = Convert.ToDouble(IMUData.intAccData[i]) / 1.0;
                                 IMUData.doubleFogTmp[i] = Convert.ToDouble(IMUData.intFogTmp[i]) / 16.0;
